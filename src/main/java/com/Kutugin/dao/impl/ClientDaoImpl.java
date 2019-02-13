@@ -12,4 +12,5 @@ public class ClientDaoImpl implements ClientDao{
         System.out.println("Saving Client Dao");
         return true;
     }
+    //delete by id
 }

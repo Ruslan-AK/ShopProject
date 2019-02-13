@@ -14,7 +14,7 @@ public class MainMenu {
     private final AdminMenu adminMenu = new AdminMenu();
     private final ClientMenu clientMenu = new ClientMenu();
 
-    public void showMenu(){
+    public void showMenu() throws IOException {
         boolean isRunning = true;
         while (isRunning){
             System.out.println("1 - Admin\n2 - Client\n0 - Exit");
@@ -28,6 +28,7 @@ public class MainMenu {
             switch (input){
                 case "1": {
                     System.out.println("Enter as admin");
+                    adminMenu.show();
                     break;
                 }
                 case "2": {
