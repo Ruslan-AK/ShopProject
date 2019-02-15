@@ -16,25 +16,26 @@ import java.math.BigDecimal;
  * Created by dp-ptcstd-49 on 11.02.2019.
  */
 public class AdminMenu {
-    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private final ClientService clientService = new ClientServiceImpl();
+    private BufferedReader br;
+    private ClientService clientService;
 
+    public AdminMenu(BufferedReader br, ClientService clientService) {
+        this.br = br;
+        this.clientService = clientService;
+    }
 
     public void show() throws IOException {
         boolean isRunning = true;
         while (isRunning){
-            System.out.println("1 - Add client\n2 - Modify client\n3 - Remove client\n4 - Add product\n0 - Exit to main menu");
+            showMenu();
             switch (br.readLine()){
                 case "1":
-                    System.out.println("Input name:");
-                    String name = br.readLine();
-                    System.out.println("Input surname:");
-                    String surname = br.readLine();
-                    System.out.println("Input phone:");
-                    String phoneNumber = br.readLine();
-                    clientService.createClient(name,surname, phoneNumber);
+                    showAllClients();
                     break;
                 case "2":
+                    createClient();
+                    break;
+                case "3":
                     System.out.println("Input Client id:");
                     long id = Long.valueOf(br.readLine());
                     if(clientService.contains(id)){
@@ -49,7 +50,8 @@ public class AdminMenu {
                     }
                     System.out.println("Client not found");
                     break;
-                case "3":
+                case "4":
+
                     System.out.println("Input Client id:");
                     long rId = Long.valueOf(br.readLine());
                     if(clientService.contains(rId)){
@@ -59,7 +61,7 @@ public class AdminMenu {
                     }
                     System.out.println("Client not found");
                     break;
-                case "4":
+                case "5":
                     System.out.println("Add product");
                     System.out.println("Enter product name:");
                     String pName = br.readLine();
@@ -95,5 +97,36 @@ public class AdminMenu {
                     System.out.println("Wrong input!");
             }
         }
+    }
+
+    private void showMenu() {
+        System.out.println("1 - Show clients\n2 - Add client\n3 - Modify client\n4 - Remove client\n5 - Add product\n0 - Exit to main menu");
+    }
+
+    private void createClient() throws IOException {
+        System.out.println("Input name:");
+        String name = br.readLine();
+        System.out.println("Input surname:");
+        String surname = br.readLine();
+        System.out.println("Input age:");
+        int age = readInteger();
+        System.out.println("Input phone:");
+        String phoneNumber = br.readLine();
+        System.out.println("Input email:");
+        String email = br.readLine();
+        clientService.createClient(name,surname,age, phoneNumber,email);
+    }
+
+    private int readInteger() {
+        try {
+            return Integer.parseInt(br.readLine());
+        } catch (IOException|NumberFormatException ex){
+            System.out.println("Wrong input");
+            return readInteger();
+        }
+    }
+
+    private void showAllClients(){
+        clientService.getAllClients().forEach(System.out::println);
     }
 }

@@ -9,7 +9,34 @@ import java.util.Random;
  */
 public class Client {
     private String name;
+    private String surmame;
+    private int age;
+    private String phoneNumber;
+
+    private String email;
+    private long id;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     private static List<Long> listId = new ArrayList<Long>();
+
+    public Client(String name, String surmame, int age, String phoneNumber, String email) {
+        this.name = name;
+        this.surmame = surmame;
+        this.phoneNumber = phoneNumber;
+        this.age = age;
+        generateId();
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Client(String name, String surmame, String phoneNumber) {
         this.name = name;
@@ -17,11 +44,6 @@ public class Client {
         this.phoneNumber = phoneNumber;
         generateId();
     }
-
-    private String surmame;
-    private int age;
-    private String phoneNumber;
-    private long id;
 
     @Override
     public String toString() {

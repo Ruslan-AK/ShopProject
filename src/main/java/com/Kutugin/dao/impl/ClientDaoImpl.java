@@ -33,7 +33,7 @@ public class ClientDaoImpl implements ClientDao{
     }
 
     @Override
-    public List<Client> getClients() {
+    public List<Client> getAllClients() {
         return clients;
     }
 
