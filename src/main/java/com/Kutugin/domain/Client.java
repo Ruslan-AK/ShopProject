@@ -1,15 +1,21 @@
 package com.Kutugin.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by dp-ptcstd-49 on 11.02.2019.
  */
 public class Client {
     private String name;
+    private static List<Long> listId = new ArrayList<Long>();
 
     public Client(String name, String surmame, String phoneNumber) {
         this.name = name;
         this.surmame = surmame;
         this.phoneNumber = phoneNumber;
+        generateId();
     }
 
     private String surmame;
@@ -64,8 +70,16 @@ public class Client {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    private void generateId(){
+        Random random = new Random();
+        while (true){
+            long temp = random.nextLong();
+            if(!listId.contains(temp)) {
+                id = temp;
+                listId.add(temp);
+                break;
+            }
+        }
     }
 
     @Override

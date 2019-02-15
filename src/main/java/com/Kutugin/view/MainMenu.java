@@ -17,14 +17,13 @@ public class MainMenu {
     public void showMenu() throws IOException {
         boolean isRunning = true;
         while (isRunning){
-            System.out.println("1 - Admin\n2 - Client\n0 - Exit");
+            System.out.println("1 - Admin\n2 - Client\n0 - Exit program");
             String input = null;
             try {
                 input = br.readLine();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("You enter: " + input);
             switch (input){
                 case "1": {
                     System.out.println("Enter as admin");
@@ -33,15 +32,14 @@ public class MainMenu {
                 }
                 case "2": {
                     System.out.println("Enter as client");
+                    clientMenu.show();
                     break;
                 }
                 case "0": {
-                    System.out.println("Exit");
-                    isRunning = false;
-                    break;
+                    System.out.println("Exit program");
+                    System.exit(0);
                 }
                 default:
-                    isRunning = false;
                     System.out.println("Wrong input");
                     break;
             }
