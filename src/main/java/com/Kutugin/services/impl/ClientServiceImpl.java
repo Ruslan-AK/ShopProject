@@ -1,10 +1,10 @@
-package com.Kutugin.services;
+package com.Kutugin.services.impl;
 
 import com.Kutugin.dao.ClientDao;
-import com.Kutugin.dao.impl.ClientDaoImpl;
 import com.Kutugin.dao.impl.ClientDaoImpl2;
 import com.Kutugin.domain.Client;
 import com.Kutugin.exceptions.BusinessException;
+import com.Kutugin.services.ClientService;
 import com.Kutugin.validators.ValidationService;
 
 import java.util.List;
@@ -27,8 +27,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void createClient(String name, String surmame, String phoneNumber) {
-        clientDao.saveClient(new Client(name,surmame,phoneNumber));
+    public boolean createClient(String name, String surmame, String phoneNumber) {
+        return clientDao.saveClient(new Client(name,surmame,phoneNumber));
     }
 
     @Override

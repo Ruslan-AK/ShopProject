@@ -2,8 +2,6 @@ package com.Kutugin.dao.impl;
 
 import com.Kutugin.dao.ClientDao;
 import com.Kutugin.domain.Client;
-import sun.dc.pr.PRError;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +13,6 @@ import java.util.Map;
 public class ClientDaoImpl2 implements ClientDao{
 
     private Map<Long,Client> map = new HashMap<>();
-    private static long generator = 0;
     private static ClientDao clientDao = new ClientDaoImpl2();
     private ClientDaoImpl2() {
 
@@ -27,7 +24,6 @@ public class ClientDaoImpl2 implements ClientDao{
 
     @Override
     public boolean saveClient(Client client) {
-        client.setId(generator++);
         map.put(client.getId(),client);
         System.out.println("Saving client");
         return true;
@@ -35,7 +31,7 @@ public class ClientDaoImpl2 implements ClientDao{
 
     @Override
     public Client getById(long id) {
-        return null;
+        return map.get(id);
     }
 
     @Override

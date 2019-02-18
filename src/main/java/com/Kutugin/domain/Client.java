@@ -14,6 +14,7 @@ public class Client {
     private String phoneNumber;
 
     private String email;
+    private static long idCounter;
     private long id;
 
     public String getEmail() {
@@ -31,18 +32,15 @@ public class Client {
         this.surmame = surmame;
         this.phoneNumber = phoneNumber;
         this.age = age;
-        generateId();
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.email = email;
+        this.id=++idCounter;
     }
 
     public Client(String name, String surmame, String phoneNumber) {
         this.name = name;
         this.surmame = surmame;
         this.phoneNumber = phoneNumber;
-        generateId();
+        this.id=++idCounter;
     }
 
     @Override
@@ -90,18 +88,6 @@ public class Client {
 
     public long getId() {
         return id;
-    }
-
-    private void generateId(){
-        Random random = new Random();
-        while (true){
-            long temp = random.nextLong();
-            if(!listId.contains(temp)) {
-                id = temp;
-                listId.add(temp);
-                break;
-            }
-        }
     }
 
     @Override

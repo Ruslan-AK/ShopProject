@@ -2,9 +2,8 @@ package com.Kutugin;
 
 import com.Kutugin.dao.ClientDao;
 import com.Kutugin.dao.impl.ClientDaoImpl2;
-import com.Kutugin.domain.Client;
 import com.Kutugin.services.ClientService;
-import com.Kutugin.services.ClientServiceImpl;
+import com.Kutugin.services.impl.ClientServiceImpl;
 import com.Kutugin.view.AdminMenu;
 import com.Kutugin.view.ClientMenu;
 import com.Kutugin.view.MainMenu;
