@@ -6,6 +6,7 @@ import com.Kutugin.domain.Client;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.services.ClientServiceImpl;
 import com.Kutugin.view.AdminMenu;
+import com.Kutugin.view.ClientAuthentification;
 import com.Kutugin.view.ClientMenu;
 import com.Kutugin.view.MainMenu;
 
@@ -22,6 +23,7 @@ public class App {
         ClientService clientService = new ClientServiceImpl(clientDao);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         AdminMenu adminMenu = new AdminMenu(br, clientService);
+        ClientAuthentification clientAuthentification = new ClientAuthentification(br,clientService);
         ClientMenu clientMenu = new ClientMenu(br,clientService);
         MainMenu menu = new MainMenu(br,adminMenu,clientMenu);
         menu.showMenu();
