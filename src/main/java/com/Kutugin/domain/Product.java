@@ -21,6 +21,12 @@ public class Product {
         this.type = type;
     }
 
+    public Product(String name, double price, Products type) {
+        this.name = name;
+        this.price = BigDecimal.valueOf(Double.valueOf(price));
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Product{" +

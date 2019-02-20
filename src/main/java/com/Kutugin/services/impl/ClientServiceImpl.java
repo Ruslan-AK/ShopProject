@@ -1,11 +1,13 @@
-package com.Kutugin.services;
+package com.Kutugin.services.impl;
 
 import com.Kutugin.dao.ClientDao;
 import com.Kutugin.dao.impl.ClientDaoImpl;
 import com.Kutugin.dao.impl.ClientDaoImpl2;
 import com.Kutugin.domain.Client;
 import com.Kutugin.exceptions.BusinessException;
+import com.Kutugin.services.ClientService;
 import com.Kutugin.validators.ValidationService;
+import com.Kutugin.validators.impl.ValidationServiceImpl;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
     //private ClientDao clientDao = new ClientDaoImpl();
     private ClientDao clientDao = ClientDaoImpl2.getInstance();
-    private ValidationService validationService;
+    private ValidationService validationService = new ValidationServiceImpl();
 
     public ClientServiceImpl(ClientDao clientDao) {
         this.clientDao = clientDao;
@@ -32,14 +34,13 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void createClient(String name, String surmame, int age, String phoneNumber, String email) {
+    public void createClient(String name, String surmame, int age, String email, String phoneNumber) {
 //        clientDao.saveClient(new Client(name,surmame,age,phoneNumber,email));
         try{
             validationService.validateAge(age);
             Client client = new Client(name,surmame,age,phoneNumber,email);
             boolean result = clientDao.saveClient(client);
-        } catch (BusinessException ex){
-            ex.printStackTrace();
+        } catch (BusinessException ignored){
         }
     }
 

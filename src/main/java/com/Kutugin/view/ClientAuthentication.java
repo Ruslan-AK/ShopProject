@@ -2,17 +2,20 @@ package com.Kutugin.view;
 
 import com.Kutugin.domain.Client;
 import com.Kutugin.services.ClientService;
+import com.Kutugin.validators.ValidationService;
+import com.Kutugin.validators.impl.ValidationServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class ClientAuthentification {
+public class ClientAuthentication {
     private BufferedReader br;
     private ClientService clientService;
     private Client currentClient;
     private boolean isSignIn = false;
+    private ValidationService validator = new ValidationServiceImpl();
 
-    public ClientAuthentification(BufferedReader br, ClientService clientService) {
+    public ClientAuthentication(BufferedReader br, ClientService clientService) {
         this.br = br;
         this.clientService = clientService;
     }
@@ -23,7 +26,7 @@ public class ClientAuthentification {
         return currentClient;
     }
 
-    public void login() {
+    public Client login() {
         boolean isRunning = true;
         String input = null;
         while (isRunning) {
@@ -45,13 +48,21 @@ public class ClientAuthentification {
                 System.out.println("Enter your mobile number");
                 try {
                     input = br.readLine();
+                    validator.validatePhoneNumber(input);
                     currentClient = isRegistered(input);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                isRegistered(input);
+                if (currentClient == null){
+                    System.out.println("Client not found");
+                }
+                else {
+                    System.out.println("You sing in as:"+currentClient.getName());
+                }
+                isRunning = false;
             }
         }
+        return currentClient;
     }
 
     private void signOut() {
@@ -61,7 +72,7 @@ public class ClientAuthentification {
     private Client isRegistered(String input) {
         for(Client client:clientService.getAllClients()){
             if(client.getPhoneNumber().equals(input)) return client;
-            return null;
         }
+        return null;
     }
 }

@@ -5,11 +5,8 @@ import com.Kutugin.dao.impl.ProductDaoImpl;
 import com.Kutugin.domain.Product;
 import com.Kutugin.domain.Products;
 import com.Kutugin.services.ClientService;
-import com.Kutugin.services.ClientServiceImpl;
-
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 
 /**
@@ -83,7 +80,7 @@ public class AdminMenu {
                             break;
                         }
                         if(product.equals(pro[pTypeI-1])){
-                            ProductDao productDao = new ProductDaoImpl();
+                            ProductDao productDao = ProductDaoImpl.getInstance();
                             productDao.saveProduct(new Product(pName, price,product));
                             break;
                         }

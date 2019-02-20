@@ -10,11 +10,18 @@ import java.util.Random;
 public class Client {
     private String name;
     private String surmame;
+    private String email;
     private int age;
     private String phoneNumber;
-
-    private String email;
+    private Order order = new Order();
     private long id;
+
+    public Order getOrder() {
+        return order;
+    }
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public String getEmail() {
         return email;
@@ -26,11 +33,12 @@ public class Client {
 
     private static List<Long> listId = new ArrayList<Long>();
 
-    public Client(String name, String surmame, int age, String phoneNumber, String email) {
+    public Client(String name, String surmame, int age, String email, String phoneNumber) {
         this.name = name;
         this.surmame = surmame;
         this.phoneNumber = phoneNumber;
         this.age = age;
+        this.email = email;
         generateId();
     }
 
