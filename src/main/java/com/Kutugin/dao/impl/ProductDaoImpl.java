@@ -1,14 +1,9 @@
 package com.Kutugin.dao.impl;
 
-import com.Kutugin.dao.ClientDao;
 import com.Kutugin.dao.ProductDao;
 import com.Kutugin.dao.impl.db.ProductDB;
-import com.Kutugin.domain.Client;
 import com.Kutugin.domain.Product;
-import com.Kutugin.domain.Products;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,16 +20,18 @@ public class ProductDaoImpl implements ProductDao {
         products = db.getProducts();
     }
 
-    public static ProductDao getInstance(){return   productDao;}
+    public static ProductDao getInstance() {
+        return productDao;
+    }
 
     @Override
     public boolean saveProduct(Product product) {
-        if(!products.contains(product)){
+        if (!products.contains(product)) {
             products.add(product);
-            System.out.println(product+" saved");
+            System.out.println(product + " saved");
             return true;
         }
-        System.out.println(product+" already saved");
+        System.out.println(product + " already saved");
         return false;
     }
 
@@ -61,7 +58,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void updateProduct(long id, Product product) {
         map.remove(id);
-        map.put(id,product);
+        map.put(id, product);
     }
 
 }

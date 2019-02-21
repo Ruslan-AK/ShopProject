@@ -4,34 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by dp-ptcstd-49 on 11.02.2019.
- */
 public class Client {
     private String name;
     private String surmame;
     private String email;
     private int age;
     private String phoneNumber;
-    private Order order = new Order();
     private long id;
-
-    public Order getOrder() {
-        return order;
-    }
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    private static List<Long> listId = new ArrayList<Long>();
+    private static List<Long> listId = new ArrayList<>();
 
     public Client(String name, String surmame, String age, String email, String phoneNumber) {
         this.name = name;
@@ -39,17 +19,6 @@ public class Client {
         this.phoneNumber = phoneNumber;
         this.age = Integer.valueOf(age);
         this.email = email;
-        generateId();
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Client(String name, String surmame, String phoneNumber) {
-        this.name = name;
-        this.surmame = surmame;
-        this.phoneNumber = phoneNumber;
         generateId();
     }
 
@@ -100,11 +69,11 @@ public class Client {
         return id;
     }
 
-    private void generateId(){
+    private void generateId() {
         Random random = new Random();
-        while (true){
+        while (true) {
             long temp = random.nextLong();
-            if(!listId.contains(temp)) {
+            if (!listId.contains(temp)) {
                 id = temp;
                 listId.add(temp);
                 break;
@@ -116,10 +85,7 @@ public class Client {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-
         Client client = (Client) o;
-
         if (age != client.age) return false;
         if (name != null ? !name.equals(client.name) : client.name != null) return false;
         if (surmame != null ? !surmame.equals(client.surmame) : client.surmame != null) return false;

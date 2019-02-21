@@ -1,27 +1,16 @@
 package com.Kutugin.services.impl;
 
 import com.Kutugin.dao.ClientDao;
-import com.Kutugin.dao.impl.ClientDaoImpl;
-import com.Kutugin.dao.impl.ClientDaoImpl2;
 import com.Kutugin.domain.Client;
 import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.validators.ValidationService;
-import com.Kutugin.validators.impl.ValidationServiceImpl;
 
 import java.util.List;
 
-/**
- * Created by dp-ptcstd-49 on 11.02.2019.
- */
 public class ClientServiceImpl implements ClientService {
-    //private ClientDao clientDao = new ClientDaoImpl();
-    private ClientDao clientDao = ClientDaoImpl2.getInstance();
-    private ValidationService validationService = new ValidationServiceImpl();
-
-    public ClientServiceImpl(ClientDao clientDao) {
-        this.clientDao = clientDao;
-    }
+    private ClientDao clientDao;
+    private ValidationService validationService;
 
     public ClientServiceImpl(ClientDao clientDao, ValidationService validationService) {
         this.clientDao = clientDao;
@@ -29,35 +18,26 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void createClient(String name, String surmame, String phoneNumber) {
-        try {
-            validationService.validatePhoneNumber(phoneNumber);
-        } catch (BusinessException e) {
-            e.printStackTrace();
-        }
-        clientDao.saveClient(new Client(name,surmame,phoneNumber));
-    }
-
-    @Override
     public void createClient(String name, String surmame, String age, String email, String phoneNumber) {
-        try{
+        try {
             validationService.validateAge(age);
             validationService.validatePhoneNumber(phoneNumber);
-            Client client = new Client(name,surmame,age,phoneNumber,email);
+            Client client = new Client(name, surmame, age, email, phoneNumber);
+            //for modif
             boolean result = clientDao.saveClient(client);
-        } catch (BusinessException ex){
+        } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
     @Override
     public void deleteClient(Client client) {
-        clientDao.deleteClient(client);
+        clientDao.deleteClient(client.getId());
     }
 
     @Override
     public boolean contains(long id) {
-        if (clientDao.getById(id)!=null) return true;
+        if (clientDao.getById(id) != null) return true;
         return false;
     }
 
@@ -66,7 +46,7 @@ public class ClientServiceImpl implements ClientService {
         client.setName(name);
         client.setSurmame(surmame);
         client.setPhoneNumber(phoneNumber);
-        System.out.println(client+" updated");
+        System.out.println(client + " updated");
     }
 
     @Override

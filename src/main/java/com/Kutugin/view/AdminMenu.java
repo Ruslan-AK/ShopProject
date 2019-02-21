@@ -3,34 +3,31 @@ package com.Kutugin.view;
 import com.Kutugin.dao.ProductDao;
 import com.Kutugin.dao.impl.ProductDaoImpl;
 import com.Kutugin.domain.Product;
-import com.Kutugin.domain.Products;
+import com.Kutugin.domain.ProductType;
 import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.validators.ValidationService;
-import com.Kutugin.validators.impl.ValidationServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-/**
- * Created by dp-ptcstd-49 on 11.02.2019.
- */
 public class AdminMenu {
     private BufferedReader br;
     private ClientService clientService;
-    private ValidationService validator = new ValidationServiceImpl();
+    private ValidationService validator;
 
-    public AdminMenu(BufferedReader br, ClientService clientService) {
+    public AdminMenu(BufferedReader br, ClientService clientService, ValidationService validator) {
         this.br = br;
         this.clientService = clientService;
+        this.validator = validator;
     }
 
     public void show() throws IOException {
         boolean isRunning = true;
-        while (isRunning){
+        while (isRunning) {
             showMenu();
-            switch (br.readLine()){
+            switch (br.readLine()) {
                 case "1":
                     showAllClients();
                     break;
@@ -40,7 +37,7 @@ public class AdminMenu {
                 case "3":
                     System.out.println("Input Client id:");
                     long id = Long.valueOf(br.readLine());
-                    if(clientService.contains(id)){
+                    if (clientService.contains(id)) {
                         System.out.println("Client found");
                         System.out.println("Input name:");
                         String uName = br.readLine();
@@ -48,7 +45,7 @@ public class AdminMenu {
                         String uSurname = br.readLine();
                         System.out.println("Input phone:");
                         String uPhoneNumber = br.readLine();
-                        clientService.updateClient(clientService.getById(id),uName,uSurname, uPhoneNumber);
+                        clientService.updateClient(clientService.getById(id), uName, uSurname, uPhoneNumber);
                     }
                     System.out.println("Client not found");
                     break;
@@ -56,7 +53,7 @@ public class AdminMenu {
 
                     System.out.println("Input Client id:");
                     long rId = Long.valueOf(br.readLine());
-                    if(clientService.contains(rId)){
+                    if (clientService.contains(rId)) {
                         clientService.deleteClient(clientService.getById(rId));
                         System.out.println("Client removed");
                         break;
@@ -71,22 +68,22 @@ public class AdminMenu {
                     BigDecimal price = BigDecimal.valueOf(Double.valueOf(br.readLine()));
                     System.out.println("Enter product type:");
                     int i = 1;
-                    for(Products p:Products.values()) {
-                        System.out.println(i++ +" - "+p.toString());
+                    for (ProductType p : ProductType.values()) {
+                        System.out.println(i++ + " - " + p.toString());
                     }
                     int pTypeI = Integer.valueOf(br.readLine());
                     int tmp = 0;
-                    Products[] pro = Products.values();
+                    ProductType[] pro = ProductType.values();
                     System.out.println(pro.length);
-                    for(Products product:pro){
+                    for (ProductType product : pro) {
                         tmp++;
-                        if (tmp>=pro.length+1){
+                        if (tmp >= pro.length + 1) {
                             System.out.println("Abort, no such Product type");
                             break;
                         }
-                        if(product.equals(pro[pTypeI-1])){
+                        if (product.equals(pro[pTypeI - 1])) {
                             ProductDao productDao = ProductDaoImpl.getInstance();
-                            productDao.saveProduct(new Product(pName, price,product));
+                            productDao.saveProduct(new Product(pName, price, product));
                             break;
                         }
                     }
@@ -114,7 +111,7 @@ public class AdminMenu {
         String age = br.readLine();
         try {
             validator.validateAge(age);
-        } catch (BusinessException ex){
+        } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
             System.out.println("Client not created!");
             return;
@@ -132,7 +129,7 @@ public class AdminMenu {
         String phoneNumber = br.readLine();
         try {
             validator.validatePhoneNumber(phoneNumber);//validator
-            clientService.createClient(name,surname, age, email,phoneNumber);
+            clientService.createClient(name, surname, age, email, phoneNumber);
             System.out.println("New Client created!");
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
@@ -141,7 +138,7 @@ public class AdminMenu {
         }
     }
 
-    private void showAllClients(){
+    private void showAllClients() {
         clientService.getAllClients().forEach(System.out::println);
     }
 }

@@ -4,44 +4,43 @@ import com.Kutugin.dao.ClientDao;
 import com.Kutugin.domain.Client;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * Created by dp-ptcstd-49 on 11.02.2019.
- */
-public class ClientDaoImpl implements ClientDao{
+public class ClientDaoImpl implements ClientDao {
 
-    private static List<Client> clients = new ArrayList<>();
+    private Map<Long, Client> map = new HashMap<>();
+    private static long generator = 0;
+    private static ClientDao clientDao = new ClientDaoImpl();
 
-    @Override
-    public boolean saveClient(Client client) {
-        if(!clients.contains(client)){
-            clients.add(client);
-            System.out.println(client+" saved");
-            return true;
-        }
-        System.out.println(client+" already saved");
-        return false;
+    private ClientDaoImpl() {
+
+    }
+
+    public static ClientDao getInstance() {
+        return clientDao;
     }
 
     @Override
-    public Client getById(long id){
-        for (Client c:clients){
-            if(c.getId()==id) return c;
-        }
-        return null;
+    public boolean saveClient(Client client) {
+        map.put(client.getId(), client);
+        System.out.println("Saving client");
+        return true;
+    }
+
+    @Override
+    public Client getById(long id) {
+        return map.get(id);
     }
 
     @Override
     public List<Client> getAllClients() {
-        return clients;
+        return new ArrayList<>(map.values());
     }
 
     @Override
-    public void deleteClient(Client client) {
-        clients.remove(client);
+    public void deleteClient(long id) {
+        map.remove(id);
     }
-
-    //delete by id
-
 }

@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by dp-ptcstd-49 on 11.02.2019.
- */
 public class Order {
     private long id;
     private static List<Long> listId = new ArrayList<Long>();

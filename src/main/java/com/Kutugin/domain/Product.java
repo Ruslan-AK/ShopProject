@@ -5,23 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by dp-ptcstd-49 on 11.02.2019.
- */
 public class Product {
     private String name;
     private BigDecimal price;
     private long id;
-    private static List<Long> listId = new ArrayList<Long>();
-    private Products type;
+    private static List<Long> listId = new ArrayList<>();
+    private ProductType type;
 
-    public Product(String name, BigDecimal price, Products type) {
+    public Product(String name, BigDecimal price, ProductType type) {
         this.name = name;
         this.price = price;
         this.type = type;
     }
 
-    public Product(String name, double price, Products type) {
+    public Product(String name, double price, ProductType type) {
         this.name = name;
         this.price = BigDecimal.valueOf(Double.valueOf(price));
         this.type = type;

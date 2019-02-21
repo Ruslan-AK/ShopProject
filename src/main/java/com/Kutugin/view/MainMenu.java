@@ -2,13 +2,7 @@ package com.Kutugin.view;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-/**
- * Created by dp-ptcstd-49 on 11.02.2019.
- * @author Reneuby
- * this class provide output/input information
- */
 public class MainMenu {
     private final BufferedReader br;
     private final AdminMenu adminMenu;
@@ -22,7 +16,7 @@ public class MainMenu {
 
     public void showMenu() throws IOException {
         boolean isRunning = true;
-        while (isRunning){
+        while (isRunning) {
             System.out.println("1 - Admin\n2 - Client\n0 - Exit program");
             String input = null;
             try {
@@ -30,7 +24,7 @@ public class MainMenu {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            switch (input){
+            switch (input) {
                 case "1": {
                     System.out.println("Enter as admin");
                     adminMenu.show();

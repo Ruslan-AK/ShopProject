@@ -2,7 +2,6 @@ package com.Kutugin.services.impl;
 
 import com.Kutugin.dao.ProductDao;
 import com.Kutugin.dao.impl.ProductDaoImpl;
-import com.Kutugin.domain.Client;
 import com.Kutugin.domain.Product;
 import com.Kutugin.services.ProductServise;
 
@@ -34,7 +33,7 @@ public class ProductServiceImpl implements ProductServise {
 
     @Override
     public void updateProduct(long id, Product product) {
-        productDao.updateProduct(id,product);
+        productDao.updateProduct(id, product);
     }
 
     @Override

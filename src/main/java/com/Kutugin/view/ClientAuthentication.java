@@ -4,7 +4,6 @@ import com.Kutugin.domain.Client;
 import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.validators.ValidationService;
-import com.Kutugin.validators.impl.ValidationServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,11 +13,12 @@ public class ClientAuthentication {
     private ClientService clientService;
     private Client currentClient;
     private boolean isSignIn = false;
-    private ValidationService validator = new ValidationServiceImpl();
+    private ValidationService validator;
 
-    public ClientAuthentication(BufferedReader br, ClientService clientService) {
+    public ClientAuthentication(BufferedReader br, ClientService clientService, ValidationService validator) {
         this.br = br;
         this.clientService = clientService;
+        this.validator = validator;
     }
 
     public Client getCurrentClient() {
@@ -31,7 +31,7 @@ public class ClientAuthentication {
         boolean isRunning = true;
         String input = null;
         while (isRunning) {
-            if (isSignIn){
+            if (isSignIn) {
                 System.out.println("You already sign in\n1 - sign out\nr - Return to previous menu");
                 try {
                     input = br.readLine();
@@ -39,26 +39,26 @@ public class ClientAuthentication {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                switch (input){
-                    case "1": signOut();
-                    case "r": isRunning = false;
+                switch (input) {
+                    case "1":
+                        signOut();
+                    case "r":
+                        isRunning = false;
                         break;
                 }
-            }
-            else {
+            } else {
                 System.out.println("Enter your mobile number");
                 try {
                     input = br.readLine();
                     validator.validatePhoneNumber(input);
                     currentClient = isRegistered(input);
-                    if (currentClient == null){
+                    if (currentClient == null) {
                         System.out.println("Client not found");
-                    }
-                    else {
-                        System.out.println("You sing in as:"+currentClient.getName());
+                    } else {
+                        System.out.println("You sing in as:" + currentClient.getName());
                     }
                     isRunning = false;
-                } catch (IOException|BusinessException e) {
+                } catch (IOException | BusinessException e) {
                     System.out.println(e.getMessage());
                 }
             }
@@ -71,8 +71,8 @@ public class ClientAuthentication {
     }
 
     private Client isRegistered(String input) {
-        for(Client client:clientService.getAllClients()){
-            if(client.getPhoneNumber().equals(input)) return client;
+        for (Client client : clientService.getAllClients()) {
+            if (client.getPhoneNumber().equals(input)) return client;
         }
         return null;
     }
