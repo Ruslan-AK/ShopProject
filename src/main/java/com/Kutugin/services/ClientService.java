@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public interface ClientService {
 
     void createClient(String name, String surmame, String phoneNumber);//for Client
-    void createClient(String name, String surmame, int age, String phoneNumber, String email);//for Admin
+    void createClient(String name, String surmame, String age, String phoneNumber, String email);//for Admin
     void deleteClient(Client client);
     boolean contains(long id);
     void updateClient(Client client,String name, String surmame, String phoneNumber);

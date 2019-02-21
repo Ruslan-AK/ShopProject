@@ -7,6 +7,7 @@ import com.Kutugin.exceptions.BusinessException;
  */
 public interface ValidationService {
 
-    void validateAge(int age) throws BusinessException;
+    void validateAge(String age) throws BusinessException;
     void validatePhoneNumber(String phoneNumber) throws BusinessException;
+    void validateEmail(String email) throws BusinessException;
 }

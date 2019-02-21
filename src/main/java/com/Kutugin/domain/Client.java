@@ -33,11 +33,11 @@ public class Client {
 
     private static List<Long> listId = new ArrayList<Long>();
 
-    public Client(String name, String surmame, int age, String email, String phoneNumber) {
+    public Client(String name, String surmame, String age, String email, String phoneNumber) {
         this.name = name;
         this.surmame = surmame;
         this.phoneNumber = phoneNumber;
-        this.age = age;
+        this.age = Integer.valueOf(age);
         this.email = email;
         generateId();
     }

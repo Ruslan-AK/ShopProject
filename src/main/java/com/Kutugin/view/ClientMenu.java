@@ -78,7 +78,6 @@ public class ClientMenu {
                 switch (br.readLine()){
                     case "1":
                         createClient();
-                        System.out.println("New Client created!");
                         break;
                     case "2":
                         currentClient = clientAutentification.login();
@@ -122,15 +121,33 @@ public class ClientMenu {
         System.out.println("Input surname:");
         String surname = br.readLine();
         System.out.println("Input age:");
-        int age = Integer.valueOf(br.readLine());
+        String age = br.readLine();
+        try {
+            validator.validateAge(age);
+        } catch (BusinessException ex){
+            System.out.println(ex.getMessage());
+            System.out.println("Client not created!");
+            return;
+        }
         System.out.println("Input email:");
         String email = br.readLine();
+        try {
+            validator.validateEmail(email);
+        } catch (BusinessException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Client not created!");
+            return;
+        }
         System.out.println("Input phone:");
         String phoneNumber = br.readLine();
         try {
             validator.validatePhoneNumber(phoneNumber);//validator
-        } catch (BusinessException ignored) {
+            clientService.createClient(name,surname, age, email,phoneNumber);
+            System.out.println("New Client created!");
+        } catch (BusinessException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Client not created!");
+            return;
         }
-        clientService.createClient(name,surname, age, email,phoneNumber);
     }
 }

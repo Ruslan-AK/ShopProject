@@ -1,6 +1,7 @@
 package com.Kutugin.view;
 
 import com.Kutugin.domain.Client;
+import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.validators.ValidationService;
 import com.Kutugin.validators.impl.ValidationServiceImpl;
@@ -50,16 +51,16 @@ public class ClientAuthentication {
                     input = br.readLine();
                     validator.validatePhoneNumber(input);
                     currentClient = isRegistered(input);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    if (currentClient == null){
+                        System.out.println("Client not found");
+                    }
+                    else {
+                        System.out.println("You sing in as:"+currentClient.getName());
+                    }
+                    isRunning = false;
+                } catch (IOException|BusinessException e) {
+                    System.out.println(e.getMessage());
                 }
-                if (currentClient == null){
-                    System.out.println("Client not found");
-                }
-                else {
-                    System.out.println("You sing in as:"+currentClient.getName());
-                }
-                isRunning = false;
             }
         }
         return currentClient;

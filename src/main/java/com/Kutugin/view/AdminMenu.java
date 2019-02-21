@@ -4,7 +4,11 @@ import com.Kutugin.dao.ProductDao;
 import com.Kutugin.dao.impl.ProductDaoImpl;
 import com.Kutugin.domain.Product;
 import com.Kutugin.domain.Products;
+import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
+import com.Kutugin.validators.ValidationService;
+import com.Kutugin.validators.impl.ValidationServiceImpl;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -15,6 +19,7 @@ import java.math.BigDecimal;
 public class AdminMenu {
     private BufferedReader br;
     private ClientService clientService;
+    private ValidationService validator = new ValidationServiceImpl();
 
     public AdminMenu(BufferedReader br, ClientService clientService) {
         this.br = br;
@@ -106,20 +111,33 @@ public class AdminMenu {
         System.out.println("Input surname:");
         String surname = br.readLine();
         System.out.println("Input age:");
-        int age = readInteger();
-        System.out.println("Input phone:");
-        String phoneNumber = br.readLine();
+        String age = br.readLine();
+        try {
+            validator.validateAge(age);
+        } catch (BusinessException ex){
+            System.out.println(ex.getMessage());
+            System.out.println("Client not created!");
+            return;
+        }
         System.out.println("Input email:");
         String email = br.readLine();
-        clientService.createClient(name,surname,age, phoneNumber,email);
-    }
-
-    private int readInteger() {
         try {
-            return Integer.parseInt(br.readLine());
-        } catch (IOException|NumberFormatException ex){
-            System.out.println("Wrong input");
-            return readInteger();
+            validator.validateEmail(email);
+        } catch (BusinessException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Client not created!");
+            return;
+        }
+        System.out.println("Input phone:");
+        String phoneNumber = br.readLine();
+        try {
+            validator.validatePhoneNumber(phoneNumber);//validator
+            clientService.createClient(name,surname, age, email,phoneNumber);
+            System.out.println("New Client created!");
+        } catch (BusinessException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Client not created!");
+            return;
         }
     }
 

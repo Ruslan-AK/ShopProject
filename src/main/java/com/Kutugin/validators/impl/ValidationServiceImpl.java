@@ -3,20 +3,38 @@ package com.Kutugin.validators.impl;
 import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.validators.ValidationService;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by dp-ptcstd-49 on 15.02.2019.
  */
 public class ValidationServiceImpl implements ValidationService {
     @Override
-    public void validateAge(int age) throws BusinessException {
-        if(age<0||age>200){
+    public void validateAge(String age) throws BusinessException {
+        int ageInt;
+        try {
+            ageInt = Integer.valueOf(age);
+        } catch (NumberFormatException ex){
+            throw new BusinessException("Only digits!");
+        }
+        if(ageInt<0||ageInt>200){
             throw new BusinessException("Incorrect age!");
         }
     }
 
     @Override
     public void validatePhoneNumber(String phoneNumber) throws BusinessException {
-        if(phoneNumber.length()!=10||!phoneNumber.startsWith("068")||!phoneNumber.startsWith("063")||!phoneNumber.startsWith("095"))
-            throw new BusinessException("Wrong phone number format!");
+        //if(phoneNumber.length()!=10||!(phoneNumber.startsWith("068"))&&!(phoneNumber.startsWith("063")&&!(phoneNumber.startsWith("095")));
+            Pattern p = Pattern.compile("(063|095|067)\\d{7}");
+            Matcher m = p.matcher(phoneNumber);
+            if(!m.matches()) throw new BusinessException("Wrong phone number format!");
+    }
+
+    @Override
+    public void validateEmail(String email) throws BusinessException {
+        Pattern p = Pattern.compile(".+\\@.+\\.(com|ru|ua|net)");
+        Matcher m = p.matcher(email);
+        if(!m.matches()) throw new BusinessException("Wrong email format!");
     }
 }

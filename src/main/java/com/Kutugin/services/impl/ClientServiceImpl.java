@@ -30,17 +30,23 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void createClient(String name, String surmame, String phoneNumber) {
+        try {
+            validationService.validatePhoneNumber(phoneNumber);
+        } catch (BusinessException e) {
+            e.printStackTrace();
+        }
         clientDao.saveClient(new Client(name,surmame,phoneNumber));
     }
 
     @Override
-    public void createClient(String name, String surmame, int age, String email, String phoneNumber) {
-//        clientDao.saveClient(new Client(name,surmame,age,phoneNumber,email));
+    public void createClient(String name, String surmame, String age, String email, String phoneNumber) {
         try{
             validationService.validateAge(age);
+            validationService.validatePhoneNumber(phoneNumber);
             Client client = new Client(name,surmame,age,phoneNumber,email);
             boolean result = clientDao.saveClient(client);
-        } catch (BusinessException ignored){
+        } catch (BusinessException ex){
+            System.out.println(ex.getMessage());
         }
     }
 
