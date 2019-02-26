@@ -16,8 +16,11 @@ public class MainMenu {
 
     public void showMenu() throws IOException {
         boolean isRunning = true;
+        System.out.println("$$$$$$$$$$$ WELCOME TO SHOP $$$$$$$$$$$");
+        System.out.println("Select your role:");
         while (isRunning) {
             System.out.println("1 - Admin\n2 - Client\n0 - Exit program");
+            System.out.println("$$$$$$$$$$$ WELCOME TO SHOP $$$$$$$$$$$");
             String input = null;
             try {
                 input = br.readLine();
@@ -31,12 +34,12 @@ public class MainMenu {
                     break;
                 }
                 case "2": {
-                    System.out.println("Enter as client");
+                    System.out.println("Chose action");
                     clientMenu.show();
                     break;
                 }
                 case "0": {
-                    System.out.println("Exit program");
+                    System.out.println("Program closed\nCome again");
                     System.exit(0);
                 }
                 default:

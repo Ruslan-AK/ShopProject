@@ -23,8 +23,7 @@ public class ClientServiceImpl implements ClientService {
             validationService.validateAge(age);
             validationService.validatePhoneNumber(phoneNumber);
             Client client = new Client(name, surmame, age, email, phoneNumber);
-            //for modif
-            boolean result = clientDao.saveClient(client);
+            clientDao.saveClient(client);
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
         }
@@ -32,11 +31,11 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void deleteClient(Client client) {
-        clientDao.deleteClient(client.getId());
+        clientDao.deleteClient(client.getPhoneNumber());
     }
 
     @Override
-    public boolean contains(long id) {
+    public boolean contains(String id) {
         if (clientDao.getById(id) != null) return true;
         return false;
     }
@@ -50,7 +49,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client getById(long id) {
+    public Client getById(String id) {
         return clientDao.getById(id);
     }
 

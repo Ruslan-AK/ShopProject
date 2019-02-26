@@ -73,7 +73,7 @@ public class Client {
         Random random = new Random();
         while (true) {
             long temp = random.nextLong();
-            if (!listId.contains(temp)) {
+            if (!listId.contains(temp)&temp>0) {
                 id = temp;
                 listId.add(temp);
                 break;

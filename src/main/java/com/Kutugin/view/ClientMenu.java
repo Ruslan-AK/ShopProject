@@ -1,14 +1,19 @@
 package com.Kutugin.view;
 
 import com.Kutugin.domain.Client;
+import com.Kutugin.domain.Order;
 import com.Kutugin.domain.Product;
 import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
+import com.Kutugin.services.OrderService;
 import com.Kutugin.services.ProductServise;
+import com.Kutugin.services.impl.OrderServiceImpl;
 import com.Kutugin.validators.ValidationService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ClientMenu {
 
@@ -19,6 +24,8 @@ public class ClientMenu {
     private ProductServise productService;
     private boolean signIn = false;
     private ValidationService validator;
+    private OrderService orderService = new OrderServiceImpl();
+    private Map<String, Long> clientOrderIdMap = new HashMap<>();
 
     public ClientMenu(ProductServise productService, BufferedReader br, ClientService clientService, ClientAuthentication clientAuthentication, ValidationService validator) {
         this.br = br;
@@ -32,71 +39,38 @@ public class ClientMenu {
         boolean isRunning = true;
         while (isRunning) {
             if (signIn) {
-                System.out.println("1 - Show products\n2 - My cart\n3 - My account\n0 - Exit to main menu");
+                System.out.println("1 - Show products\n2 - My order\n3 - My account\nr - return");
                 switch (br.readLine()) {
                     case "1":
-                        System.out.println("show products");
-                        int i = 0;
-                        for (Product product : productService.getProducts()) {
-                            System.out.println(++i + " - " + product);
-                        }
-                        System.out.println("1-" + i + " - bye item\nr - return");
-                        //verificate
-                        String input = null;
-                        switch (input = br.readLine()) {
-                            case "r":
-                                isRunning = false;
-                                break;
-                            default:
-                                Product product = productService.getProducts().get(Integer.valueOf(input) - 1);
-//                                Order order = currentClient.getOrder();
-//                                order.addProduct(product);
-                                System.out.println("You bye " + product);
-                                break;
-                        }
+                        showProducts();
                         break;
                     case "2":
-                        System.out.println("My cart");
+                        myOrder();
                         break;
                     case "3":
-                        System.out.println("my account");
+                        isRunning = myAccount();
                         break;
-                    case "0":
-                        System.out.println("Exit to main menu");
+                    case "r":
                         isRunning = false;
                         break;
                     default:
                         System.out.println("Wrong input!");
                 }
             } else {
-                System.out.println("1 - Register\n2 - Login\n3 - Delete\n4 - Modify\n5 - Return\n0 - Exit to main menu");
+                System.out.println("1 - Register\n2 - Login\nr - Return");
                 switch (br.readLine()) {
                     case "1":
                         createClient();
                         break;
                     case "2":
                         currentClient = clientAuthentication.login();
-                        if (currentClient != null)
+                        if (currentClient != null){
                             signIn = true;
-                        break;
-                    case "3":
-                        System.out.println("Input Client id:");
-                        long rId = Long.valueOf(br.readLine());
-                        if (clientService.contains(rId)) {
-                            clientService.deleteClient(clientService.getById(rId));
-                            System.out.println("Client removed");
-                            break;
+                            clientOrderIdMap.put(currentClient.getPhoneNumber(),orderService.add(new Order()));
                         }
-                        System.out.println("Client not found");
                         break;
-                    case "4":
-                        modify();
-                        break;
-                    case "5":
+                    case "r":
                         System.out.println("Return");
-                        break;
-                    case "0":
-                        System.out.println("Exit to main menu");
                         isRunning = false;
                         break;
                     default:
@@ -106,9 +80,91 @@ public class ClientMenu {
         }
     }
 
-    private void modify() {
-
+    private boolean myAccount() throws IOException {
+        boolean run = true;
+        while (run) {
+            System.out.println("1 - Modify\n2 - Delete\nr - Return");
+            switch (br.readLine()) {
+                case "r":
+                    run = false;
+                    break;
+                case "1":
+                    //modify();
+                    break;
+                case "2": {
+                    boolean run1 = true;
+                    while (run1) {
+                        System.out.println("Are you sure?\n y - yes\n n - no");
+                        String inputId = br.readLine();
+                        switch (inputId) {
+                            case "y":
+                                clientService.deleteClient(currentClient);
+                                System.out.println("Client removed");
+                                clientOrderIdMap.remove(currentClient.getPhoneNumber());
+                                currentClient = clientAuthentication.signOut();
+                                signIn = false;
+                                return false;
+                            case "n":
+                                run1 = false;
+                                break;
+                            default:
+                                System.out.println("Wrong input!");
+                                break;
+                        }
+                    }
+                }
+                default:
+                    System.out.println("Wrong input!");
+                    break;
+            }
+        }
+        return true;
     }
+
+
+    private void myOrder() throws IOException {
+        if (clientOrderIdMap.get(currentClient.getPhoneNumber()) == null) {
+            Order order = new Order();
+            orderService.add(order);
+            clientOrderIdMap.put(currentClient.getPhoneNumber(), order.getId());
+        }
+        System.out.println(orderService.getById(clientOrderIdMap.get(currentClient.getPhoneNumber())));
+        boolean run = true;
+        while (run){
+            System.out.println("r - return");
+            String input = br.readLine();
+            switch (input){
+                case "r":
+                    run = false;
+                    break;
+                default:
+                    System.out.println("Wrong input!");
+            }
+        }
+    }
+
+    private void showProducts() throws IOException {
+        int i = 0;
+        for (Product product : productService.getProducts()) {
+            System.out.println(++i + " - " + product);
+        }
+        System.out.println("1-" + i + " - bye item\nr - return");
+        //verificate
+        String input = null;
+        switch (input = br.readLine()) {
+            case "r":
+                break;
+            default:
+                Product product = productService.getProducts().get(Integer.valueOf(input) - 1);
+                System.out.println("You bye " + product);
+                orderService.getById(clientOrderIdMap.get(currentClient.getPhoneNumber())).addProduct(product);//get Order by Client id and add Product to Order
+                break;
+        }
+    }
+
+//    private void modify() {
+//        clientService.updateClient();
+//    }
 
     private void createClient() throws IOException {
         System.out.println("Input name:");
@@ -141,7 +197,7 @@ public class ClientMenu {
             System.out.println("New Client created!");
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Client not created!");
+            System.out.println("Client not created!\nYou can login now");
             return;
         }
     }

@@ -9,6 +9,11 @@ public class Product {
     private String name;
     private BigDecimal price;
     private long id;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
     private static List<Long> listId = new ArrayList<>();
     private ProductType type;
 
@@ -16,12 +21,14 @@ public class Product {
         this.name = name;
         this.price = price;
         this.type = type;
+        generateId();
     }
 
     public Product(String name, double price, ProductType type) {
         this.name = name;
         this.price = BigDecimal.valueOf(Double.valueOf(price));
         this.type = type;
+        generateId();
     }
 
     @Override

@@ -7,9 +7,9 @@ import com.Kutugin.domain.Client;
 public interface ClientDao {
     boolean saveClient(Client client);
 
-    Client getById(long id);
+    Client getById(String id);
 
     List<Client> getAllClients();
 
-    void deleteClient(long id);
+    void deleteClient(String id);
 }

@@ -27,6 +27,7 @@ public class AdminMenu {
         boolean isRunning = true;
         while (isRunning) {
             showMenu();
+            String inputId;
             switch (br.readLine()) {
                 case "1":
                     showAllClients();
@@ -36,8 +37,8 @@ public class AdminMenu {
                     break;
                 case "3":
                     System.out.println("Input Client id:");
-                    long id = Long.valueOf(br.readLine());
-                    if (clientService.contains(id)) {
+                    inputId = br.readLine();
+                    if (clientService.contains(inputId)) {
                         System.out.println("Client found");
                         System.out.println("Input name:");
                         String uName = br.readLine();
@@ -45,16 +46,16 @@ public class AdminMenu {
                         String uSurname = br.readLine();
                         System.out.println("Input phone:");
                         String uPhoneNumber = br.readLine();
-                        clientService.updateClient(clientService.getById(id), uName, uSurname, uPhoneNumber);
+                        clientService.updateClient(clientService.getById(inputId), uName, uSurname, uPhoneNumber);
                     }
                     System.out.println("Client not found");
                     break;
                 case "4":
 
                     System.out.println("Input Client id:");
-                    long rId = Long.valueOf(br.readLine());
-                    if (clientService.contains(rId)) {
-                        clientService.deleteClient(clientService.getById(rId));
+                    inputId = br.readLine();
+                    if (clientService.contains(inputId)) {
+                        clientService.deleteClient(clientService.getById(inputId));
                         System.out.println("Client removed");
                         break;
                     }

@@ -28,46 +28,43 @@ public class ClientAuthentication {
     }
 
     public Client login() {
-        boolean isRunning = true;
         String input = null;
-        while (isRunning) {
-            if (isSignIn) {
-                System.out.println("You already sign in\n1 - sign out\nr - Return to previous menu");
-                try {
-                    input = br.readLine();
-                    currentClient = isRegistered(input);
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (isSignIn) {
+            System.out.println("You already sign in\n1 - sign out\nr - Return to previous menu");
+            try {
+                input = br.readLine();
+                currentClient = isRegistered(input);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            switch (input) {
+                case "1":
+                    signOut();
+                case "r":
+                    break;
+            }
+        } else {
+            System.out.println("Enter your mobile number");
+            try {
+                input = br.readLine();
+                validator.validatePhoneNumber(input);
+                currentClient = isRegistered(input);
+                if (currentClient == null) {
+                    System.out.println("Client not found");
+                } else {
+                    System.out.println("You sing in as:" + currentClient.getName());
+                    isSignIn = true;
                 }
-                switch (input) {
-                    case "1":
-                        signOut();
-                    case "r":
-                        isRunning = false;
-                        break;
-                }
-            } else {
-                System.out.println("Enter your mobile number");
-                try {
-                    input = br.readLine();
-                    validator.validatePhoneNumber(input);
-                    currentClient = isRegistered(input);
-                    if (currentClient == null) {
-                        System.out.println("Client not found");
-                    } else {
-                        System.out.println("You sing in as:" + currentClient.getName());
-                    }
-                    isRunning = false;
-                } catch (IOException | BusinessException e) {
-                    System.out.println(e.getMessage());
-                }
+            } catch (IOException | BusinessException e) {
+                System.out.println(e.getMessage());
             }
         }
         return currentClient;
     }
 
-    private void signOut() {
-        currentClient = null;
+    public Client signOut() {
+        isSignIn = false;
+        return currentClient = null;
     }
 
     private Client isRegistered(String input) {

@@ -5,15 +5,15 @@ import com.Kutugin.domain.Client;
 import java.util.List;
 
 public interface ClientService {
-    void createClient(String name, String surmame, String age, String phoneNumber, String email);//for Admin
+    void createClient(String name, String surmame, String age, String email, String phoneNumber);//for Admin
 
     void deleteClient(Client client);
 
-    boolean contains(long id);
+    boolean contains(String id);
 
     void updateClient(Client client, String name, String surmame, String phoneNumber);
 
-    Client getById(long id);
+    Client getById(String id);
 
     List<Client> getAllClients();
 }

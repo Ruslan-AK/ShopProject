@@ -1,6 +1,7 @@
 package com.Kutugin.dao.impl;
 
 import com.Kutugin.dao.ClientDao;
+import com.Kutugin.dao.impl.db.ClientDB;
 import com.Kutugin.domain.Client;
 
 import java.util.ArrayList;
@@ -10,12 +11,14 @@ import java.util.Map;
 
 public class ClientDaoImpl implements ClientDao {
 
-    private Map<Long, Client> map = new HashMap<>();
-    private static long generator = 0;
-    private static ClientDao clientDao = new ClientDaoImpl();
+    private Map<String, Client> map = new HashMap<>();
+    private static ClientDao clientDao = new ClientDaoImpl();//for Singleton
+    private ClientDB db = new ClientDB();
 
     private ClientDaoImpl() {
-
+        for (Client c:db.getClients()){
+            map.put(c.getPhoneNumber(),c);
+        }
     }
 
     public static ClientDao getInstance() {
@@ -24,13 +27,12 @@ public class ClientDaoImpl implements ClientDao {
 
     @Override
     public boolean saveClient(Client client) {
-        map.put(client.getId(), client);
-        System.out.println("Saving client");
+        map.put(client.getPhoneNumber(), client);
         return true;
     }
 
     @Override
-    public Client getById(long id) {
+    public Client getById(String id) {
         return map.get(id);
     }
 
@@ -40,7 +42,7 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     @Override
-    public void deleteClient(long id) {
+    public void deleteClient(String id) {
         map.remove(id);
     }
 }
