@@ -3,7 +3,7 @@ package com.Kutugin.view;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class MainMenu {
+public class MainMenu implements IMenu {
     private final BufferedReader br;
     private final AdminMenu adminMenu;
     private final ClientMenu clientMenu;
@@ -21,12 +21,7 @@ public class MainMenu {
             System.out.println("Select your role:");
             System.out.println("1 - Admin\n2 - Client\n0 - Exit program");
             System.out.println("$$$$$$$$$$$ WELCOME TO SHOP $$$$$$$$$$$");
-            String input = null;
-            try {
-                input = br.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String input = getInput();
             switch (input) {
                 case "1": {
                     System.out.println("Enter as admin");
@@ -47,5 +42,16 @@ public class MainMenu {
                     break;
             }
         }
+    }
+
+    @Override
+    public String getInput() {
+        String input = null;
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            System.out.println("Wrong input!");
+        }
+        return input;
     }
 }

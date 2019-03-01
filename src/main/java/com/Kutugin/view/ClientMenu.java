@@ -14,11 +14,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClientMenu {
+public class ClientMenu implements IMenu {
 
     private BufferedReader br;
     private ClientService clientService;
-    private ClientAuthentication clientAuthentication;
     private Client currentClient;
     private ProductServise productService;
     private boolean signIn = false;
@@ -26,21 +25,20 @@ public class ClientMenu {
     private OrderService orderService;
     private Map<String, Long> clientOrderIdMap = new HashMap<>();
 
-    public ClientMenu(ProductServise productService, BufferedReader br, ClientService clientService, ClientAuthentication clientAuthentication, ValidationService validator, OrderService orderService) {
+    public ClientMenu(ProductServise productService, BufferedReader br, ClientService clientService, ValidationService validator, OrderService orderService) {
         this.br = br;
         this.clientService = clientService;
-        this.clientAuthentication = clientAuthentication;
         this.validator = validator;
         this.productService = productService;
         this.orderService = orderService;
     }
 
-    public void show() throws IOException {
+    public void show() {
         boolean isRunning = true;
         while (isRunning) {
             if (signIn) {
-                System.out.println("1 - Show products\n2 - My order\n3 - My account\nr - return");
-                switch (br.readLine()) {
+                System.out.println("1 - Show products\n2 - My order\n3 - My account\n4 - Log Out\nr - return");
+                switch (getInput()) {
                     case "1":
                         showProducts();
                         break;
@@ -50,6 +48,9 @@ public class ClientMenu {
                     case "3":
                         isRunning = myAccount();
                         break;
+                    case "4":
+                        isRunning = signOut();
+                        break;
                     case "r":
                         isRunning = false;
                         break;
@@ -58,12 +59,12 @@ public class ClientMenu {
                 }
             } else {
                 System.out.println("1 - Register\n2 - Login\nr - Return");
-                switch (br.readLine()) {
+                switch (getInput()) {
                     case "1":
                         createClient();
                         break;
                     case "2":
-                        currentClient = clientAuthentication.login();
+                        currentClient = login();
                         if (currentClient != null) {
                             signIn = true;
                             clientOrderIdMap.put(currentClient.getPhoneNumber(), orderService.add(new Order()));
@@ -80,11 +81,11 @@ public class ClientMenu {
         }
     }
 
-    private boolean myAccount() throws IOException {
+    private boolean myAccount() {
         boolean run = true;
         while (run) {
             System.out.println("0 - Show Account Info\n1 - Modify\n2 - Delete\nr - Return");
-            switch (br.readLine()) {
+            switch (getInput()) {
                 case "r":
                     run = false;
                     break;
@@ -98,14 +99,13 @@ public class ClientMenu {
                     boolean run1 = true;
                     while (run1) {
                         System.out.println("Are you sure?\n y - yes\n n - no");
-                        String inputId = br.readLine();
+                        String inputId = getInput();
                         switch (inputId) {
                             case "y":
                                 clientService.deleteClient(currentClient);
                                 System.out.println("Client removed");
                                 clientOrderIdMap.remove(currentClient.getPhoneNumber());
-                                currentClient = clientAuthentication.signOut();
-                                signIn = false;
+                                signOut();
                                 return false;
                             case "n":
                                 run1 = false;
@@ -125,7 +125,7 @@ public class ClientMenu {
     }
 
 
-    private void myOrder() throws IOException {
+    private void myOrder() {
         if (clientOrderIdMap.get(currentClient.getPhoneNumber()) == null) {
             Order order = new Order();
             orderService.add(order);
@@ -136,7 +136,7 @@ public class ClientMenu {
         boolean run = true;
         while (run) {
             System.out.println("r - return");
-            String input = br.readLine();
+            String input = getInput();
             switch (input) {
                 case "r":
                     run = false;
@@ -147,15 +147,14 @@ public class ClientMenu {
         }
     }
 
-    private void showProducts() throws IOException {
+    private void showProducts() {
         int i = 0;
         for (Product product : productService.getProducts()) {
             System.out.println(++i + " - " + product);
         }
         System.out.println("1-" + i + " - bye item\nr - return");
-        //verificate
         String input = null;
-        switch (input = br.readLine()) {
+        switch (input = getInput()) {
             case "r":
                 break;
             default:
@@ -175,21 +174,13 @@ public class ClientMenu {
 
         System.out.println("What you want to modify?:\n1 - Name\n2 - Surname\n3 - Age\n4 - Email\n5 - Phone Number\nr - Return");
         String input = null;
-        try {
-            input = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        input = getInput();
         switch (input) {
             case "r":
                 break;
             case "1": {
                 System.out.println("Enter new Name:");
-                try {
-                    input = br.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                input = getInput();
                 try {
                     validator.validateName(input);
                 } catch (BusinessException e) {
@@ -201,11 +192,7 @@ public class ClientMenu {
             }
             case "2": {
                 System.out.println("Enter new Surname:");
-                try {
-                    input = br.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                input = getInput();
                 try {
                     validator.validateName(input);
                 } catch (BusinessException e) {
@@ -217,11 +204,7 @@ public class ClientMenu {
             }
             case "3": {
                 System.out.println("Enter new Age:");
-                try {
-                    input = br.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                input = getInput();
                 try {
                     validator.validateAge(input);
                 } catch (BusinessException e) {
@@ -233,11 +216,7 @@ public class ClientMenu {
             }
             case "4": {
                 System.out.println("Enter new Email:");
-                try {
-                    input = br.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                input = getInput();
                 try {
                     validator.validateEmail(input);
                 } catch (BusinessException e) {
@@ -249,11 +228,7 @@ public class ClientMenu {
             }
             case "5": {
                 System.out.println("Enter new Phone Number:");
-                try {
-                    input = br.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                input = getInput();
                 try {
                     validator.validatePhoneNumber(input);
                 } catch (BusinessException e) {
@@ -272,12 +247,7 @@ public class ClientMenu {
 
     private void createClient() {
         System.out.println("Input name:");
-        String name = null;
-        try {
-            name = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String name = getInput();
         try {
             validator.validateName(name);
         } catch (BusinessException e) {
@@ -286,12 +256,7 @@ public class ClientMenu {
             return;
         }
         System.out.println("Input surname:");
-        String surname = null;
-        try {
-            surname = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String surname = getInput();
         try {
             validator.validateName(surname);
         } catch (BusinessException e) {
@@ -300,12 +265,7 @@ public class ClientMenu {
             return;
         }
         System.out.println("Input age:");
-        String age = null;
-        try {
-            age = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String age = getInput();
         try {
             validator.validateAge(age);
         } catch (BusinessException ex) {
@@ -314,12 +274,7 @@ public class ClientMenu {
             return;
         }
         System.out.println("Input email:");
-        String email = null;
-        try {
-            email = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String email = getInput();
         try {
             validator.validateEmail(email);
         } catch (BusinessException ex) {
@@ -328,15 +283,10 @@ public class ClientMenu {
             return;
         }
         System.out.println("Input phone:");
-        String phoneNumber = null;
-        try {
-            phoneNumber = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String phoneNumber = getInput();
         try {
             validator.validatePhoneNumber(phoneNumber);//validator
-            if(clientService.contains(phoneNumber)) {
+            if (clientService.contains(phoneNumber)) {
                 System.out.println("Client with this phone number already exist");
                 System.out.println("Client not created!");
                 return;
@@ -348,5 +298,56 @@ public class ClientMenu {
             System.out.println("Client not created!");
             return;
         }
+    }
+
+    public Client login() {
+        String input = null;
+        if (signIn) {
+            System.out.println("You already sign in\n1 - sign out\nr - Return to previous menu");
+            try {
+                input = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            switch (input) {
+                case "1":
+                    signOut();
+                case "r":
+                    break;
+            }
+        } else {
+            System.out.println("Enter your mobile number");
+            try {
+                input = br.readLine();
+                validator.validatePhoneNumber(input);
+                currentClient = clientService.getById(input);
+                if (currentClient == null) {
+                    System.out.println("Client not found");
+                } else {
+                    System.out.println("You sing in as:" + currentClient.getName());
+                    signIn = true;
+                }
+            } catch (IOException | BusinessException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return currentClient;
+    }
+
+    public boolean signOut() {
+        signIn = false;
+        currentClient = null;
+        return false;
+    }
+
+    @Override
+    public String getInput() {
+        String input = null;
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            System.out.println("Wrong input!");
+        }
+        return input;
     }
 }
