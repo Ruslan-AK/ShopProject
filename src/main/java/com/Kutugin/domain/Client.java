@@ -22,17 +22,6 @@ public class Client {
         generateId();
     }
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "name='" + name + '\'' +
-                ", surmame='" + surmame + '\'' +
-                ", age=" + age +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", id=" + id +
-                '}';
-    }
-
     public String getName() {
         return name;
     }
@@ -63,6 +52,22 @@ public class Client {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", surmame='" + surmame + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public long getId() {

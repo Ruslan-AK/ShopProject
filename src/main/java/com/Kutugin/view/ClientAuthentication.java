@@ -33,7 +33,6 @@ public class ClientAuthentication {
             System.out.println("You already sign in\n1 - sign out\nr - Return to previous menu");
             try {
                 input = br.readLine();
-                currentClient = isRegistered(input);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -48,7 +47,7 @@ public class ClientAuthentication {
             try {
                 input = br.readLine();
                 validator.validatePhoneNumber(input);
-                currentClient = isRegistered(input);
+                currentClient = clientService.getById(input);
                 if (currentClient == null) {
                     System.out.println("Client not found");
                 } else {
@@ -67,10 +66,10 @@ public class ClientAuthentication {
         return currentClient = null;
     }
 
-    private Client isRegistered(String input) {
-        for (Client client : clientService.getAllClients()) {
-            if (client.getPhoneNumber().equals(input)) return client;
-        }
-        return null;
-    }
+//    private Client isRegistered(String input) {
+//        for (Client client : clientService.getAllClients()) {
+//            if (client.getPhoneNumber().equals(input)) return client;
+//        }
+//        return null;
+//    }
 }

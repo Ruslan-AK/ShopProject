@@ -1,6 +1,7 @@
 package com.Kutugin;
 
 import com.Kutugin.dao.ClientDao;
+import com.Kutugin.dao.impl.ClientDBDao;
 import com.Kutugin.dao.impl.ClientDaoImpl;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.services.ProductServise;
@@ -19,7 +20,8 @@ import java.io.InputStreamReader;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        ClientDao clientDao = ClientDaoImpl.getInstance();
+        ClientDao clientDao = new ClientDBDao();
+       // ClientDao clientDao = ClientDaoImpl.getInstance();
         ValidationService validationService = new ValidationServiceImpl();
         ClientService clientService = new ClientServiceImpl(clientDao, validationService);
         ProductServise productService = new ProductServiceImpl();
