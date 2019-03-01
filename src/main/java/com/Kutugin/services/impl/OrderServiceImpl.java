@@ -1,7 +1,6 @@
 package com.Kutugin.services.impl;
 
 import com.Kutugin.dao.OrderDao;
-import com.Kutugin.dao.impl.OrderDaoImpl;
 import com.Kutugin.domain.Order;
 import com.Kutugin.domain.Product;
 import com.Kutugin.services.OrderService;
@@ -11,13 +10,17 @@ import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
 
-    private OrderDao orderDao = OrderDaoImpl.getInstance();
+    private OrderDao orderDao;
+
+    public OrderServiceImpl(OrderDao orderDao) {
+        this.orderDao = orderDao;
+    }
 
     @Override
     public BigDecimal summaryPrice(long id) {
         BigDecimal sum = new BigDecimal(0);
-        for (Product product:orderDao.getById(id).getProductList()){
-            sum.add(product.getPrice());
+        for (Product product : orderDao.getById(id).getProductList()) {
+            sum = sum.add(product.getPrice());//because BigDecimal is immutable
         }
         return sum;
     }
@@ -28,8 +31,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void update(long id,Order order) {
-        orderDao.update(id,order);
+    public void update(long id, Order order) {
+        orderDao.update(id, order);
     }
 
     @Override

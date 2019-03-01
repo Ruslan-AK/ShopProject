@@ -5,6 +5,7 @@ import com.Kutugin.domain.Product;
 import java.util.List;
 
 public interface ProductServise {
+
     public boolean saveProduct(Product product);
 
     List<Product> getProducts();

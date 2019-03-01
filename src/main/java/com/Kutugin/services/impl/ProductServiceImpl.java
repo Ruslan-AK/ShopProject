@@ -1,7 +1,6 @@
 package com.Kutugin.services.impl;
 
 import com.Kutugin.dao.ProductDao;
-import com.Kutugin.dao.impl.ProductDaoImpl;
 import com.Kutugin.domain.Product;
 import com.Kutugin.services.ProductServise;
 
@@ -9,7 +8,11 @@ import java.util.List;
 
 public class ProductServiceImpl implements ProductServise {
 
-    private ProductDao productDao = ProductDaoImpl.getInstance();
+    private ProductDao productDao;
+
+    public ProductServiceImpl(ProductDao productDao) {
+        this.productDao = productDao;
+    }
 
     @Override
     public boolean saveProduct(Product product) {

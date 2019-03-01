@@ -5,11 +5,13 @@ import java.util.List;
 import com.Kutugin.domain.Client;
 
 public interface ClientDao {
-    boolean saveClient(Client client);
+    void saveClient(Client client);
 
     Client getById(String id);
 
     List<Client> getAllClients();
 
     void deleteClient(String id);
+
+    boolean contains(String id);
 }

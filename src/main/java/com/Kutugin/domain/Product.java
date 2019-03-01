@@ -45,11 +45,11 @@ public class Product {
         return id;
     }
 
-    private void generateId(){
+    private void generateId() {
         Random random = new Random();
-        while (true){
+        while (true) {
             long temp = random.nextLong();
-            if(!listId.contains(temp)) {
+            if (!listId.contains(temp)) {
                 id = temp;
                 listId.add(temp);
                 break;
