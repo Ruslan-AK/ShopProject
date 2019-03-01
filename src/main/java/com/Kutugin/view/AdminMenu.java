@@ -39,16 +39,77 @@ public class AdminMenu {
                     System.out.println("Input Client id:");
                     inputId = br.readLine();
                     if (clientService.contains(inputId)) {
-                        System.out.println("Client found");
-                        System.out.println("Input name:");
-                        String uName = br.readLine();
-                        System.out.println("Input surname:");
-                        String uSurname = br.readLine();
-                        System.out.println("Input phone:");
-                        String uPhoneNumber = br.readLine();
-                        clientService.updateClient(clientService.getById(inputId), uName, uSurname, uPhoneNumber);
-                    }
-                    System.out.println("Client not found");
+                        System.out.println("What you want to modify?:\n1 - Name\n2 - Surname\n3 - Age\n4 - Email\n5 - Phone Number");
+                        String input = null;
+                        try {
+                            input = br.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        switch (input) {
+                            case "1": {
+                                try {
+                                    input = br.readLine();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
+                                break;
+                            }
+                            case "2": {
+                                try {
+                                    input = br.readLine();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
+                                break;
+                            }
+                            case "3": {
+                                try {
+                                    input = br.readLine();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    validator.validateAge(input);
+                                } catch (BusinessException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
+                                break;
+                            }
+                            case "4": {
+                                try {
+                                    input = br.readLine();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    validator.validateEmail(input);
+                                } catch (BusinessException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
+                                break;
+                            }
+                            case "5": {
+                                try {
+                                    input = br.readLine();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    validator.validatePhoneNumber(input);
+                                } catch (BusinessException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
+                                break;
+                            }
+                        }
+                    } else
+                        System.out.println("Client not found");
                     break;
                 case "4":
 

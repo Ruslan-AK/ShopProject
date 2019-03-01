@@ -27,8 +27,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void update(long id, Order order) {
-        for (Order o:orderList){
-            if (o.getId()==id) {
+        for (Order o : orderList) {
+            if (o.getId() == id) {
                 o.update(order);
             }
         }
@@ -41,8 +41,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void deleteById(long id) {
-        for (Order order:orderList){
-            if (order.getId()==id) {
+        for (Order order : orderList) {
+            if (order.getId() == id) {
                 orderList.remove(order);
             }
         }
@@ -50,8 +50,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order getById(long id) {
-        for (Order order:orderList){
-            if (order.getId()==id)
+        for (Order order : orderList) {
+            if (order.getId() == id)
                 return order;
         }
         return null;
@@ -59,8 +59,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean containsById(long id) {
-        for (Order order:orderList){
-            if (order.getId()==id)
+        for (Order order : orderList) {
+            if (order.getId() == id)
                 return true;
         }
         return false;

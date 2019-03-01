@@ -36,15 +36,36 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public boolean contains(String id) {
-        if (clientDao.getById(id) != null) return true;
-        return false;
+        return clientDao.contains(id);
     }
 
     @Override
-    public void updateClient(Client client, String name, String surmame, String phoneNumber) {
-        client.setName(name);
-        client.setSurmame(surmame);
-        client.setPhoneNumber(phoneNumber);
+    public void updateClient(Client client, int paramNumber, String param) {
+        switch (paramNumber) {
+            case 1: {
+                client.setName(param);
+                break;
+            }
+            case 2: {
+                client.setSurmame(param);
+                break;
+            }
+            case 3: {
+                client.setAge(Integer.valueOf(param));
+                break;
+            }
+            case 4: {
+                client.setEmail(param);
+                break;
+            }
+            case 5: {
+                client.setPhoneNumber(param);
+                break;
+            }
+            default: {
+                System.out.println("Eror update!");
+            }
+        }
         System.out.println(client + " updated");
     }
 

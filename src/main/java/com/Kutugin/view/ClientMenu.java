@@ -7,7 +7,6 @@ import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.services.OrderService;
 import com.Kutugin.services.ProductServise;
-import com.Kutugin.services.impl.OrderServiceImpl;
 import com.Kutugin.validators.ValidationService;
 
 import java.io.BufferedReader;
@@ -24,15 +23,16 @@ public class ClientMenu {
     private ProductServise productService;
     private boolean signIn = false;
     private ValidationService validator;
-    private OrderService orderService = new OrderServiceImpl();
+    private OrderService orderService;
     private Map<String, Long> clientOrderIdMap = new HashMap<>();
 
-    public ClientMenu(ProductServise productService, BufferedReader br, ClientService clientService, ClientAuthentication clientAuthentication, ValidationService validator) {
+    public ClientMenu(ProductServise productService, BufferedReader br, ClientService clientService, ClientAuthentication clientAuthentication, ValidationService validator, OrderService orderService) {
         this.br = br;
         this.clientService = clientService;
         this.clientAuthentication = clientAuthentication;
         this.validator = validator;
         this.productService = productService;
+        this.orderService = orderService;
     }
 
     public void show() throws IOException {
@@ -64,9 +64,9 @@ public class ClientMenu {
                         break;
                     case "2":
                         currentClient = clientAuthentication.login();
-                        if (currentClient != null){
+                        if (currentClient != null) {
                             signIn = true;
-                            clientOrderIdMap.put(currentClient.getPhoneNumber(),orderService.add(new Order()));
+                            clientOrderIdMap.put(currentClient.getPhoneNumber(), orderService.add(new Order()));
                         }
                         break;
                     case "r":
@@ -83,13 +83,16 @@ public class ClientMenu {
     private boolean myAccount() throws IOException {
         boolean run = true;
         while (run) {
-            System.out.println("1 - Modify\n2 - Delete\nr - Return");
+            System.out.println("0 - Show Account Info\n1 - Modify\n2 - Delete\nr - Return");
             switch (br.readLine()) {
                 case "r":
                     run = false;
                     break;
+                case "0":
+                    System.out.println(currentClient);
+                    break;
                 case "1":
-                    //modify();
+                    modify();
                     break;
                 case "2": {
                     boolean run1 = true;
@@ -129,11 +132,12 @@ public class ClientMenu {
             clientOrderIdMap.put(currentClient.getPhoneNumber(), order.getId());
         }
         System.out.println(orderService.getById(clientOrderIdMap.get(currentClient.getPhoneNumber())));
+        System.out.println("Total price: " + orderService.summaryPrice(clientOrderIdMap.get(currentClient.getPhoneNumber())));
         boolean run = true;
-        while (run){
+        while (run) {
             System.out.println("r - return");
             String input = br.readLine();
-            switch (input){
+            switch (input) {
                 case "r":
                     run = false;
                     break;
@@ -155,16 +159,116 @@ public class ClientMenu {
             case "r":
                 break;
             default:
-                Product product = productService.getProducts().get(Integer.valueOf(input) - 1);
-                System.out.println("You bye " + product);
-                orderService.getById(clientOrderIdMap.get(currentClient.getPhoneNumber())).addProduct(product);//get Order by Client id and add Product to Order
+                try {
+                    int index = Integer.valueOf(input) - 1;
+                    Product product = productService.getProducts().get(index);
+                    System.out.println("You bye " + product);
+                    orderService.getById(clientOrderIdMap.get(currentClient.getPhoneNumber())).addProduct(product);//get Order by Client id and add Product to Order
+                } catch (NumberFormatException ex) {
+                    System.out.println("Wrong input!");
+                }
                 break;
         }
     }
 
-//    private void modify() {
-//        clientService.updateClient();
-//    }
+    private void modify() {
+
+        System.out.println("What you want to modify?:\n1 - Name\n2 - Surname\n3 - Age\n4 - Email\n5 - Phone Number\nr - Return");
+        String input = null;
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        switch (input) {
+            case "r":
+                break;
+            case "1": {
+                System.out.println("Enter new Name:");
+                try {
+                    input = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    validator.validateName(input);
+                } catch (BusinessException e) {
+                    System.out.println(e.getMessage() + "\n");
+                }
+                clientService.updateClient(currentClient, 2, input);
+                System.out.println("Client modified!");
+                break;
+            }
+            case "2": {
+                System.out.println("Enter new Surname:");
+                try {
+                    input = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    validator.validateName(input);
+                } catch (BusinessException e) {
+                    System.out.println(e.getMessage() + "\n");
+                }
+                clientService.updateClient(currentClient, 2, input);
+                System.out.println("Client modified!");
+                break;
+            }
+            case "3": {
+                System.out.println("Enter new Age:");
+                try {
+                    input = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    validator.validateAge(input);
+                } catch (BusinessException e) {
+                    System.out.println(e.getMessage() + "\n");
+                }
+                clientService.updateClient(currentClient, 3, input);
+                System.out.println("Client modified!");
+                break;
+            }
+            case "4": {
+                System.out.println("Enter new Email:");
+                try {
+                    input = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    validator.validateEmail(input);
+                } catch (BusinessException e) {
+                    System.out.println(e.getMessage() + "\n");
+                }
+                clientService.updateClient(currentClient, 4, input);
+                System.out.println("Client modified!");
+                break;
+            }
+            case "5": {
+                System.out.println("Enter new Phone Number:");
+                try {
+                    input = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    validator.validatePhoneNumber(input);
+                } catch (BusinessException e) {
+                    System.out.println(e.getMessage() + "\n");
+                }
+                clientService.updateClient(currentClient, 5, input);
+                System.out.println("Client modified!");
+                break;
+            }
+            default:
+                System.out.println("Wrong input");
+                break;
+        }
+
+    }
 
     private void createClient() throws IOException {
         System.out.println("Input name:");
@@ -194,10 +298,10 @@ public class ClientMenu {
         try {
             validator.validatePhoneNumber(phoneNumber);//validator
             clientService.createClient(name, surname, age, email, phoneNumber);
-            System.out.println("New Client created!");
+            System.out.println("New Client created!\nYou can login now");
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Client not created!\nYou can login now");
+            System.out.println("Client not created!");
             return;
         }
     }

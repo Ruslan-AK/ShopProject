@@ -1,6 +1,7 @@
 package com.Kutugin.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -8,31 +9,28 @@ public class Order {
     private long id;
     private static List<Long> listId = new ArrayList<Long>();
     private List<Product> productList = new ArrayList<>();
-    //date and time of order
+    private Date date;
 
-    public Order(Product product) {
-        productList.add(product);
-        generateId();
-    }
 
     public Order() {
         generateId();
+        date = new Date();
     }
 
     @Override
     public String toString() {
-        return "Order №=" + id +
-                "\nProductList:\n" + (showProducts().equals("")?"No products yet":showProducts());
+        return "Order №=" + id + "\nCreated: " + date +
+                "\nProductList:\n" + (showProducts().equals("") ? "No products yet" : showProducts());
     }
 
     private String showProducts() {
-        String t="";
-        for(Product p:productList){
-           t+=p.toString();
-           t+="\n";
+        String t = "";
+        for (Product p : productList) {
+            t += p.toString();
+            if (!(productList.indexOf(p) + 1 == productList.size()))
+                t += "\n";
         }
         return t;
-
     }
 
     public long getId() {
@@ -43,15 +41,15 @@ public class Order {
         return productList;
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         productList.add(product);
     }
 
-    private void generateId(){
+    private void generateId() {
         Random random = new Random();
-        while (true){
+        while (true) {
             long temp = random.nextLong();
-            if(!listId.contains(temp)&temp>0) {
+            if (!listId.contains(temp) & temp > 0) {
                 id = temp;
                 listId.add(temp);
                 break;
@@ -61,5 +59,6 @@ public class Order {
 
     public void update(Order order) {
         this.productList = order.getProductList();
+        date = new Date();
     }
 }

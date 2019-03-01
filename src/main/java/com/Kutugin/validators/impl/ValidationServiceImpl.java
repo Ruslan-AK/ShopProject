@@ -33,4 +33,16 @@ public class ValidationServiceImpl implements ValidationService {
         Matcher m = p.matcher(email);
         if (!m.matches()) throw new BusinessException("Wrong email format!");
     }
+
+    @Override
+    public void validateName(String name) throws BusinessException {
+        Pattern p = Pattern.compile("\\{1,20\\}\\D");
+        Matcher m = p.matcher(name);
+        if (!m.matches()) throw new BusinessException("Wrong name format!");
+    }
+
+    @Override
+    public void validateSurname(String email) throws BusinessException {
+
+    }
 }

@@ -7,7 +7,9 @@ import java.util.Random;
 public class Client {
     private String name;
     private String surmame;
+
     private String email;
+
     private int age;
     private String phoneNumber;
     private long id;
@@ -20,6 +22,16 @@ public class Client {
         this.age = Integer.valueOf(age);
         this.email = email;
         generateId();
+    }
+
+    @Override
+    public String toString() {
+        return "Name='" + name + '\'' + ", \n" +
+                "surmame='" + surmame + '\'' + ", \n" +
+                "email='" + email + '\'' + ", \n" +
+                "age=" + age + ", \n" +
+                "phoneNumber='" + phoneNumber + '\'' + ", \n" +
+                "id=" + id;
     }
 
     public String getName() {
@@ -54,6 +66,10 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
@@ -78,7 +94,7 @@ public class Client {
         Random random = new Random();
         while (true) {
             long temp = random.nextLong();
-            if (!listId.contains(temp)&temp>0) {
+            if (!listId.contains(temp) & temp > 0) {
                 id = temp;
                 listId.add(temp);
                 break;

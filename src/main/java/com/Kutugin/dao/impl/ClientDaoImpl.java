@@ -16,8 +16,8 @@ public class ClientDaoImpl implements ClientDao {
     private ClientDB db = new ClientDB();
 
     private ClientDaoImpl() {
-        for (Client c:db.getClients()){
-            map.put(c.getPhoneNumber(),c);
+        for (Client c : db.getClients()) {
+            map.put(c.getPhoneNumber(), c);
         }
     }
 
@@ -26,9 +26,8 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     @Override
-    public boolean saveClient(Client client) {
+    public void saveClient(Client client) {
         map.put(client.getPhoneNumber(), client);
-        return true;
     }
 
     @Override
@@ -44,5 +43,10 @@ public class ClientDaoImpl implements ClientDao {
     @Override
     public void deleteClient(String id) {
         map.remove(id);
+    }
+
+    @Override
+    public boolean contains(String id) {
+        return map.containsKey(id);
     }
 }
