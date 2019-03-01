@@ -125,7 +125,7 @@ public class AdminMenu {
                     break;
                 case "4":
 
-                    System.out.println("Input Client id:");
+                    System.out.println("Input Client phone number(id):");
                     inputId = br.readLine();
                     if (clientService.contains(inputId)) {
                         clientService.deleteClient(clientService.getById(inputId));

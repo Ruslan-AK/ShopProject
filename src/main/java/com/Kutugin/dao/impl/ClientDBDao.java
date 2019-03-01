@@ -88,7 +88,7 @@ public class ClientDBDao implements ClientDao {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT WHERE PHONE = '" + id + "';");
-            while (resultSet.next() && !find) {
+            while (!find&&resultSet.next()) {
                 String name = resultSet.getString("PHONE");
                 if (name != null && name.length() > 0) {
                     find = true;
