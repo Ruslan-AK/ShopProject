@@ -270,13 +270,42 @@ public class ClientMenu {
 
     }
 
-    private void createClient() throws IOException {
+    private void createClient() {
         System.out.println("Input name:");
-        String name = br.readLine();
+        String name = null;
+        try {
+            name = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            validator.validateName(name);
+        } catch (BusinessException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Client not created!");
+            return;
+        }
         System.out.println("Input surname:");
-        String surname = br.readLine();
+        String surname = null;
+        try {
+            surname = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            validator.validateName(surname);
+        } catch (BusinessException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Client not created!");
+            return;
+        }
         System.out.println("Input age:");
-        String age = br.readLine();
+        String age = null;
+        try {
+            age = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             validator.validateAge(age);
         } catch (BusinessException ex) {
@@ -285,7 +314,12 @@ public class ClientMenu {
             return;
         }
         System.out.println("Input email:");
-        String email = br.readLine();
+        String email = null;
+        try {
+            email = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             validator.validateEmail(email);
         } catch (BusinessException ex) {
@@ -294,9 +328,19 @@ public class ClientMenu {
             return;
         }
         System.out.println("Input phone:");
-        String phoneNumber = br.readLine();
+        String phoneNumber = null;
+        try {
+            phoneNumber = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             validator.validatePhoneNumber(phoneNumber);//validator
+            if(clientService.contains(phoneNumber)) {
+                System.out.println("Client with this phone number already exist");
+                System.out.println("Client not created!");
+                return;
+            }
             clientService.createClient(name, surname, age, email, phoneNumber);
             System.out.println("New Client created!\nYou can login now");
         } catch (BusinessException ex) {

@@ -36,7 +36,7 @@ public class ValidationServiceImpl implements ValidationService {
 
     @Override
     public void validateName(String name) throws BusinessException {
-        Pattern p = Pattern.compile("\\{1,20\\}\\D");
+        Pattern p = Pattern.compile("\\D{1,20}");
         Matcher m = p.matcher(name);
         if (!m.matches()) throw new BusinessException("Wrong name format!");
     }

@@ -26,7 +26,7 @@ public class AdminMenu {
     public void show() throws IOException {
         boolean isRunning = true;
         while (isRunning) {
-            showMenu();
+            System.out.println("1 - Show clients\n2 - Add client\n3 - Modify client\n4 - Remove client\n5 - Add product\n0 - Exit to main menu");
             String inputId;
             switch (br.readLine()) {
                 case "1":
@@ -48,21 +48,33 @@ public class AdminMenu {
                         }
                         switch (input) {
                             case "1": {
+                                System.out.println("Enter new name:");
                                 try {
                                     input = br.readLine();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
+                                try {
+                                    validator.validateName(input);
+                                    clientService.updateClient(clientService.getById(inputId), 1, input);
+                                } catch (BusinessException e) {
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
                             }
                             case "2": {
+                                System.out.println("Enter new surname:");
                                 try {
                                     input = br.readLine();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
+                                try {
+                                    validator.validateName(input);
+                                    clientService.updateClient(clientService.getById(inputId), 2, input);
+                                } catch (BusinessException e) {
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
                             }
                             case "3": {
@@ -73,10 +85,10 @@ public class AdminMenu {
                                 }
                                 try {
                                     validator.validateAge(input);
+                                    clientService.updateClient(clientService.getById(inputId), 3, input);
                                 } catch (BusinessException e) {
                                     System.out.println(e.getMessage());
                                 }
-                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
                                 break;
                             }
                             case "4": {
@@ -87,10 +99,10 @@ public class AdminMenu {
                                 }
                                 try {
                                     validator.validateEmail(input);
+                                    clientService.updateClient(clientService.getById(inputId), 4, input);
                                 } catch (BusinessException e) {
                                     System.out.println(e.getMessage());
                                 }
-                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
                                 break;
                             }
                             case "5": {
@@ -101,10 +113,10 @@ public class AdminMenu {
                                 }
                                 try {
                                     validator.validatePhoneNumber(input);
+                                    clientService.updateClient(clientService.getById(inputId), 5, input);
                                 } catch (BusinessException e) {
                                     System.out.println(e.getMessage());
                                 }
-                                clientService.updateClient(clientService.getById(inputId), Integer.valueOf(input), input);
                                 break;
                             }
                         }
@@ -160,15 +172,26 @@ public class AdminMenu {
         }
     }
 
-    private void showMenu() {
-        System.out.println("1 - Show clients\n2 - Add client\n3 - Modify client\n4 - Remove client\n5 - Add product\n0 - Exit to main menu");
-    }
-
     private void createClient() throws IOException {
+        System.out.println("Create client:");
         System.out.println("Input name:");
         String name = br.readLine();
+        try {
+            validator.validateName(name);
+        } catch (BusinessException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Client not created!");
+            return;
+        }
         System.out.println("Input surname:");
         String surname = br.readLine();
+        try {
+            validator.validateName(surname);
+        } catch (BusinessException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Client not created!");
+            return;
+        }
         System.out.println("Input age:");
         String age = br.readLine();
         try {

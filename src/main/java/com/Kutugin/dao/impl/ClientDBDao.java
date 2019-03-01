@@ -12,6 +12,7 @@ public class ClientDBDao implements ClientDao {
     private static final String LOGIN = "admin";
     private static final String PASS = "";
     private List<Client> clientList;
+    private boolean modified = false;//flag modification, to reload clientList when we change DB information
 
     @Override
     public void saveClient(Client client) {
@@ -23,6 +24,7 @@ public class ClientDBDao implements ClientDao {
                      + "'" + client.getPhoneNumber() + "',"
                      + "'" + client.getEmail() + "');")) {
             statement.execute();
+            modified = true;
         } catch (SQLException ignored) {
         }
     }
@@ -46,7 +48,7 @@ public class ClientDBDao implements ClientDao {
 
     @Override
     public List<Client> getAllClients() {
-        if (clientList == null) {
+        if (clientList == null||modified) {
             clientList = new ArrayList<>();
             try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
                  Statement statement = connection.createStatement()) {
@@ -74,6 +76,7 @@ public class ClientDBDao implements ClientDao {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement = connection.createStatement()) {
             statement.execute("DELETE FROM CLIENT WHERE PHONE ='" + id + "';");
+            modified = true;
         } catch (SQLException e) {
             System.out.println(e.getSQLState());
         }
@@ -84,9 +87,9 @@ public class ClientDBDao implements ClientDao {
         boolean find = false;
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT;");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT WHERE PHONE = '" + id + "';");
             while (resultSet.next() && !find) {
-                String name = resultSet.getString("id");
+                String name = resultSet.getString("PHONE");
                 if (name != null && name.length() > 0) {
                     find = true;
                     break;
