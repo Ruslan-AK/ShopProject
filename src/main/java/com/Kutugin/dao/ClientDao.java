@@ -1,8 +1,8 @@
 package com.Kutugin.dao;
 
-import java.util.List;
-
 import com.Kutugin.domain.Client;
+
+import java.util.List;
 
 public interface ClientDao {
     void saveClient(Client client);

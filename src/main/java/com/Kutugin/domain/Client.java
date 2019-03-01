@@ -26,12 +26,15 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Name='" + name + '\'' + ", \n" +
+
+        return ">======================<\n"+
+                "Name='" + name + '\'' + ", \n" +
                 "surmame='" + surmame + '\'' + ", \n" +
                 "email='" + email + '\'' + ", \n" +
                 "age=" + age + ", \n" +
                 "phoneNumber='" + phoneNumber + '\'' + ", \n" +
-                "id=" + id;
+                "id=" + id +
+                "\n>======================<";
     }
 
     public String getName() {
@@ -68,18 +71,6 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "name='" + name + '\'' +
-                ", surmame='" + surmame + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", id=" + id +
-                '}';
     }
 
     public String getEmail() {

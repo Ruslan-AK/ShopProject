@@ -14,7 +14,7 @@ public class ClientDBDao implements ClientDao {
     private List<Client> clientList;
 
     @Override
-    public boolean saveClient(Client client) {
+    public void saveClient(Client client) {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME,AGE, PHONE,EMAIL) VALUES("
                      + "'" + client.getName() + "',"
@@ -23,10 +23,8 @@ public class ClientDBDao implements ClientDao {
                      + "'" + client.getPhoneNumber() + "',"
                      + "'" + client.getEmail() + "');")) {
             statement.execute();
-        } catch (SQLException e) {
-            System.out.println("Error saving client!");
+        } catch (SQLException ignored) {
         }
-        return true;
     }
 
     @Override
@@ -41,8 +39,7 @@ public class ClientDBDao implements ClientDao {
             String phoneNumber = resultSet.getString("PHONE");
             String email = resultSet.getString("EMAIL");
             return new Client(name, surname, age, email, phoneNumber);
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState());
+        } catch (SQLException ignored) {
         }
         return null;
     }
@@ -76,9 +73,28 @@ public class ClientDBDao implements ClientDao {
     public void deleteClient(String id) {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("'DELETE FROM CLIENT WHERE PHONE ='" + id +"';");
+            statement.execute("DELETE FROM CLIENT WHERE PHONE ='" + id + "';");
         } catch (SQLException e) {
             System.out.println(e.getSQLState());
         }
+    }
+
+    @Override
+    public boolean contains(String id) {
+        boolean find = false;
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT;");
+            while (resultSet.next() && !find) {
+                String name = resultSet.getString("id");
+                if (name != null && name.length() > 0) {
+                    find = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState());
+        }
+        return find;
     }
 }

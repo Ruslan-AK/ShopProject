@@ -27,9 +27,6 @@ import java.io.InputStreamReader;
 public class App {
     public static void main(String[] args) throws IOException {
         ClientDao clientDao = new ClientDBDao();
-       // ClientDao clientDao = ClientDaoImpl.getInstance();
-
-        ClientDao clientDao = ClientDaoImpl.getInstance();
         ValidationService validationService = new ValidationServiceImpl();
         ClientService clientService = new ClientServiceImpl(clientDao, validationService);
         ProductDao productDao = ProductDaoImpl.getInstance();

@@ -201,6 +201,7 @@ public class AdminMenu {
     }
 
     private void showAllClients() {
+        System.out.println("Clients:");
         clientService.getAllClients().forEach(System.out::println);
     }
 }

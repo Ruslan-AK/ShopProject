@@ -16,9 +16,9 @@ public class MainMenu {
 
     public void showMenu() throws IOException {
         boolean isRunning = true;
-        System.out.println("$$$$$$$$$$$ WELCOME TO SHOP $$$$$$$$$$$");
-        System.out.println("Select your role:");
         while (isRunning) {
+            System.out.println("$$$$$$$$$$$ WELCOME TO SHOP $$$$$$$$$$$");
+            System.out.println("Select your role:");
             System.out.println("1 - Admin\n2 - Client\n0 - Exit program");
             System.out.println("$$$$$$$$$$$ WELCOME TO SHOP $$$$$$$$$$$");
             String input = null;
