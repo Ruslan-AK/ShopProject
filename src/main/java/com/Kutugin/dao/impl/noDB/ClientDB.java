@@ -1,4 +1,4 @@
-package com.Kutugin.dao.impl.db;
+package com.Kutugin.dao.impl.noDB;
 
 import com.Kutugin.domain.Client;
 

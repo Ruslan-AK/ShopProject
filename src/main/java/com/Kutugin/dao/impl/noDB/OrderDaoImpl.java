@@ -1,4 +1,4 @@
-package com.Kutugin.dao.impl;
+package com.Kutugin.dao.impl.noDB;
 
 import com.Kutugin.dao.OrderDao;
 import com.Kutugin.domain.Order;

@@ -1,7 +1,6 @@
-package com.Kutugin.dao.impl;
+package com.Kutugin.dao.impl.noDB;
 
 import com.Kutugin.dao.ClientDao;
-import com.Kutugin.dao.impl.db.ClientDB;
 import com.Kutugin.domain.Client;
 
 import java.util.ArrayList;

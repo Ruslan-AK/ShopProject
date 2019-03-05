@@ -1,32 +1,32 @@
 package com.Kutugin.view;
 
-import com.Kutugin.dao.ProductDao;
-import com.Kutugin.dao.impl.ProductDaoImpl;
 import com.Kutugin.domain.Product;
 import com.Kutugin.domain.ProductType;
 import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
+import com.Kutugin.services.ProductServise;
 import com.Kutugin.validators.ValidationService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 public class AdminMenu implements IMenu {
     private ClientService clientService;
     private ValidationService validator;
     private BufferedReader br;
+    private ProductServise productService;
 
-    public AdminMenu(BufferedReader br, ClientService clientService, ValidationService validator) {
+    public AdminMenu(BufferedReader br, ClientService clientService, ValidationService validator, ProductServise productService) {
         this.br = br;
         this.clientService = clientService;
         this.validator = validator;
+        this.productService = productService;
     }
 
     public void show() {
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("1 - Show clients\n2 - Add client\n3 - Modify client\n4 - Remove client\n5 - Add product\n0 - Exit to main menu");
+            System.out.println("1 - Show clients\n2 - Add client\n3 - Modify client\n4 - Remove client\n5 - Show products\n6 - Add product\n7 - Modify product\n8 - Delete product\n0 - Exit to main menu");
             String inputId;
             switch (getInput()) {
                 case "1":
@@ -110,33 +110,35 @@ public class AdminMenu implements IMenu {
                     System.out.println("Client not found");
                     break;
                 case "5":
+                    showProducts();
+                    break;
+                case "6":
                     System.out.println("Add product");
-                    System.out.println("Enter product name:");
-                    String pName = getInput();
+                    System.out.println("Enter product firm:");
+                    String firm = getInput();
+                    System.out.println("Enter product model:");
+                    String model = getInput();
                     System.out.println("Enter product price:");
-                    BigDecimal price = BigDecimal.valueOf(Double.valueOf(getInput()));
-                    System.out.println("Enter product type:");
-                    int i = 1;
+                    double price = Double.valueOf(getInput());
+                    System.out.println("Enter product type from following:");
                     for (ProductType p : ProductType.values()) {
-                        System.out.println(i++ + " - " + p.toString());
+                        System.out.println(p.toString());
                     }
-                    int pTypeI = Integer.valueOf(getInput());
-                    int tmp = 0;
-                    ProductType[] pro = ProductType.values();
-                    System.out.println(pro.length);
-                    for (ProductType product : pro) {
-                        tmp++;
-                        if (tmp >= pro.length + 1) {
-                            System.out.println("Abort, no such Product type");
-                            break;
-                        }
-                        if (product.equals(pro[pTypeI - 1])) {
-                            ProductDao productDao = ProductDaoImpl.getInstance();
-                            productDao.saveProduct(new Product(pName, price, product));
-                            break;
-                        }
+                    String type = getInput();
+                    if (isInEnum(type)) {
+                        productService.saveProduct(new Product(firm, model, price, type));
+                    } else {
+                        System.out.println("Abort, no such Product type");
                     }
                     break;
+                case "7":
+                    modifyProduct();
+                    break;
+                case "8":
+                    deleteProduct();
+                    break;
+
+
                 case "0":
                     System.out.println("Exit to main menu");
                     isRunning = false;
@@ -145,6 +147,66 @@ public class AdminMenu implements IMenu {
                     System.out.println("Wrong input!");
             }
         }
+    }
+
+    private void modifyProduct() {
+        int j = 0;
+        for (Product product : productService.getProducts()) {
+            System.out.println(++j + " - " + product);
+        }
+        System.out.println("1-" + j + " - modify product\nr - return");
+        while (true) {
+            String input = null;
+            switch (input = getInput()) {
+                case "r":
+                    return;
+                default:
+                    try {
+                        int index = Integer.valueOf(input) - 1;
+                        System.out.println(productService.getProducts().get(index));
+                        System.out.println("What you want to modify?\n1 - firm\n2 - model\n3 - type\n4 - price");
+                        switch (input = getInput()) {
+
+                            case "1":
+                                System.out.println("Enter new firm");
+                                input = getInput();
+                                productService.updateProduct(productService.getProducts().get(index).getId(), 1, input);
+                                break;
+                            case "2":
+                                System.out.println("Enter new model");
+                                input = getInput();
+                                productService.updateProduct(productService.getProducts().get(index).getId(), 2, input);
+                                break;
+                            case "3":
+                                System.out.println("Enter new type");
+                                input = getInput();
+                                productService.updateProduct(productService.getProducts().get(index).getId(), 3, input);
+                                break;
+                            case "4":
+                                System.out.println("Enter new price");
+                                //verify
+                                input = getInput();
+                                productService.updateProduct(productService.getProducts().get(index).getId(), 4, input);
+                                break;
+                            default:
+                                System.out.println("Wrong input!");
+                        }
+                        System.out.println("Product updated");
+                    } catch (NumberFormatException ex) {
+                        System.out.println("Wrong input!");
+                    }
+                    break;
+            }
+            System.out.println("r - return");
+        }
+    }
+
+    private boolean isInEnum(String type) {
+        for (ProductType p : ProductType.values()) {
+            if (p.toString().equals(type))
+                return true;
+        }
+        return false;
     }
 
     private void createClient() {
@@ -203,14 +265,54 @@ public class AdminMenu implements IMenu {
         clientService.getAllClients().forEach(System.out::println);
     }
 
+    private void showProducts() {
+        for (Product product : productService.getProducts()) {
+            System.out.println(product);
+        }
+        String input = null;
+        while (true) {
+            System.out.println("r - return");
+            switch (input = getInput()) {
+                case "r":
+                    return;
+                default:
+                    System.out.println("Wrong input!");
+            }
+        }
+    }
+
+    private void deleteProduct() {
+        int j = 0;
+        for (Product product : productService.getProducts()) {
+            System.out.println(++j + " - " + product);
+        }
+        System.out.println("1-" + j + " - delete product\nr - return");
+        while (true) {
+            String input = null;
+            switch (input = getInput()) {
+                case "r":
+                    return;
+                default:
+                    try {
+                        int index = Integer.valueOf(input) - 1;
+                        productService.deleteById(productService.getProducts().get(index).getId());
+                        System.out.println("Product deleted");
+                    } catch (NumberFormatException ex) {
+                        System.out.println("Wrong input!");
+                    }
+                    break;
+            }
+        }
+    }
+
     @Override
-    public String getInput(){
+    public String getInput() {
         String input = null;
         try {
             input = br.readLine();
         } catch (IOException e) {
             System.out.println("Wrong input!");
         }
-        return  input;
+        return input;
     }
 }

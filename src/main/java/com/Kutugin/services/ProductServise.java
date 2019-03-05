@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductServise {
 
-    public boolean saveProduct(Product product);
+    boolean saveProduct(Product product);
 
     List<Product> getProducts();
 
@@ -14,7 +14,7 @@ public interface ProductServise {
 
     boolean contains(long id);
 
-    void updateProduct(long id, Product product);
+    void updateProduct(long id, int paramNumber, String item);
 
     Product getById(long id);
 }

@@ -3,9 +3,9 @@ package com.Kutugin;
 import com.Kutugin.dao.ClientDao;
 import com.Kutugin.dao.OrderDao;
 import com.Kutugin.dao.ProductDao;
-import com.Kutugin.dao.impl.ClientDBDao;
-import com.Kutugin.dao.impl.OrderDaoImpl;
-import com.Kutugin.dao.impl.ProductDaoImpl;
+import com.Kutugin.dao.impl.H2DB.ClientDBDao;
+import com.Kutugin.dao.impl.H2DB.ProductDBDao;
+import com.Kutugin.dao.impl.noDB.OrderDaoImpl;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.services.OrderService;
 import com.Kutugin.services.ProductServise;
@@ -27,10 +27,12 @@ public class App {
         ClientDao clientDao = new ClientDBDao();
         ValidationService validationService = new ValidationServiceImpl();
         ClientService clientService = new ClientServiceImpl(clientDao, validationService);
-        ProductDao productDao = ProductDaoImpl.getInstance();
+//        ProductDao productDao = ProductDaoImpl.getInstance();
+        ProductDao productDao = new ProductDBDao();
+
         ProductServise productService = new ProductServiceImpl(productDao);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        AdminMenu adminMenu = new AdminMenu(br, clientService, validationService);
+        AdminMenu adminMenu = new AdminMenu(br, clientService, validationService, productService);
         OrderDao orderDao = OrderDaoImpl.getInstance();
         OrderService orderService = new OrderServiceImpl(orderDao);
         ClientMenu clientMenu = new ClientMenu(productService, br, clientService, validationService, orderService);

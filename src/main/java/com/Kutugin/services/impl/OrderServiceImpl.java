@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     public BigDecimal summaryPrice(long id) {
         BigDecimal sum = new BigDecimal(0);
         for (Product product : orderDao.getById(id).getProductList()) {
-            sum = sum.add(product.getPrice());//because BigDecimal is immutable
+            sum = sum.add(BigDecimal.valueOf(product.getPrice()));//because BigDecimal is immutable
         }
         return sum;
     }

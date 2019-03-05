@@ -1,4 +1,4 @@
-package com.Kutugin.dao.impl;
+package com.Kutugin.dao.impl.H2DB;
 
 import com.Kutugin.dao.ClientDao;
 import com.Kutugin.domain.Client;

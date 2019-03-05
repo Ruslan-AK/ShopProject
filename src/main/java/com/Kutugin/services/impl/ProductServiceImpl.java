@@ -35,8 +35,8 @@ public class ProductServiceImpl implements ProductServise {
     }
 
     @Override
-    public void updateProduct(long id, Product product) {
-        productDao.updateProduct(id, product);
+    public void updateProduct(long id, int paramNumber, String item) {
+        productDao.updateProduct(id, paramNumber, item);
     }
 
     @Override
