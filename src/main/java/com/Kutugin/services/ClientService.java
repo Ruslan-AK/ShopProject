@@ -11,9 +11,9 @@ public interface ClientService {
 
     boolean contains(String id);
 
-    void updateClient(Client client, int paramNumber, String param);
+    void updateClient(String phoneNumber, int paramNumber, String param);
 
-    Client getById(String id);
+    Client getByPhoneNumber(String id);
 
     List<Client> getAllClients();
 }

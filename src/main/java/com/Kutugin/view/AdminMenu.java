@@ -27,7 +27,7 @@ public class AdminMenu implements IMenu {
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("1 - Show clients\n2 - Add client\n3 - Modify client\n4 - Remove client\n5 - Show products\n6 - Add product\n7 - Modify product\n8 - Delete product\n0 - Exit to main menu");
-            String inputId;
+            String inputPhoneNumber;
             switch (getInput()) {
                 case "1":
                     showAllClients();
@@ -36,9 +36,9 @@ public class AdminMenu implements IMenu {
                     createClient();
                     break;
                 case "3":
-                    System.out.println("Input Client id:");
-                    inputId = getInput();
-                    if (clientService.contains(inputId)) {
+                    System.out.println("Input Client phone number:");
+                    inputPhoneNumber = getInput();
+                    if (clientService.contains(inputPhoneNumber)) {
                         System.out.println("What you want to modify?:\n1 - Name\n2 - Surname\n3 - Age\n4 - Email\n5 - Phone Number");
                         String input = null;
                         input = getInput();
@@ -48,7 +48,7 @@ public class AdminMenu implements IMenu {
                                 input = getInput();
                                 try {
                                     validator.validateName(input);
-                                    clientService.updateClient(clientService.getById(inputId), 1, input);
+                                    clientService.updateClient(inputPhoneNumber, 1, input);
                                 } catch (BusinessException e) {
                                     System.out.println(e.getMessage());
                                 }
@@ -59,7 +59,7 @@ public class AdminMenu implements IMenu {
                                 input = getInput();
                                 try {
                                     validator.validateName(input);
-                                    clientService.updateClient(clientService.getById(inputId), 2, input);
+                                    clientService.updateClient(inputPhoneNumber, 2, input);
                                 } catch (BusinessException e) {
                                     System.out.println(e.getMessage());
                                 }
@@ -69,7 +69,7 @@ public class AdminMenu implements IMenu {
                                 input = getInput();
                                 try {
                                     validator.validateAge(input);
-                                    clientService.updateClient(clientService.getById(inputId), 3, input);
+                                    clientService.updateClient(inputPhoneNumber, 3, input);
                                 } catch (BusinessException e) {
                                     System.out.println(e.getMessage());
                                 }
@@ -79,7 +79,7 @@ public class AdminMenu implements IMenu {
                                 input = getInput();
                                 try {
                                     validator.validateEmail(input);
-                                    clientService.updateClient(clientService.getById(inputId), 4, input);
+                                    clientService.updateClient(inputPhoneNumber, 4, input);
                                 } catch (BusinessException e) {
                                     System.out.println(e.getMessage());
                                 }
@@ -89,7 +89,7 @@ public class AdminMenu implements IMenu {
                                 input = getInput();
                                 try {
                                     validator.validatePhoneNumber(input);
-                                    clientService.updateClient(clientService.getById(inputId), 5, input);
+                                    clientService.updateClient(inputPhoneNumber, 5, input);
                                 } catch (BusinessException e) {
                                     System.out.println(e.getMessage());
                                 }
@@ -101,9 +101,9 @@ public class AdminMenu implements IMenu {
                     break;
                 case "4":
                     System.out.println("Input Client phone number(id):");
-                    inputId = getInput();
-                    if (clientService.contains(inputId)) {
-                        clientService.deleteClient(clientService.getById(inputId));
+                    inputPhoneNumber = getInput();
+                    if (clientService.contains(inputPhoneNumber)) {
+                        clientService.deleteClient(clientService.getByPhoneNumber(inputPhoneNumber));
                         System.out.println("Client removed");
                         break;
                     }
@@ -282,12 +282,12 @@ public class AdminMenu implements IMenu {
     }
 
     private void deleteProduct() {
-        int j = 0;
-        for (Product product : productService.getProducts()) {
-            System.out.println(++j + " - " + product);
-        }
-        System.out.println("1-" + j + " - delete product\nr - return");
         while (true) {
+            int j = 0;
+            for (Product product : productService.getProducts()) {
+                System.out.println(++j + " - " + product);
+            }
+            System.out.println("1-" + j + " - delete product\nr - return");
             String input = null;
             switch (input = getInput()) {
                 case "r":
@@ -297,6 +297,7 @@ public class AdminMenu implements IMenu {
                         int index = Integer.valueOf(input) - 1;
                         productService.deleteById(productService.getProducts().get(index).getId());
                         System.out.println("Product deleted");
+                        j--;
                     } catch (NumberFormatException ex) {
                         System.out.println("Wrong input!");
                     }

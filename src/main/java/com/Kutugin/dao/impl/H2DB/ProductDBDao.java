@@ -51,9 +51,7 @@ public class ProductDBDao implements ProductDao {
             statement.setString(3, product.getModel());
             statement.setString(4, product.getType());
             statement.setDouble(5, product.getPrice());
-            System.out.println("Before execute");
             statement.execute();
-            System.out.println("After execute");
         } catch (SQLException ignored) {
             System.out.println("Error saving product");
         }
@@ -70,15 +68,14 @@ public class ProductDBDao implements ProductDao {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement = connection.createStatement()) {
             statement.execute("DELETE FROM PRODUCT WHERE ID = '" + id + "';");
-            System.out.println(id);
-            productList.remove(getById(id));
+            productList.remove(getByID(id));
         } catch (SQLException e) {
             System.out.println(e.getSQLState());
         }
     }
 
     @Override
-    public Product getById(long id) {
+    public Product getByID(long id) {
         for (Product p : productList) {
             if (p.getId() == id)
                 return p;

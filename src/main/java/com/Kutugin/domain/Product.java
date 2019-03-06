@@ -3,13 +3,13 @@ package com.Kutugin.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Product {
     private String model;
     private String firm;
     private BigDecimal price;
     private long id;
+    private static long currentId = 0;
     private ProductType type;
     private static List<Long> listId = new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class Product {
         this.model = model;
         this.price = BigDecimal.valueOf(Double.valueOf(price));
         this.type = ProductType.valueOf(type);
-        generateId();
+        id = currentId++;
     }
 
     public Product(String firm, String model, double price, String type, long id) {
@@ -86,22 +86,5 @@ public class Product {
 
     public long getId() {
         return id;
-    }
-
-    private void generateId() {
-        Random random = new Random();
-        while (true) {
-            long temp = random.nextLong();
-            if ((!listId.contains(temp))&&temp>0) {
-                id = temp;
-                listId.add(temp);
-                break;
-            }
-        }
-    }
-
-    @Override
-    protected  void finalize() throws Throwable {
-        listId.remove(new Long(id));
     }
 }

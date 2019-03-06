@@ -13,7 +13,7 @@ public class Client {
     private int age;
     private String phoneNumber;
     private long id;
-    private static List<Long> listId = new ArrayList<>();
+    private static long currentId = 0;
 
     public Client(String name, String surmame, String age, String email, String phoneNumber) {
         this.name = name;
@@ -21,7 +21,7 @@ public class Client {
         this.phoneNumber = phoneNumber;
         this.age = Integer.valueOf(age);
         this.email = email;
-        generateId();
+        id = currentId++;
     }
 
     @Override
@@ -79,18 +79,6 @@ public class Client {
 
     public long getId() {
         return id;
-    }
-
-    private void generateId() {
-        Random random = new Random();
-        while (true) {
-            long temp = random.nextLong();
-            if (!listId.contains(temp) & temp > 0) {
-                id = temp;
-                listId.add(temp);
-                break;
-            }
-        }
     }
 
     @Override

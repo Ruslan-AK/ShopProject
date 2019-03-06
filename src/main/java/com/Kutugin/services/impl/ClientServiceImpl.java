@@ -18,11 +18,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void createClient(String name, String surmame, String age, String email, String phoneNumber) {
+    public void createClient(String name, String surname, String age, String email, String phoneNumber) {
         try {
             validationService.validateAge(age);
             validationService.validatePhoneNumber(phoneNumber);
-            Client client = new Client(name, surmame, age, email, phoneNumber);
+            Client client = new Client(name, surname, age, email, phoneNumber);
             clientDao.saveClient(client);
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
@@ -40,38 +40,13 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void updateClient(Client client, int paramNumber, String param) {
-        switch (paramNumber) {
-            case 1: {
-                client.setName(param);
-                break;
-            }
-            case 2: {
-                client.setSurmame(param);
-                break;
-            }
-            case 3: {
-                client.setAge(Integer.valueOf(param));
-                break;
-            }
-            case 4: {
-                client.setEmail(param);
-                break;
-            }
-            case 5: {
-                client.setPhoneNumber(param);
-                break;
-            }
-            default: {
-                System.out.println("Eror update!");
-            }
-        }
-        System.out.println(client + " updated");
+    public void updateClient(String phoneNumber, int paramNumber, String param) {
+        clientDao.updateClient(phoneNumber,paramNumber,param);
     }
 
     @Override
-    public Client getById(String id) {
-        return clientDao.getById(id);
+    public Client getByPhoneNumber(String phoneNumber) {
+        return clientDao.getByPhoneNumber(phoneNumber);
     }
 
     @Override

@@ -10,11 +10,11 @@ public interface ProductServise {
 
     List<Product> getProducts();
 
-    void deleteById(long id);//for Client
+    void deleteById(long id);//
 
     boolean contains(long id);
 
     void updateProduct(long id, int paramNumber, String item);
 
-    Product getById(long id);
+    Product getByID(long id);
 }

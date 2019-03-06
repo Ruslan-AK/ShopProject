@@ -7,14 +7,28 @@ import java.util.Random;
 
 public class Order {
     private long id;
-    private static List<Long> listId = new ArrayList<Long>();
+    private static long currentId = 0;
     private List<Product> productList = new ArrayList<>();
-    private Date date;
+    private String date;
 
 
     public Order() {
-        generateId();
-        date = new Date();
+        id = currentId++;
+        date = new Date().toString();
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public Order(long id, List<Product> productCartList, String date) {
+        this.id = id;
+        productList = productCartList;
+        this.date = date;
     }
 
     @Override
@@ -45,20 +59,8 @@ public class Order {
         productList.add(product);
     }
 
-    private void generateId() {
-        Random random = new Random();
-        while (true) {
-            long temp = random.nextLong();
-            if (!listId.contains(temp) & temp > 0) {
-                id = temp;
-                listId.add(temp);
-                break;
-            }
-        }
-    }
-
     public void update(Order order) {
         this.productList = order.getProductList();
-        date = new Date();
+        date = new Date().toString();
     }
 }

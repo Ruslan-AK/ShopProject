@@ -1,6 +1,7 @@
 package com.Kutugin.services.impl;
 
 import com.Kutugin.dao.OrderDao;
+import com.Kutugin.domain.Client;
 import com.Kutugin.domain.Order;
 import com.Kutugin.domain.Product;
 import com.Kutugin.services.OrderService;
@@ -19,15 +20,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public BigDecimal summaryPrice(long id) {
         BigDecimal sum = new BigDecimal(0);
-        for (Product product : orderDao.getById(id).getProductList()) {
+        for (Product product : orderDao.getByID(id).getProductList()) {
             sum = sum.add(BigDecimal.valueOf(product.getPrice()));//because BigDecimal is immutable
         }
         return sum;
     }
 
     @Override
-    public long add(Order order) {
-        return orderDao.add(order);
+    public long add(Client client, Order order) {
+        return orderDao.add(client,order);
     }
 
     @Override
@@ -46,8 +47,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getById(long id) {
-        return orderDao.getById(id);
+    public Order getByID(long id) {
+        return orderDao.getByID(id);
+    }
+
+    @Override
+    public List<Order> getOrdersByClient(long clientId){
+        return orderDao.getOrdersByClient(clientId);
+    }
+
+    @Override
+    public void addProduct(long id, Product product){
+        orderDao.addProduct(id,product);
     }
 
     @Override

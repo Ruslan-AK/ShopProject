@@ -12,10 +12,14 @@ public class ClientDBDao implements ClientDao {
     private static final String LOGIN = "admin";
     private static final String PASS = "";
     private List<Client> clientList;
-    private boolean modified = false;//flag modification, to reload clientList when we change DB information
+
+    public ClientDBDao() {
+        getAllClients();
+    }
 
     @Override
     public void saveClient(Client client) {
+        clientList.add(client);
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME,AGE, PHONE,EMAIL) VALUES("
                      + "'" + client.getName() + "',"
@@ -24,31 +28,66 @@ public class ClientDBDao implements ClientDao {
                      + "'" + client.getPhoneNumber() + "',"
                      + "'" + client.getEmail() + "');")) {
             statement.execute();
-            modified = true;
         } catch (SQLException ignored) {
+            System.out.println("Error saving client to DB");
         }
     }
 
     @Override
-    public Client getById(String id) {
+    public void updateClient(String phoneNumber, int paramNumber, String param) {
+        Client client = getByPhoneNumber(phoneNumber);
+        String query = null;
+        switch (paramNumber) {
+            case 1: {
+                client.setName(param);
+                query = "UPDATE CLIENT SET NAME = '"+param+"' WHERE PHONE ='"+phoneNumber+"';";
+                break;
+            }
+            case 2: {
+                client.setSurmame(param);
+                query = "UPDATE CLIENT SET SURNAME = '"+param+"' WHERE PHONE ='"+phoneNumber+"';";
+                break;
+            }
+            case 3: {
+                client.setAge(Integer.valueOf(param));
+                query = "UPDATE CLIENT SET AGE = "+Integer.valueOf(param)+" WHERE PHONE ='"+phoneNumber+"';";
+                break;
+            }
+            case 4: {
+                client.setEmail(param);
+                query = "UPDATE CLIENT SET EMAIL = '"+param+"' WHERE PHONE ='"+phoneNumber+"';";
+                break;
+            }
+            case 5: {
+                client.setPhoneNumber(param);
+                query = "UPDATE CLIENT SET PHONE = '"+param+"' WHERE PHONE ='"+phoneNumber+"';";
+                break;
+            }
+            default: {
+                System.out.println("Eror update client!");
+            }
+        }
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT WHERE PHONE='" + id + "';");
-            resultSet.next();//move pointer to first row of table
-            String name = resultSet.getString("NAME");
-            String surname = resultSet.getString("SURNAME");
-            String age = resultSet.getString("AGE");
-            String phoneNumber = resultSet.getString("PHONE");
-            String email = resultSet.getString("EMAIL");
-            return new Client(name, surname, age, email, phoneNumber);
-        } catch (SQLException ignored) {
+            statement.execute(query);
+        } catch (SQLException e) {
+            System.out.println("Eror update client DB!");
+        }
+    }
+
+    @Override
+    public Client getByPhoneNumber(String phoneNumber) {
+        for (Client c:clientList){
+            if (c.getPhoneNumber().equals(phoneNumber)){
+                return c;
+            }
         }
         return null;
     }
 
     @Override
     public List<Client> getAllClients() {
-        if (clientList == null||modified) {
+        if (clientList == null) {
             clientList = new ArrayList<>();
             try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
                  Statement statement = connection.createStatement()) {
@@ -72,32 +111,23 @@ public class ClientDBDao implements ClientDao {
     }
 
     @Override
-    public void deleteClient(String id) {
+    public void deleteClient(String phoneNumber) {
+        clientList.remove(getByPhoneNumber(phoneNumber));
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement = connection.createStatement()) {
-            statement.execute("DELETE FROM CLIENT WHERE PHONE ='" + id + "';");
-            modified = true;
+            statement.execute("DELETE FROM CLIENT WHERE PHONE ='" + phoneNumber + "';");
         } catch (SQLException e) {
             System.out.println(e.getSQLState());
         }
     }
 
     @Override
-    public boolean contains(String id) {
-        boolean find = false;
-        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT WHERE PHONE = '" + id + "';");
-            while (!find&&resultSet.next()) {
-                String name = resultSet.getString("PHONE");
-                if (name != null && name.length() > 0) {
-                    find = true;
-                    break;
-                }
+    public boolean contains(String phoneNumber) {
+        for (Client c:clientList){
+            if (c.getPhoneNumber().equals(phoneNumber)){
+                return true;
             }
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState());
         }
-        return find;
+        return false;
     }
 }

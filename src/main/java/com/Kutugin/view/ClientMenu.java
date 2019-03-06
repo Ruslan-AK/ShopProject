@@ -11,19 +11,19 @@ import com.Kutugin.validators.ValidationService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class ClientMenu implements IMenu {
 
     private BufferedReader br;
     private ClientService clientService;
     private Client currentClient;
+    private Order currentOrder;
+    private List<Order> clientOrders;
     private ProductServise productService;
     private boolean signIn = false;
     private ValidationService validator;
     private OrderService orderService;
-    private Map<String, Long> clientOrderIdMap = new HashMap<>();
 
     public ClientMenu(ProductServise productService, BufferedReader br, ClientService clientService, ValidationService validator, OrderService orderService) {
         this.br = br;
@@ -37,7 +37,7 @@ public class ClientMenu implements IMenu {
         boolean isRunning = true;
         while (isRunning) {
             if (signIn) {
-                System.out.println("1 - Show products\n2 - My order\n3 - My account\n4 - Log Out\nr - return");
+                System.out.println("1 - Show products\n2 - My order\n3 - My account\n4 - Log Out\n5 - Show order archive\nr - return");
                 switch (getInput()) {
                     case "1":
                         showProducts();
@@ -50,6 +50,11 @@ public class ClientMenu implements IMenu {
                         break;
                     case "4":
                         isRunning = signOut();
+                        break;
+                    case "5":
+                        for (Order o : clientOrders) {
+                            System.out.println(o);
+                        }
                         break;
                     case "r":
                         isRunning = false;
@@ -67,7 +72,7 @@ public class ClientMenu implements IMenu {
                         currentClient = login();
                         if (currentClient != null) {
                             signIn = true;
-                            clientOrderIdMap.put(currentClient.getPhoneNumber(), orderService.add(new Order()));
+                            clientOrders = orderService.getOrdersByClient(currentClient.getId());
                         }
                         break;
                     case "r":
@@ -99,12 +104,12 @@ public class ClientMenu implements IMenu {
                     boolean run1 = true;
                     while (run1) {
                         System.out.println("Are you sure?\n y - yes\n n - no");
-                        String inputId = getInput();
-                        switch (inputId) {
+                        String inputPhoneNumber = getInput();
+                        switch (inputPhoneNumber) {
                             case "y":
                                 clientService.deleteClient(currentClient);
                                 System.out.println("Client removed");
-                                clientOrderIdMap.remove(currentClient.getPhoneNumber());
+                                currentClient = null;
                                 signOut();
                                 return false;
                             case "n":
@@ -126,13 +131,12 @@ public class ClientMenu implements IMenu {
 
 
     private void myOrder() {
-        if (clientOrderIdMap.get(currentClient.getPhoneNumber()) == null) {
-            Order order = new Order();
-            orderService.add(order);
-            clientOrderIdMap.put(currentClient.getPhoneNumber(), order.getId());
+        if (currentOrder == null) {
+            System.out.println("Order empty");
+            return;
         }
-        System.out.println(orderService.getById(clientOrderIdMap.get(currentClient.getPhoneNumber())));
-        System.out.println("Total price: " + orderService.summaryPrice(clientOrderIdMap.get(currentClient.getPhoneNumber())));
+        System.out.println(currentOrder);
+        System.out.println("Total price: " + orderService.summaryPrice(currentOrder.getId()));
         boolean run = true;
         while (run) {
             System.out.println("r - return");
@@ -162,7 +166,12 @@ public class ClientMenu implements IMenu {
                     int index = Integer.valueOf(input) - 1;
                     Product product = productService.getProducts().get(index);
                     System.out.println("You bye " + product);
-                    orderService.getById(clientOrderIdMap.get(currentClient.getPhoneNumber())).addProduct(product);//get Order by Client id and add Product to Order
+                    if (currentOrder == null) {
+                        currentOrder = new Order();
+                        clientOrders.add(currentOrder);
+                        orderService.add(currentClient, currentOrder);
+                    }
+                    orderService.addProduct(currentOrder.getId(), product);
                 } catch (NumberFormatException ex) {
                     System.out.println("Wrong input!");
                 }
@@ -186,7 +195,7 @@ public class ClientMenu implements IMenu {
                 } catch (BusinessException e) {
                     System.out.println(e.getMessage() + "\n");
                 }
-                clientService.updateClient(currentClient, 2, input);
+                clientService.updateClient(currentClient.getPhoneNumber(), 2, input);
                 System.out.println("Client modified!");
                 break;
             }
@@ -198,7 +207,7 @@ public class ClientMenu implements IMenu {
                 } catch (BusinessException e) {
                     System.out.println(e.getMessage() + "\n");
                 }
-                clientService.updateClient(currentClient, 2, input);
+                clientService.updateClient(currentClient.getPhoneNumber(), 2, input);
                 System.out.println("Client modified!");
                 break;
             }
@@ -210,7 +219,7 @@ public class ClientMenu implements IMenu {
                 } catch (BusinessException e) {
                     System.out.println(e.getMessage() + "\n");
                 }
-                clientService.updateClient(currentClient, 3, input);
+                clientService.updateClient(currentClient.getPhoneNumber(), 3, input);
                 System.out.println("Client modified!");
                 break;
             }
@@ -222,7 +231,7 @@ public class ClientMenu implements IMenu {
                 } catch (BusinessException e) {
                     System.out.println(e.getMessage() + "\n");
                 }
-                clientService.updateClient(currentClient, 4, input);
+                clientService.updateClient(currentClient.getPhoneNumber(), 4, input);
                 System.out.println("Client modified!");
                 break;
             }
@@ -234,7 +243,7 @@ public class ClientMenu implements IMenu {
                 } catch (BusinessException e) {
                     System.out.println(e.getMessage() + "\n");
                 }
-                clientService.updateClient(currentClient, 5, input);
+                clientService.updateClient(currentClient.getPhoneNumber(), 5, input);
                 System.out.println("Client modified!");
                 break;
             }
@@ -320,7 +329,7 @@ public class ClientMenu implements IMenu {
             try {
                 input = br.readLine();
                 validator.validatePhoneNumber(input);
-                currentClient = clientService.getById(input);
+                currentClient = clientService.getByPhoneNumber(input);
                 if (currentClient == null) {
                     System.out.println("Client not found");
                 } else {

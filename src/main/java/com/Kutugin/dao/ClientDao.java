@@ -7,7 +7,9 @@ import java.util.List;
 public interface ClientDao {
     void saveClient(Client client);
 
-    Client getById(String id);
+    void updateClient(String phoneNumber, int paramNumber,String param);
+
+    Client getByPhoneNumber(String phoneNumber);
 
     List<Client> getAllClients();
 

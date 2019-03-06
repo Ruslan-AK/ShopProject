@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductServise {
     }
 
     @Override
-    public Product getById(long id) {
-        return productDao.getById(id);
+    public Product getByID(long id) {
+        return productDao.getByID(id);
     }
 }

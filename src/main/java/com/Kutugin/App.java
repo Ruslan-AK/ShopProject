@@ -4,8 +4,8 @@ import com.Kutugin.dao.ClientDao;
 import com.Kutugin.dao.OrderDao;
 import com.Kutugin.dao.ProductDao;
 import com.Kutugin.dao.impl.H2DB.ClientDBDao;
+import com.Kutugin.dao.impl.H2DB.OrderDBDao;
 import com.Kutugin.dao.impl.H2DB.ProductDBDao;
-import com.Kutugin.dao.impl.noDB.OrderDaoImpl;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.services.OrderService;
 import com.Kutugin.services.ProductServise;
@@ -33,7 +33,7 @@ public class App {
         ProductServise productService = new ProductServiceImpl(productDao);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         AdminMenu adminMenu = new AdminMenu(br, clientService, validationService, productService);
-        OrderDao orderDao = OrderDaoImpl.getInstance();
+        OrderDao orderDao = new OrderDBDao();
         OrderService orderService = new OrderServiceImpl(orderDao);
         ClientMenu clientMenu = new ClientMenu(productService, br, clientService, validationService, orderService);
         MainMenu menu = new MainMenu(br, adminMenu, clientMenu);

@@ -11,7 +11,7 @@ public interface ProductDao {
 
     void deleteById(long id);
 
-    Product getById(long id);
+    Product getByID(long id);
 
     boolean contains(long id);
 
