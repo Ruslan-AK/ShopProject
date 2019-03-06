@@ -12,8 +12,9 @@ public class Order {
     private String date;
 
 
-    public Order() {
-        id = currentId++;
+    public Order(long id) {
+        currentId = id+1;
+        this.id = currentId++;
         date = new Date().toString();
     }
 

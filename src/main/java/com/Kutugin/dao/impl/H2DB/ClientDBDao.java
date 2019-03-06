@@ -98,7 +98,8 @@ public class ClientDBDao implements ClientDao {
                     String age = resultSet.getString("AGE");
                     String phoneNumber = resultSet.getString("PHONE");
                     String email = resultSet.getString("EMAIL");
-                    clientList.add(new Client(name, surname, age, email, phoneNumber));
+                    Long id = resultSet.getLong("ID");
+                    clientList.add(new Client(id,name, surname, age, email, phoneNumber));
                 }
                 return clientList;
             } catch (SQLException e) {

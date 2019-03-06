@@ -65,4 +65,9 @@ public class OrderServiceImpl implements OrderService {
     public boolean containsById(long id) {
         return orderDao.containsById(id);
     }
+
+    @Override
+    public long getMaxID() {
+        return orderDao.getMaxID();
+    }
 }

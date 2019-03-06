@@ -24,6 +24,15 @@ public class Client {
         id = currentId++;
     }
 
+    public Client(long id, String name, String surmame, String age, String email, String phoneNumber) {
+        this.name = name;
+        this.surmame = surmame;
+        this.phoneNumber = phoneNumber;
+        this.age = Integer.valueOf(age);
+        this.email = email;
+        this.id = id;
+    }
+
     @Override
     public String toString() {
 

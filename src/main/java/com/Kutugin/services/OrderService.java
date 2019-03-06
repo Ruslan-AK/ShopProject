@@ -26,4 +26,6 @@ public interface OrderService {
     public void addProduct(long id, Product product);
 
     boolean containsById(long id);
+
+    long getMaxID();
 }

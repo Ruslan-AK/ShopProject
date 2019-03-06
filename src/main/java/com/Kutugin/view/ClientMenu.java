@@ -52,6 +52,7 @@ public class ClientMenu implements IMenu {
                         isRunning = signOut();
                         break;
                     case "5":
+
                         for (Order o : clientOrders) {
                             System.out.println(o);
                         }
@@ -167,8 +168,8 @@ public class ClientMenu implements IMenu {
                     Product product = productService.getProducts().get(index);
                     System.out.println("You bye " + product);
                     if (currentOrder == null) {
-                        currentOrder = new Order();
-                        clientOrders.add(currentOrder);
+                        currentOrder = new Order(orderService.getMaxID());
+                        System.out.println("MAX_ID: "+orderService.getMaxID());
                         orderService.add(currentClient, currentOrder);
                     }
                     orderService.addProduct(currentOrder.getId(), product);

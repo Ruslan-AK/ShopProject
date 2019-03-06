@@ -23,4 +23,6 @@ public interface OrderDao {
     public void addProduct(long id, Product product);
 
     boolean containsById(long id);
+
+    long getMaxID();
 }
