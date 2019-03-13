@@ -21,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
     public BigDecimal summaryPrice(long id) {
         BigDecimal sum = new BigDecimal(0);
         for (Product product : orderDao.getByID(id).getProductList()) {
-            sum = sum.add(BigDecimal.valueOf(product.getPrice()));//because BigDecimal is immutable
+            sum = sum.add(BigDecimal.valueOf(product.getPrice()));
         }
         return sum;
     }
@@ -50,11 +50,6 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersByClient(long clientId) {
         return orderDao.getOrdersByClient(clientId);
     }
-
-//    @Override
-//    public void addProduct(long id, Product product) {
-//        orderDao.addProduct(id, product);
-//    }
 
     @Override
     public boolean isInDBById(long id) {

@@ -154,32 +154,40 @@ public class OrderDBDao implements OrderDao {
             resultSet.next();
             String date = resultSet.getString("DATE");
             //get products
-            List<Long> cartList = new ArrayList<>();
-            try (PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM \"CART_ID\" WHERE ORDER_ID =?")) {
+            List<Product> productCartList = new ArrayList<>();
+            //get products
+            try (PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM \"CART_ID\" WHERE ORDER_ID =?;")) {
                 statement1.setLong(1, id);
                 ResultSet resultSetCart = statement1.executeQuery();
                 while (resultSetCart.next()) {
-                    cartList.add(resultSetCart.getLong("PRODUCT_ID"));
-                }
-                List<Product> productList = new ArrayList<>();
-                try (Statement statement2 = connection.createStatement()) {
-                    ResultSet productResultSetCart = statement2.executeQuery("SELECT * FROM \"PRODUCT\" WHERE ID IN (" + listToString(cartList) + ");");
-                    while (productResultSetCart.next()) {
-                        long idP = productResultSetCart.getLong("ID");
-                        String firm = productResultSetCart.getString("FIRM");
-                        String model = productResultSetCart.getString("MODEL");
-                        String type = productResultSetCart.getString("TYPE");
-                        double price = productResultSetCart.getDouble("PRICE");
-                        productList.add(new Product(firm, model, price, type, idP));
+                    long productID = resultSetCart.getLong("PRODUCT_ID");
+                    long productAmount = resultSetCart.getLong("PRODUCT_AMOUNT");
+                    for (int i = 0; i < productAmount; i++) {
+                        try (PreparedStatement statement2 = connection.prepareStatement("SELECT * FROM \"PRODUCT\" WHERE ID =?")) {
+                            statement2.setLong(1, productID);
+                            ResultSet productResultSetCart = statement2.executeQuery();
+                            while (productResultSetCart.next()) {
+                                long idP = productResultSetCart.getLong("ID");
+                                String firm = productResultSetCart.getString("FIRM");
+                                String model = productResultSetCart.getString("MODEL");
+                                String type = productResultSetCart.getString("TYPE");
+                                double price = productResultSetCart.getDouble("PRICE");
+                                productCartList.add(new Product(firm, model, price, type, idP));
+                            }
+                        } catch (SQLException e) {
+                            System.out.println("Error getOrdersByClient");
+                            System.out.println(e.getErrorCode());
+                        }
                     }
-                } catch (SQLException e) {
                 }
-                return new Order(id, productList, date);
-            } catch (SQLException ignored) {
-                System.out.println("Error getByID");
+                return new Order(id, productCartList, date);
+            } catch (SQLException e) {
+                System.out.println("Error getOrdersByClient");
+                System.out.println(e.getErrorCode());
             }
-        } catch (SQLException ignored) {
-            System.out.println("Error getByID");
+        } catch (SQLException e) {
+            System.out.println("Error getOrdersByClient");
+            System.out.println(e.getErrorCode());
         }
         return null;
     }
