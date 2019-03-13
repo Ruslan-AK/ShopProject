@@ -1,7 +1,6 @@
 package com.Kutugin.dao.impl.noDB;
 
 import com.Kutugin.domain.Product;
-import com.Kutugin.domain.ProductType;
 
 import java.util.ArrayList;
 import java.util.List;

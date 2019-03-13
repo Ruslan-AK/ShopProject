@@ -2,31 +2,36 @@ package com.Kutugin.dao.impl.H2DB;
 
 import com.Kutugin.dao.ClientDao;
 import com.Kutugin.domain.Client;
+import com.Kutugin.exceptions.BusinessException;
+import org.h2.tools.Server;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.Kutugin.dao.impl.H2DB.InitDB.*;
+
 public class ClientDBDao implements ClientDao {
-    private static final String DB_URL = "jdbc:h2:tcp://localhost/~/LuxoftShop";
-    private static final String LOGIN = "admin";
-    private static final String PASS = "";
-    private List<Client> clientList;
 
     public ClientDBDao() {
+        try {
+            Server server = Server.createTcpServer().start();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         getAllClients();
     }
 
     @Override
     public void saveClient(Client client) {
-        clientList.add(client);
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME,AGE, PHONE,EMAIL) VALUES("
-                     + "'" + client.getName() + "',"
-                     + "'" + client.getSurmame() + "',"
-                     + "" + client.getAge() + ","
-                     + "'" + client.getPhoneNumber() + "',"
-                     + "'" + client.getEmail() + "');")) {
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME,AGE, PHONE,EMAIL,ID) VALUES(?,?,?,?,?,?);")) {
+            statement.setString(1, client.getName());
+            statement.setString(2, client.getSurmame());
+            statement.setInt(3, client.getAge());
+            statement.setString(4, client.getPhoneNumber());
+            statement.setString(5, client.getEmail());
+            statement.setLong(6, client.getId());
             statement.execute();
         } catch (SQLException ignored) {
             System.out.println("Error saving client to DB");
@@ -34,101 +39,135 @@ public class ClientDBDao implements ClientDao {
     }
 
     @Override
-    public void updateClient(String phoneNumber, int paramNumber, String param) {
-        Client client = getByPhoneNumber(phoneNumber);
-        String query = null;
-        switch (paramNumber) {
-            case 1: {
-                client.setName(param);
-                query = "UPDATE CLIENT SET NAME = '"+param+"' WHERE PHONE ='"+phoneNumber+"';";
-                break;
-            }
-            case 2: {
-                client.setSurmame(param);
-                query = "UPDATE CLIENT SET SURNAME = '"+param+"' WHERE PHONE ='"+phoneNumber+"';";
-                break;
-            }
-            case 3: {
-                client.setAge(Integer.valueOf(param));
-                query = "UPDATE CLIENT SET AGE = "+Integer.valueOf(param)+" WHERE PHONE ='"+phoneNumber+"';";
-                break;
-            }
-            case 4: {
-                client.setEmail(param);
-                query = "UPDATE CLIENT SET EMAIL = '"+param+"' WHERE PHONE ='"+phoneNumber+"';";
-                break;
-            }
-            case 5: {
-                client.setPhoneNumber(param);
-                query = "UPDATE CLIENT SET PHONE = '"+param+"' WHERE PHONE ='"+phoneNumber+"';";
-                break;
-            }
-            default: {
-                System.out.println("Eror update client!");
-            }
+    public void updateClient(long currentClientID, Client clientFrom) {
+        Client c = getClientByID(currentClientID);
+        if (clientFrom.getName() != null) {
+            c.setName(clientFrom.getName());
+        }
+        if (clientFrom.getSurmame() != null) {
+            c.setSurname(clientFrom.getSurmame());
+        }
+        if (clientFrom.getAge() != 0) {
+            c.setAge(clientFrom.getAge());
+        }
+        if (clientFrom.getPhoneNumber() != null) {
+            c.setPhoneNumber(clientFrom.getPhoneNumber());
+        }
+        if (clientFrom.getEmail() != null) {
+            c.setEmail(clientFrom.getEmail());
         }
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
-             Statement statement = connection.createStatement()) {
-            statement.execute(query);
+             PreparedStatement statement = connection.prepareStatement("UPDATE CLIENT SET NAME = ?, SURNAME = ?,AGE = ?, PHONE = ?,EMAIL = ? WHERE ID = ?;")) {
+            statement.setString(1, c.getName());
+            statement.setString(2, c.getSurmame());
+            statement.setInt(3, c.getAge());
+            statement.setString(4, c.getPhoneNumber());
+            statement.setString(5, c.getEmail());
+            statement.setLong(6, currentClientID);
+            statement.execute();
         } catch (SQLException e) {
             System.out.println("Eror update client DB!");
         }
     }
 
+
     @Override
-    public Client getByPhoneNumber(String phoneNumber) {
-        for (Client c:clientList){
-            if (c.getPhoneNumber().equals(phoneNumber)){
-                return c;
-            }
+    public long getIDByPhoneNumber(String phoneNumber) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT WHERE PHONE = ?;")) {
+            statement.setString(1, phoneNumber);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                return resultSet.getLong("ID");
+            } else throw new BusinessException("No such ID");
+        } catch (SQLException|BusinessException e) {
+            System.out.println("Error isInDB");
+            System.out.println(e.getMessage());
         }
-        return null;
+        return -1;
     }
 
     @Override
     public List<Client> getAllClients() {
-        if (clientList == null) {
-            clientList = new ArrayList<>();
-            try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
-                 Statement statement = connection.createStatement()) {
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT;");
-                while (resultSet.next()) {
-                    String name = resultSet.getString("NAME");
-                    String surname = resultSet.getString("SURNAME");
-                    String age = resultSet.getString("AGE");
-                    String phoneNumber = resultSet.getString("PHONE");
-                    String email = resultSet.getString("EMAIL");
-                    Long id = resultSet.getLong("ID");
-                    clientList.add(new Client(id,name, surname, age, email, phoneNumber));
-                }
-                return clientList;
-            } catch (SQLException e) {
-                System.out.println("Client not found");
+        List<Client> clientList = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT;");
+            while (resultSet.next()) {
+                String name = resultSet.getString("NAME");
+                String surname = resultSet.getString("SURNAME");
+                String age = resultSet.getString("AGE");
+                String phoneNumber = resultSet.getString("PHONE");
+                String email = resultSet.getString("EMAIL");
+                Long id = resultSet.getLong("ID");
+                clientList.add(new Client(id, name, surname, age, email, phoneNumber));
             }
-        } else {
             return clientList;
+        } catch (SQLException e) {
+            System.out.println("Client not found");
         }
         return null;
     }
 
     @Override
-    public void deleteClient(String phoneNumber) {
-        clientList.remove(getByPhoneNumber(phoneNumber));
+    public void deleteClient(long id) {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
-             Statement statement = connection.createStatement()) {
-            statement.execute("DELETE FROM CLIENT WHERE PHONE ='" + phoneNumber + "';");
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM CLIENT WHERE ID = ?;")) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
         } catch (SQLException e) {
+            System.out.println("Error deleteClient");
             System.out.println(e.getSQLState());
         }
     }
 
     @Override
-    public boolean contains(String phoneNumber) {
-        for (Client c:clientList){
-            if (c.getPhoneNumber().equals(phoneNumber)){
-                return true;
-            }
+    public boolean isInDB(long id) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT WHERE ID =?;")) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.out.println("Error isInDB");
+            System.out.println(e.getSQLState());
         }
         return false;
+    }
+
+    @Override
+    public long getNextByMaxID() {
+        long maxId = 0;
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             Statement statement2 = connection.createStatement()) {
+            ResultSet resultSet = statement2.executeQuery("SELECT MAX(ID) FROM CLIENT;");
+            resultSet.next();
+            maxId = resultSet.getLong(1);
+        } catch (SQLException e) {
+            System.out.println("Error getNextByMaxID");
+            System.out.println(e.getErrorCode());
+        }
+        return  maxId+1;
+    }
+
+    @Override
+    public Client getClientByID(long id) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT WHERE ID = ?;")) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                String name = resultSet.getString("NAME");
+                String surname = resultSet.getString("SURNAME");
+                String age = resultSet.getString("AGE");
+                String email = resultSet.getString("EMAIL");
+                String phone = resultSet.getString("PHONE");
+                return new Client(id, name, surname, age, email, phone);
+            } else System.out.println("Client not found in DB");
+        } catch (SQLException e) {
+            System.out.println("Error getByPhoneNumber");
+            System.out.println(e.getErrorCode());
+        }
+        return null;
     }
 }

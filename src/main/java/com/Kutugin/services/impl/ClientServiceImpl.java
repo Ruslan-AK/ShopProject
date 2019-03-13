@@ -22,7 +22,8 @@ public class ClientServiceImpl implements ClientService {
         try {
             validationService.validateAge(age);
             validationService.validatePhoneNumber(phoneNumber);
-            Client client = new Client(name, surname, age, email, phoneNumber);
+            long id = getNextByMaxID();
+            Client client = new Client(id,name, surname, age, email, phoneNumber);
             clientDao.saveClient(client);
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
@@ -30,27 +31,36 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void deleteClient(Client client) {
-        clientDao.deleteClient(client.getPhoneNumber());
+    public void deleteClient(long id) {
+        clientDao.deleteClient(id);
     }
 
     @Override
-    public boolean contains(String id) {
-        return clientDao.contains(id);
+    public boolean isInDB(long id) {
+        return clientDao.isInDB(id);
     }
 
     @Override
-    public void updateClient(String phoneNumber, int paramNumber, String param) {
-        clientDao.updateClient(phoneNumber,paramNumber,param);
+    public void updateClient(long currentClientID, Client client) {
+        clientDao.updateClient(currentClientID, client);
     }
 
     @Override
-    public Client getByPhoneNumber(String phoneNumber) {
-        return clientDao.getByPhoneNumber(phoneNumber);
+    public long getIDByPhoneNumber(String phoneNumber) {
+        return clientDao.getIDByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public Client getClientByID(long id) {
+        return clientDao.getClientByID(id);
     }
 
     @Override
     public List<Client> getAllClients() {
         return clientDao.getAllClients();
+    }
+
+    private long getNextByMaxID() {
+        return clientDao.getNextByMaxID();
     }
 }

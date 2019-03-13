@@ -1,20 +1,19 @@
 package com.Kutugin.domain;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Order {
     private long id;
-    private static long currentId = 0;
-    private List<Product> productList = new ArrayList<>();
     private String date;
 
+    public Map<Product, Long> getProductMap() {
+        return productMap;
+    }
+
+    private Map<Product, Long> productMap = new HashMap<>();
 
     public Order(long id) {
-        currentId = id+1;
-        this.id = currentId++;
+        this.id = id;
         date = new Date().toString();
     }
 
@@ -28,7 +27,10 @@ public class Order {
 
     public Order(long id, List<Product> productCartList, String date) {
         this.id = id;
-        productList = productCartList;
+        for (Product p:productCartList) {
+            Long pos = productMap.get(p);
+            productMap.put(p, pos == null ? 1 : pos + 1);
+        }
         this.date = date;
     }
 
@@ -40,10 +42,11 @@ public class Order {
 
     private String showProducts() {
         String t = "";
-        for (Product p : productList) {
+        for (Product p : productMap.keySet()) {
             t += p.toString();
-            if (!(productList.indexOf(p) + 1 == productList.size()))
-                t += "\n";
+            t += "\nAmount: ";
+            t += productMap.get(p);
+            t += "\n";
         }
         return t;
     }
@@ -53,15 +56,24 @@ public class Order {
     }
 
     public List<Product> getProductList() {
+        List<Product> productList = new ArrayList<>();
+        for(Product p:productMap.keySet()){
+            for (int i=0;i<productMap.get(p);i++){
+                productList.add(p);
+            }
+        }
         return productList;
     }
 
     public void addProduct(Product product) {
-        productList.add(product);
+        Long pos = productMap.get(product);
+        productMap.put(product, pos == null ? 1 : pos + 1);
     }
 
     public void update(Order order) {
-        this.productList = order.getProductList();
+        for (Product p:order.getProductList()){
+            addProduct(p);
+        }
         date = new Date().toString();
     }
 }

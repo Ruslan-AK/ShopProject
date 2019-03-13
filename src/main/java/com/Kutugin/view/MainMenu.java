@@ -1,7 +1,5 @@
 package com.Kutugin.view;
 
-import com.Kutugin.dao.impl.H2DB.Init;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -21,7 +19,7 @@ public class MainMenu implements IMenu {
         while (isRunning) {
             System.out.println("$$$$$$$$$$$ WELCOME TO SHOP $$$$$$$$$$$");
             System.out.println("Select your role:");
-            System.out.println("1 - Admin\n2 - Client\n3 - init\n0 - Exit program");
+            System.out.println("1 - Admin\n2 - Client\n0 - Exit program");
             System.out.println("$$$$$$$$$$$ WELCOME TO SHOP $$$$$$$$$$$");
             String input = getInput();
             switch (input) {
@@ -33,11 +31,6 @@ public class MainMenu implements IMenu {
                 case "2": {
                     System.out.println("Chose action");
                     clientMenu.show();
-                    break;
-                }
-                case"3":{
-                    Init init = new Init();
-                    init.initDBs();
                     break;
                 }
                 case "0": {

@@ -7,13 +7,15 @@ import java.util.List;
 public interface ClientService {
     void createClient(String name, String surmame, String age, String email, String phoneNumber);//for Admin
 
-    void deleteClient(Client client);
+    void deleteClient(long id);
 
-    boolean contains(String id);
+    boolean isInDB(long id);
 
-    void updateClient(String phoneNumber, int paramNumber, String param);
+    void updateClient(long currentClientID, Client client);
 
-    Client getByPhoneNumber(String id);
+    long getIDByPhoneNumber(String id);
+
+    Client getClientByID(long id);
 
     List<Client> getAllClients();
 }

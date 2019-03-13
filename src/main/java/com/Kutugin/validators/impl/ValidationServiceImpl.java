@@ -42,7 +42,16 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     @Override
-    public void validateSurname(String email) throws BusinessException {
+    public void validateInteger(String input) throws BusinessException {
+        Pattern p = Pattern.compile("\\d{1,2}");
+        Matcher m = p.matcher(input);
+        if (!m.matches()) throw new BusinessException("Wrong integer digit format!");
+    }
 
+    @Override
+    public void validateDouble(String arg) throws BusinessException {
+        Pattern p = Pattern.compile("\\d{1,20}\\.+\\d{1,20}");
+        Matcher m = p.matcher(arg);
+        if (!m.matches()) throw new BusinessException("Wrong double digit format!");
     }
 }

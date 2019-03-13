@@ -30,13 +30,13 @@ public class ProductServiceImpl implements ProductServise {
     }
 
     @Override
-    public boolean contains(long id) {
-        return productDao.contains(id);
+    public boolean isInDB(long id) {
+        return productDao.isInDB(id);
     }
 
     @Override
-    public void updateProduct(long id, int paramNumber, String item) {
-        productDao.updateProduct(id, paramNumber, item);
+    public void updateProduct(long id, Product product) {
+        productDao.updateProduct(id, product);
     }
 
     @Override

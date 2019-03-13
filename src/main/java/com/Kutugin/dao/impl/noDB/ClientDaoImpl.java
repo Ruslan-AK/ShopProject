@@ -45,7 +45,7 @@
 //    }
 //
 //    @Override
-//    public boolean contains(String id) {
-//        return map.containsKey(id);
+//    public boolean isInDB(String id) {
+//        return map.isInDBKey(id);
 //    }
 //}

@@ -7,24 +7,32 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.Kutugin.dao.impl.H2DB.InitDB.*;
+
 public class ProductDBDao implements ProductDao {
 
-    private static final String DB_URL = "jdbc:h2:tcp://localhost/~/LuxoftShop";
-    private static final String LOGIN = "admin";
-    private static final String PASS = "";
-    private List<Product> productList;
+    @Override
+    public boolean saveProduct(Product product) {
+        long id = getNextByMaxID();
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO PRODUCT(ID,FIRM,MODEL,TYPE,PRICE) VALUES(?,?,?,?,?)")) {
+            statement.setLong(1, id);
 
-    public ProductDBDao() {
-        init();
+            statement.setString(2, product.getFirm());
+            statement.setString(3, product.getModel());
+            statement.setString(4, product.getType());
+            statement.setDouble(5, product.getPrice());
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println("Error saving product");
+            System.out.println(e.getErrorCode());
+        }
+        return false;
     }
 
-    private void init() {
-        try {
-            Class.forName("org.h2.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Can't load driver");
-        }
-        productList = new ArrayList<>();
+    @Override
+    public List<Product> getProducts() {
+        List<Product> productList = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM PRODUCT;");
@@ -37,29 +45,9 @@ public class ProductDBDao implements ProductDao {
                 productList.add(new Product(firm, model, price, type, id));
             }
         } catch (SQLException e) {
-            System.out.println("Error loading products");
+            System.out.println("Error deleteById");
+            System.out.println(e.getErrorCode());
         }
-    }
-
-    @Override
-    public boolean saveProduct(Product product) {
-        productList.add(product);
-        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO PRODUCT(ID,FIRM,MODEL,TYPE,PRICE) VALUES(?,?,?,?,?)")) {
-            statement.setLong(1, product.getId());
-            statement.setString(2, product.getFirm());
-            statement.setString(3, product.getModel());
-            statement.setString(4, product.getType());
-            statement.setDouble(5, product.getPrice());
-            statement.execute();
-        } catch (SQLException ignored) {
-            System.out.println("Error saving product");
-        }
-        return false;
-    }
-
-    @Override
-    public List<Product> getProducts() {
         return productList;
     }
 
@@ -68,62 +56,90 @@ public class ProductDBDao implements ProductDao {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement = connection.createStatement()) {
             statement.execute("DELETE FROM PRODUCT WHERE ID = '" + id + "';");
-            productList.remove(getByID(id));
         } catch (SQLException e) {
+            System.out.println("Error deleteById");
             System.out.println(e.getSQLState());
         }
     }
 
     @Override
     public Product getByID(long id) {
-        for (Product p : productList) {
-            if (p.getId() == id)
-                return p;
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCT WHERE ID = ?;")) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String firm = resultSet.getString("FIRM");
+                String model = resultSet.getString("MODEL");
+                double price = resultSet.getDouble("PRICE");
+                String type = resultSet.getString("TYPE");
+                return new Product(firm, model, price, type, id);
+            } else System.out.println("Product not found in DB");
+        } catch (SQLException e) {
+            System.out.println("Error getID");
+            System.out.println(e.getErrorCode());
         }
         return null;
     }
 
     @Override
-    public boolean contains(long id) {
-        for (Product p : productList) {
-            if (p.getId() == id)
+    public boolean isInDB(long id) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCT WHERE ID = ?;")) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
                 return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error isInDB");
+            System.out.println(e.getErrorCode());
         }
         return false;
     }
 
     @Override
-    public void updateProduct(long id, int paramNumber, String value) {
-        for (Product p : productList) {
-            if (p.getId() == id) {
-                switch (paramNumber) {
-                    case 1:
-                        p.setFirm(value);
-                        break;
-                    case 2:
-                        p.setModel(value);
-                        break;
-                    case 3:
-                        p.setType(value);
-                        break;
-                    case 4:
-                        p.setPrice(Double.valueOf(value));
-                        break;
-                    default:
-                        System.out.println("Wrong input!");
-                }
-                try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
-                     PreparedStatement statement = connection.prepareStatement("update product set " +
-                             "firm='" + p.getFirm() + "'," +
-                             "model='" + p.getModel() + "'," +
-                             "type='" + p.getType() + "'," +
-                             "price='" + p.getPrice() + "' " +
-                             "where id = " + id + ";")) {
-                    statement.execute();
-                } catch (SQLException ignored) {
-                    System.out.println("Error updating product");
-                }
-            }
+    public void updateProduct(long id, Product product) {
+        Product p = getByID(id);
+        if (product.getFirm() != null) {
+            p.setFirm(product.getFirm());
         }
+        if (product.getModel() != null) {
+            p.setModel(product.getModel());
+        }
+        if (product.getPrice() > 0) {
+            p.setPrice(product.getPrice());
+        }
+        if (product.getType() != null) {
+            p.setType(product.getType());
+        }
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             PreparedStatement statement = connection
+                     .prepareStatement("update product set firm=?, model=?, type=?, price=? where id = ?")) {
+            statement.setString(1, p.getFirm());
+            statement.setString(2, p.getModel());
+            statement.setString(3, p.getType());
+            statement.setDouble(4, p.getPrice());
+            statement.setLong(5, id);
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println("Error updating product");
+            System.out.println(e.getErrorCode());
+        }
+    }
+
+    @Override
+    public long getNextByMaxID() {
+        long maxId = 0;
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
+             Statement statement2 = connection.createStatement()) {
+            ResultSet resultSet = statement2.executeQuery("SELECT MAX(ID) FROM PRODUCT;");
+            resultSet.next();
+            maxId = resultSet.getLong(1);
+        } catch (SQLException e) {
+            System.out.println("Error getNextByMaxID");
+            System.out.println(e.getErrorCode());
+        }
+        return  maxId+1;
     }
 }

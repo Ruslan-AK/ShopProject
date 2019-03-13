@@ -7,13 +7,17 @@ import java.util.List;
 public interface ClientDao {
     void saveClient(Client client);
 
-    void updateClient(String phoneNumber, int paramNumber,String param);
+    void updateClient(long id, Client client);
 
-    Client getByPhoneNumber(String phoneNumber);
+    long getIDByPhoneNumber(String phoneNumber);
 
     List<Client> getAllClients();
 
-    void deleteClient(String id);
+    void deleteClient(long id);
 
-    boolean contains(String id);
+    boolean isInDB(long id);
+
+    long getNextByMaxID();
+
+    Client getClientByID(long id);
 }

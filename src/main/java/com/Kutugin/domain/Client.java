@@ -1,9 +1,5 @@
 package com.Kutugin.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class Client {
     private String name;
     private String surmame;
@@ -15,13 +11,7 @@ public class Client {
     private long id;
     private static long currentId = 0;
 
-    public Client(String name, String surmame, String age, String email, String phoneNumber) {
-        this.name = name;
-        this.surmame = surmame;
-        this.phoneNumber = phoneNumber;
-        this.age = Integer.valueOf(age);
-        this.email = email;
-        id = currentId++;
+    public Client() {
     }
 
     public Client(long id, String name, String surmame, String age, String email, String phoneNumber) {
@@ -58,7 +48,7 @@ public class Client {
         return surmame;
     }
 
-    public void setSurmame(String surmame) {
+    public void setSurname(String surmame) {
         this.surmame = surmame;
     }
 

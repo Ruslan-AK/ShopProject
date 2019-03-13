@@ -27,18 +27,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public long add(Client client, Order order) {
-        return orderDao.add(client,order);
+    public void addClientOrder(Client client, Order order) {
+        orderDao.addClientOrder(client, order);
     }
 
     @Override
     public void update(long id, Order order) {
         orderDao.update(id, order);
-    }
-
-    @Override
-    public List<Order> getOrders() {
-        return orderDao.getOrders();//
     }
 
     @Override
@@ -52,22 +47,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getOrdersByClient(long clientId){
+    public List<Order> getOrdersByClient(long clientId) {
         return orderDao.getOrdersByClient(clientId);
     }
 
+//    @Override
+//    public void addProduct(long id, Product product) {
+//        orderDao.addProduct(id, product);
+//    }
+
     @Override
-    public void addProduct(long id, Product product){
-        orderDao.addProduct(id,product);
+    public boolean isInDBById(long id) {
+        return orderDao.isInDBById(id);
     }
 
     @Override
-    public boolean containsById(long id) {
-        return orderDao.containsById(id);
-    }
-
-    @Override
-    public long getMaxID() {
-        return orderDao.getMaxID();
+    public long getNextByMaxID() {
+        return orderDao.getNextByMaxID();
     }
 }

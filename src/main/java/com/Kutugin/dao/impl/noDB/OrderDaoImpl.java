@@ -58,7 +58,7 @@
 //    }
 //
 //    @Override
-//    public boolean containsById(long id) {
+//    public boolean isInDBById(long id) {
 //        for (Order order : orderList) {
 //            if (order.getId() == id)
 //                return true;

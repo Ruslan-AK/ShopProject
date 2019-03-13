@@ -3,6 +3,7 @@ package com.Kutugin.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Product {
     private String model;
@@ -14,7 +15,9 @@ public class Product {
     private static List<Long> listId = new ArrayList<>();
 
     public Double getPrice() {
-        return price.doubleValue();
+        if (price != null)
+            return price.doubleValue();
+        return null;
     }
 
     public String getModel() {
@@ -50,11 +53,16 @@ public class Product {
     }
 
     public String getType() {
-        return type.toString();
+        if (type != null)
+            return type.toString();
+        return null;
     }
 
     public void setType(String type) {
         this.type = ProductType.valueOf(type);
+    }
+
+    public Product() {
     }
 
     public Product(String firm, String model, double price, String type) {
@@ -86,5 +94,21 @@ public class Product {
 
     public long getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return model.equals(product.model) &&
+                firm.equals(product.firm) &&
+                price.equals(product.price) &&
+                type == product.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(model, firm, price, type);
     }
 }

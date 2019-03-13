@@ -52,8 +52,8 @@
 //    }
 //
 //    @Override
-//    public boolean contains(long id) {
-//        return map.containsKey(id);
+//    public boolean isInDB(long id) {
+//        return map.isInDBKey(id);
 //    }
 //
 //    @Override

@@ -4,6 +4,7 @@ import com.Kutugin.dao.ClientDao;
 import com.Kutugin.dao.OrderDao;
 import com.Kutugin.dao.ProductDao;
 import com.Kutugin.dao.impl.H2DB.ClientDBDao;
+import com.Kutugin.dao.impl.H2DB.InitDB;
 import com.Kutugin.dao.impl.H2DB.OrderDBDao;
 import com.Kutugin.dao.impl.H2DB.ProductDBDao;
 import com.Kutugin.services.ClientService;
@@ -24,6 +25,7 @@ import java.io.InputStreamReader;
 
 public class App {
     public static void main(String[] args) throws IOException {
+        InitDB init = new InitDB();
         ClientDao clientDao = new ClientDBDao();
         ValidationService validationService = new ValidationServiceImpl();
         ClientService clientService = new ClientServiceImpl(clientDao, validationService);
@@ -32,7 +34,7 @@ public class App {
 
         ProductServise productService = new ProductServiceImpl(productDao);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        AdminMenu adminMenu = new AdminMenu(br, clientService, validationService, productService);
+        AdminMenu adminMenu = new AdminMenu(br, clientService, validationService, productService,init);
         OrderDao orderDao = new OrderDBDao();
         OrderService orderService = new OrderServiceImpl(orderDao);
         ClientMenu clientMenu = new ClientMenu(productService, br, clientService, validationService, orderService);

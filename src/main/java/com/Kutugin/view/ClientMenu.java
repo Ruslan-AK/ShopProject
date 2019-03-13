@@ -52,8 +52,7 @@ public class ClientMenu implements IMenu {
                         isRunning = signOut();
                         break;
                     case "5":
-
-                        for (Order o : clientOrders) {
+                        for (Order o : orderService.getOrdersByClient(currentClient.getId())) {
                             System.out.println(o);
                         }
                         break;
@@ -108,7 +107,7 @@ public class ClientMenu implements IMenu {
                         String inputPhoneNumber = getInput();
                         switch (inputPhoneNumber) {
                             case "y":
-                                clientService.deleteClient(currentClient);
+                                clientService.deleteClient(currentClient.getId());
                                 System.out.println("Client removed");
                                 currentClient = null;
                                 signOut();
@@ -129,7 +128,6 @@ public class ClientMenu implements IMenu {
         }
         return true;
     }
-
 
     private void myOrder() {
         if (currentOrder == null) {
@@ -168,11 +166,11 @@ public class ClientMenu implements IMenu {
                     Product product = productService.getProducts().get(index);
                     System.out.println("You bye " + product);
                     if (currentOrder == null) {
-                        currentOrder = new Order(orderService.getMaxID());
-                        System.out.println("MAX_ID: "+orderService.getMaxID());
-                        orderService.add(currentClient, currentOrder);
+                        currentOrder = new Order(orderService.getNextByMaxID());
+                        orderService.addClientOrder(currentClient, currentOrder);
                     }
-                    orderService.addProduct(currentOrder.getId(), product);
+                    currentOrder.addProduct(product);
+                    orderService.update(currentOrder.getId(), currentOrder);
                 } catch (NumberFormatException ex) {
                     System.out.println("Wrong input!");
                 }
@@ -181,78 +179,60 @@ public class ClientMenu implements IMenu {
     }
 
     private void modify() {
-
-        System.out.println("What you want to modify?:\n1 - Name\n2 - Surname\n3 - Age\n4 - Email\n5 - Phone Number\nr - Return");
+        boolean isRunning = true;
+        while (isRunning)
+            System.out.println("What you want to modify?:\n1 - Name\n2 - Surname\n3 - Age\n4 - Email\n5 - Phone Number\nr - Return");
         String input = null;
         input = getInput();
-        switch (input) {
-            case "r":
-                break;
-            case "1": {
-                System.out.println("Enter new Name:");
-                input = getInput();
-                try {
+        Client mockClient = new Client();
+        try {
+            switch (input) {
+                case "r":
+                    isRunning = false;
+                    break;
+                case "1": {
+                    System.out.println("Enter new Name:");
+                    input = getInput();
                     validator.validateName(input);
-                } catch (BusinessException e) {
-                    System.out.println(e.getMessage() + "\n");
+                    mockClient.setName(input);
+                    break;
                 }
-                clientService.updateClient(currentClient.getPhoneNumber(), 2, input);
-                System.out.println("Client modified!");
-                break;
-            }
-            case "2": {
-                System.out.println("Enter new Surname:");
-                input = getInput();
-                try {
+                case "2": {
+                    System.out.println("Enter new Surname:");
+                    input = getInput();
                     validator.validateName(input);
-                } catch (BusinessException e) {
-                    System.out.println(e.getMessage() + "\n");
+                    mockClient.setSurname(input);
+                    break;
                 }
-                clientService.updateClient(currentClient.getPhoneNumber(), 2, input);
-                System.out.println("Client modified!");
-                break;
-            }
-            case "3": {
-                System.out.println("Enter new Age:");
-                input = getInput();
-                try {
+                case "3": {
+                    System.out.println("Enter new Age:");
+                    input = getInput();
                     validator.validateAge(input);
-                } catch (BusinessException e) {
-                    System.out.println(e.getMessage() + "\n");
+                    mockClient.setAge(Integer.valueOf(input));
+                    break;
                 }
-                clientService.updateClient(currentClient.getPhoneNumber(), 3, input);
-                System.out.println("Client modified!");
-                break;
-            }
-            case "4": {
-                System.out.println("Enter new Email:");
-                input = getInput();
-                try {
+                case "4": {
+                    System.out.println("Enter new Email:");
+                    input = getInput();
                     validator.validateEmail(input);
-                } catch (BusinessException e) {
-                    System.out.println(e.getMessage() + "\n");
+                    mockClient.setEmail(input);
+                    break;
                 }
-                clientService.updateClient(currentClient.getPhoneNumber(), 4, input);
-                System.out.println("Client modified!");
-                break;
-            }
-            case "5": {
-                System.out.println("Enter new Phone Number:");
-                input = getInput();
-                try {
-                    validator.validatePhoneNumber(input);
-                } catch (BusinessException e) {
-                    System.out.println(e.getMessage() + "\n");
+                case "5": {
+                    System.out.println("Enter new Phone Number:");
+                    input = getInput();
+                    mockClient.setPhoneNumber(input);
+                    break;
                 }
-                clientService.updateClient(currentClient.getPhoneNumber(), 5, input);
-                System.out.println("Client modified!");
-                break;
+                default:
+                    System.out.println("Wrong input");
+                    break;
             }
-            default:
-                System.out.println("Wrong input");
-                break;
+        } catch (BusinessException e) {
+            System.out.println(e.getMessage() + "\n");
         }
-
+        clientService.updateClient(currentClient.getId(), mockClient);
+        System.out.println("Client modified!");
     }
 
     private void createClient() {
@@ -260,43 +240,19 @@ public class ClientMenu implements IMenu {
         String name = getInput();
         try {
             validator.validateName(name);
-        } catch (BusinessException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Client not created!");
-            return;
-        }
-        System.out.println("Input surname:");
-        String surname = getInput();
-        try {
+            System.out.println("Input surname:");
+            String surname = getInput();
             validator.validateName(surname);
-        } catch (BusinessException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Client not created!");
-            return;
-        }
-        System.out.println("Input age:");
-        String age = getInput();
-        try {
+            System.out.println("Input age:");
+            String age = getInput();
             validator.validateAge(age);
-        } catch (BusinessException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("Client not created!");
-            return;
-        }
-        System.out.println("Input email:");
-        String email = getInput();
-        try {
+            System.out.println("Input email:");
+            String email = getInput();
             validator.validateEmail(email);
-        } catch (BusinessException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("Client not created!");
-            return;
-        }
-        System.out.println("Input phone:");
-        String phoneNumber = getInput();
-        try {
+            System.out.println("Input phone:");
+            String phoneNumber = getInput();
             validator.validatePhoneNumber(phoneNumber);//validator
-            if (clientService.contains(phoneNumber)) {
+            if (clientService.isInDB(currentClient.getId())) {
                 System.out.println("Client with this phone number already exist");
                 System.out.println("Client not created!");
                 return;
@@ -306,7 +262,6 @@ public class ClientMenu implements IMenu {
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
             System.out.println("Client not created!");
-            return;
         }
     }
 
@@ -330,7 +285,7 @@ public class ClientMenu implements IMenu {
             try {
                 input = br.readLine();
                 validator.validatePhoneNumber(input);
-                currentClient = clientService.getByPhoneNumber(input);
+                currentClient = clientService.getClientByID(clientService.getIDByPhoneNumber(input));
                 if (currentClient == null) {
                     System.out.println("Client not found");
                 } else {
@@ -347,6 +302,7 @@ public class ClientMenu implements IMenu {
     public boolean signOut() {
         signIn = false;
         currentClient = null;
+        currentOrder = null;
         return false;
     }
 

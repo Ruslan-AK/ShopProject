@@ -13,7 +13,9 @@ public interface ProductDao {
 
     Product getByID(long id);
 
-    boolean contains(long id);
+    boolean isInDB(long id);
 
-    void updateProduct(long id, int paramNumber,String item);
+    void updateProduct(long id, Product product);
+
+    long getNextByMaxID();
 }

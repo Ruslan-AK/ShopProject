@@ -10,7 +10,9 @@ public interface ValidationService {
 
     void validateEmail(String email) throws BusinessException;
 
-    void validateName(String email) throws BusinessException;
+    void validateName(String name) throws BusinessException;
 
-    void validateSurname(String email) throws BusinessException;
+    void validateInteger(String arg) throws BusinessException;
+
+    void validateDouble(String arg) throws BusinessException;
 }
