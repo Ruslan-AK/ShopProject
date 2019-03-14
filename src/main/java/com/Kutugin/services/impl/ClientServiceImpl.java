@@ -23,7 +23,7 @@ public class ClientServiceImpl implements ClientService {
             validationService.validateAge(age);
             validationService.validatePhoneNumber(phoneNumber);
             long id = getNextByMaxID();
-            Client client = new Client(id,name, surname, age, email, phoneNumber);
+            Client client = new Client(id, name, surname, age, email, phoneNumber);
             clientDao.saveClient(client);
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
@@ -36,8 +36,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean isInDB(long id) {
-        return clientDao.isInDB(id);
+    public boolean isInDB(String phone) {
+        return clientDao.isInDB(phone);
     }
 
     @Override

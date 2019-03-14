@@ -77,10 +77,10 @@ public class ClientDBDao implements ClientDao {
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT WHERE PHONE = ?;")) {
             statement.setString(1, phoneNumber);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 return resultSet.getLong("ID");
             } else throw new BusinessException("No such ID");
-        } catch (SQLException|BusinessException e) {
+        } catch (SQLException | BusinessException e) {
             System.out.println("Error isInDB");
             System.out.println(e.getMessage());
         }
@@ -122,10 +122,10 @@ public class ClientDBDao implements ClientDao {
     }
 
     @Override
-    public boolean isInDB(long id) {
+    public boolean isInDB(String phone) {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT WHERE ID =?;")) {
-            statement.setLong(1, id);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT WHERE PHONE =?;")) {
+            statement.setString(1, phone);
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
         } catch (SQLException e) {
@@ -147,7 +147,7 @@ public class ClientDBDao implements ClientDao {
             System.out.println("Error getNextByMaxID");
             System.out.println(e.getErrorCode());
         }
-        return  maxId+1;
+        return maxId + 1;
     }
 
     @Override
@@ -156,7 +156,7 @@ public class ClientDBDao implements ClientDao {
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT WHERE ID = ?;")) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 String name = resultSet.getString("NAME");
                 String surname = resultSet.getString("SURNAME");
                 String age = resultSet.getString("AGE");

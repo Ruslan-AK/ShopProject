@@ -47,7 +47,7 @@ public class AdminMenu implements IMenu {
                     inputPhoneNumber = getInput();
                     try {
                         validator.validatePhoneNumber(inputPhoneNumber);
-                        if (clientService.isInDB(clientService.getIDByPhoneNumber(inputPhoneNumber))) {
+                        if (clientService.isInDB(inputPhoneNumber)) {
                             clientService.deleteClient(clientService.getIDByPhoneNumber(inputPhoneNumber));
                             System.out.println("Client removed");
                             break;
@@ -77,7 +77,7 @@ public class AdminMenu implements IMenu {
                     if (isInEnum(type)) {
                         Product product = new Product(firm, model, price, type);
                         productService.saveProduct(product);
-                        System.out.println("Product added: \n"+ product);
+                        System.out.println("Product added: \n" + product);
                     } else {
                         System.out.println("Abort, no such Product type");
                     }
@@ -113,7 +113,7 @@ public class AdminMenu implements IMenu {
             System.out.println(e.getMessage());
         }
         long currentClientID = clientService.getIDByPhoneNumber(inputPhoneNumber);
-        if (clientService.isInDB(currentClientID)) {
+        if (clientService.isInDB(clientService.getClientByID(currentClientID).getPhoneNumber())) {
             Client mockClient = new Client();
             boolean modFlag = true;
             while (modFlag) {
@@ -224,9 +224,9 @@ public class AdminMenu implements IMenu {
                                     System.out.println("Wrong input!");
                                     break;
                             }
-                            if(modFlag){
+                            if (modFlag) {
                                 productService.updateProduct(currentProductID, mockProduct);
-                                System.out.println("Product updated:\n"+productService.getByID(currentProductID));
+                                System.out.println("Product updated:\n" + productService.getByID(currentProductID));
                             }
                         }
                     } catch (BusinessException e) {

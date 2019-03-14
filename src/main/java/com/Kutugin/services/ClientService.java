@@ -9,7 +9,7 @@ public interface ClientService {
 
     void deleteClient(long id);
 
-    boolean isInDB(long id);
+    boolean isInDB(String phone);
 
     void updateClient(long currentClientID, Client client);
 

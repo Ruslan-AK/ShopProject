@@ -252,7 +252,7 @@ public class ClientMenu implements IMenu {
             System.out.println("Input phone:");
             String phoneNumber = getInput();
             validator.validatePhoneNumber(phoneNumber);//validator
-            if (clientService.isInDB(currentClient.getId())) {
+            if (clientService.isInDB(phoneNumber)) {
                 System.out.println("Client with this phone number already exist");
                 System.out.println("Client not created!");
                 return;

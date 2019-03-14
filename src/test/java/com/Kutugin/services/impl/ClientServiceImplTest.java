@@ -16,36 +16,30 @@
 //    private ValidationService validationService = Mockito.mock(ValidationService.class);
 //    //new ValidationServiceImpl();
 //    @Mock
-//    private ClientDao clientDao;
-//    //= new ClientDBDao();
-//    private ClientService clientService = new ClientServiceImpl(clientDao, validationService);
+//    private ClientDao clientDao;//= Mockito.mock(ClientDao.class);
+//    private ClientService clientService;
 //
 //    @Before
 //    public void init() {
 //        clientService = new ClientServiceImpl(clientDao, validationService);
 //    }
 //
-//    @BeforeClass
-//    public static void initClass() {
-//        System.out.println("BEFORE CLASS");
-//    }
-//
 //    @After
 //    public void tearDown() {
-//        System.out.println("After");
+//        clientService = null;
 //    }
 //
 //
 //    @Test
-//    public void createClientWithFullParametersTest() {
+//    public void createClientNotExistsInDB() {
 //        //Given
-//        String name = "test";
-//        String surname = "test";
-//        String age = "10";
-//        String phone = "0676387370";
-//        String email = "test@test.com";
+//        String name = "client";
+//        String surname = "client";
+//        String age = "23";
+//        String phone = "06776767";
+//        String email = "client@client.com";
 //        //When
-//        clientService.createClient(name, surname, age, email, phone);
+//        Mockito.when(clientService.createClient(name, surname, age, email, phone)).thenReturn();
 //        //Then
 //
 //        System.out.println("Test");
