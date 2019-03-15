@@ -18,15 +18,19 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void createClient(String name, String surname, String age, String email, String phoneNumber) {
+    public boolean createClient(String name, String surname, String age, String email, String phoneNumber) {
         try {
+            validationService.validateEmail(email);
+            validationService.validateName(surname);
+            validationService.validateName(name);
             validationService.validateAge(age);
             validationService.validatePhoneNumber(phoneNumber);
             long id = getNextByMaxID();
             Client client = new Client(id, name, surname, age, email, phoneNumber);
-            clientDao.saveClient(client);
+            return clientDao.saveClient(client);
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
     }
 
@@ -47,7 +51,13 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public long getIDByPhoneNumber(String phoneNumber) {
-        return clientDao.getIDByPhoneNumber(phoneNumber);
+        try {
+            validationService.validatePhoneNumber(phoneNumber);
+            return clientDao.getIDByPhoneNumber(phoneNumber);
+        } catch (BusinessException e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
     }
 
     @Override

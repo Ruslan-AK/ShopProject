@@ -23,11 +23,12 @@ public class ProductDBDao implements ProductDao {
             statement.setString(4, product.getType());
             statement.setDouble(5, product.getPrice());
             statement.execute();
+            return true;
         } catch (SQLException e) {
             System.out.println("Error saving product");
             System.out.println(e.getErrorCode());
+            return false;
         }
-        return false;
     }
 
     @Override
@@ -140,6 +141,6 @@ public class ProductDBDao implements ProductDao {
             System.out.println("Error getNextByMaxID");
             System.out.println(e.getErrorCode());
         }
-        return  maxId+1;
+        return maxId + 1;
     }
 }

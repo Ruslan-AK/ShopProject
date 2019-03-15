@@ -198,7 +198,8 @@ public class OrderDBDao implements OrderDao {
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"ORDER\" WHERE ID =?;")) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            return resultSet.next();
+            if (resultSet.next())
+                return true;
         } catch (SQLException e) {
             System.out.println("Error isInDBById");
             System.out.println(e.getSQLState());

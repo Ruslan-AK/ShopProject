@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface OrderService {
 
-    BigDecimal summaryPrice(long id);
+    BigDecimal summaryPrice(Order order);
 
     void addClientOrder(Client client, Order order);
 

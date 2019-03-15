@@ -29,7 +29,7 @@ public class ValidationServiceImpl implements ValidationService {
 
     @Override
     public void validateEmail(String email) throws BusinessException {
-        Pattern p = Pattern.compile(".+\\@.+\\.(com|ru|ua|net)");
+        Pattern p = Pattern.compile("\\w+\\@\\w+\\.(com|ru|ua|net)");
         Matcher m = p.matcher(email);
         if (!m.matches()) throw new BusinessException("Wrong email format!");
     }

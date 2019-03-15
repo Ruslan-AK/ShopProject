@@ -135,7 +135,7 @@ public class ClientMenu implements IMenu {
             return;
         }
         System.out.println(currentOrder);
-        System.out.println("Total price: " + orderService.summaryPrice(currentOrder.getId()));
+        System.out.println("Total price: " + orderService.summaryPrice(currentOrder));
         boolean run = true;
         while (run) {
             System.out.println("r - return");
@@ -257,8 +257,9 @@ public class ClientMenu implements IMenu {
                 System.out.println("Client not created!");
                 return;
             }
-            clientService.createClient(name, surname, age, email, phoneNumber);
-            System.out.println("New Client created!\nYou can login now");
+            if (clientService.createClient(name, surname, age, email, phoneNumber)) {
+                System.out.println("New Client created!\nYou can login now");
+            } else System.out.println("New Client not created!");
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
             System.out.println("Client not created!");

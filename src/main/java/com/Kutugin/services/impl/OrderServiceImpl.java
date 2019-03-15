@@ -18,9 +18,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public BigDecimal summaryPrice(long id) {
+    public BigDecimal summaryPrice(Order order) {
         BigDecimal sum = new BigDecimal(0);
-        for (Product product : orderDao.getByID(id).getProductList()) {
+        for (Product product : order.getProductList()) {
             sum = sum.add(BigDecimal.valueOf(product.getPrice()));
         }
         return sum;

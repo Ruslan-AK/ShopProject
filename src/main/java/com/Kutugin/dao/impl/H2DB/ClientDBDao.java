@@ -23,7 +23,7 @@ public class ClientDBDao implements ClientDao {
     }
 
     @Override
-    public void saveClient(Client client) {
+    public boolean saveClient(Client client) {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME,AGE, PHONE,EMAIL,ID) VALUES(?,?,?,?,?,?);")) {
             statement.setString(1, client.getName());
@@ -33,8 +33,10 @@ public class ClientDBDao implements ClientDao {
             statement.setString(5, client.getEmail());
             statement.setLong(6, client.getId());
             statement.execute();
+            return true;
         } catch (SQLException ignored) {
             System.out.println("Error saving client to DB");
+            return false;
         }
     }
 
