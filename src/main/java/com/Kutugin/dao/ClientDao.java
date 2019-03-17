@@ -15,7 +15,7 @@ public interface ClientDao {
 
     void deleteClient(long id);
 
-    boolean isInDB(String phone);
+    boolean isPresent(String phone);
 
     long getNextByMaxID();
 

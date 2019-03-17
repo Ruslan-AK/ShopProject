@@ -113,7 +113,7 @@ public class ClientServiceImplTest {
     }
 
     @Test
-    public void isInDBTest() {
+    public void isPresentTest() {
         //Given
         String name = "client";
         String surname = "client";
@@ -123,9 +123,9 @@ public class ClientServiceImplTest {
         long id = clientDao.getNextByMaxID();
         Client client = new Client(id, name, surname, age, email, phone);
         //When
-        Mockito.when(clientDao.isInDB(client.getPhoneNumber())).thenReturn(true);
+        Mockito.when(clientDao.isPresent(client.getPhoneNumber())).thenReturn(true);
         //Then
-        boolean res = clientService.isInDB(client.getPhoneNumber());
+        boolean res = clientService.isPresent(client.getPhoneNumber());
         Assert.assertTrue(res);
     }
 

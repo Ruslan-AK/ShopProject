@@ -31,7 +31,6 @@ public class AdminMenu implements IMenu {
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("1 - Show clients\n2 - Add client\n3 - Modify client\n4 - Remove client\n5 - Show products\n6 - Add product\n7 - Modify product\n8 - Delete product\n9 - Initialize DB\n0 - Exit to main menu");
-            String inputPhoneNumber;
             switch (getInput()) {
                 case "1":
                     showAllClients();
@@ -43,44 +42,13 @@ public class AdminMenu implements IMenu {
                     modifyClient();
                     break;
                 case "4":
-                    System.out.println("Input Client phone number:");
-                    inputPhoneNumber = getInput();
-                    try {
-                        validator.validatePhoneNumber(inputPhoneNumber);
-                        if (clientService.isInDB(inputPhoneNumber)) {
-                            clientService.deleteClient(clientService.getIDByPhoneNumber(inputPhoneNumber));
-                            System.out.println("Client removed");
-                            break;
-                        }
-                    } catch (BusinessException e) {
-                        System.out.println(e.getMessage());
-                        System.out.println("Abort deleting");
-                    }
-                    System.out.println("Client not found");
+                    deleteClient();
                     break;
                 case "5":
                     showProducts();
                     break;
                 case "6":
-                    System.out.println("Add product");
-                    System.out.println("Enter product firm:");
-                    String firm = getInput();
-                    System.out.println("Enter product model:");
-                    String model = getInput();
-                    System.out.println("Enter product price:");
-                    double price = Double.valueOf(getInput());
-                    System.out.println("Enter product type from following:");
-                    for (ProductType p : ProductType.values()) {
-                        System.out.println(p.toString());
-                    }
-                    String type = getInput();
-                    if (isInEnum(type)) {
-                        Product product = new Product(firm, model, price, type);
-                        productService.saveProduct(product);
-                        System.out.println("Product added: \n" + product);
-                    } else {
-                        System.out.println("Abort, no such Product type");
-                    }
+                    addProduct();
                     break;
                 case "7":
                     modifyProduct();
@@ -103,72 +71,114 @@ public class AdminMenu implements IMenu {
         }
     }
 
+    private void addProduct() {
+        System.out.println("Add product");
+        System.out.println("Enter product firm:");
+        String firm = getInput();
+        System.out.println("Enter product model:");
+        String model = getInput();
+        System.out.println("Enter product price:");
+        double price = Double.valueOf(getInput());
+        System.out.println("Enter product type from following:");
+        for (ProductType p : ProductType.values()) {
+            System.out.println(p.toString());
+        }
+        String type = getInput();
+        if (isInEnum(type)) {
+            Product product = new Product(firm, model, price, type);
+            productService.saveProduct(product);
+            System.out.println("Product added: \n" + product);
+        } else {
+            System.out.println("Abort, no such Product type");
+        }
+    }
+
+    private void deleteClient() {
+        String inputPhoneNumber;
+        if (clientService.getAllClients().size() > 0) {
+            System.out.println("Input Client phone number:");
+            inputPhoneNumber = getInput();
+            try {
+                validator.validatePhoneNumber(inputPhoneNumber);
+                if (clientService.isPresent(inputPhoneNumber)) {
+                    clientService.deleteClient(clientService.getIDByPhoneNumber(inputPhoneNumber));
+                    System.out.println("Client removed");
+                } else System.out.println("Client not found");
+            } catch (BusinessException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Abort deleting");
+            }
+        }
+    }
+
     private void modifyClient() {
         String inputPhoneNumber;
         System.out.println("Input Client phone number:");
         inputPhoneNumber = getInput();
         try {
             validator.validatePhoneNumber(inputPhoneNumber);
+            long currentClientID = clientService.getIDByPhoneNumber(inputPhoneNumber);
+            if (clientService.isPresent(clientService.getClientByID(currentClientID).getPhoneNumber())) {
+                Client mockClient = new Client();
+                boolean modFlag = true;
+                while (modFlag) {
+                    System.out.println("What you want to modify?:\n1 - Name\n2 - Surname\n3 - Age\n4 - Email\n5 - Phone Number\nr - return");
+                    String input = getInput();
+                    try {
+                        switch (input) {
+                            case "1": {
+                                System.out.println("Enter new name:");
+                                input = getInput();
+                                validator.validateName(input);
+                                mockClient.setName(input);
+                                break;
+                            }
+                            case "2": {
+                                System.out.println("Enter new surname:");
+                                input = getInput();
+                                validator.validateName(input);
+                                mockClient.setSurname(input);
+                                break;
+                            }
+                            case "3": {
+                                System.out.println("Enter new age:");
+                                input = getInput();
+                                validator.validateAge(input);
+                                mockClient.setAge(Integer.valueOf(input));
+                                break;
+                            }
+                            case "4": {
+                                System.out.println("Enter new email:");
+                                input = getInput();
+                                validator.validateEmail(input);
+                                mockClient.setEmail(input);
+                                break;
+                            }
+                            case "5": {
+                                System.out.println("Enter new phone number1" +
+                                        ":");
+                                input = getInput();
+                                validator.validatePhoneNumber(input);
+                                mockClient.setPhoneNumber(input);
+                                break;
+                            }
+                            case "r": {
+                                modFlag = false;
+                                break;
+                            }
+                        }
+                    } catch (BusinessException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    clientService.updateClient(currentClientID, mockClient);
+                }
+            } else
+                System.out.println("Client not found");
         } catch (BusinessException e) {
             System.out.println(e.getMessage());
+            System.out.println("Abort");
         }
-        long currentClientID = clientService.getIDByPhoneNumber(inputPhoneNumber);
-        if (clientService.isInDB(clientService.getClientByID(currentClientID).getPhoneNumber())) {
-            Client mockClient = new Client();
-            boolean modFlag = true;
-            while (modFlag) {
-                System.out.println("What you want to modify?:\n1 - Name\n2 - Surname\n3 - Age\n4 - Email\n5 - Phone Number\nr - return");
-                String input = getInput();
-                try {
-                    switch (input) {
-                        case "1": {
-                            System.out.println("Enter new name:");
-                            input = getInput();
-                            validator.validateName(input);
-                            mockClient.setName(input);
-                            break;
-                        }
-                        case "2": {
-                            System.out.println("Enter new surname:");
-                            input = getInput();
-                            validator.validateName(input);
-                            mockClient.setSurname(input);
-                            break;
-                        }
-                        case "3": {
-                            System.out.println("Enter new age:");
-                            input = getInput();
-                            validator.validateAge(input);
-                            mockClient.setAge(Integer.valueOf(input));
-                            break;
-                        }
-                        case "4": {
-                            System.out.println("Enter new email:");
-                            input = getInput();
-                            validator.validateEmail(input);
-                            mockClient.setEmail(input);
-                            break;
-                        }
-                        case "5": {
-                            System.out.println("Enter new phone number1" +
-                                    ":");
-                            input = getInput();
-                            validator.validatePhoneNumber(input);
-                            mockClient.setPhoneNumber(input);
-                            break;
-                        }
-                        case "r": {
-                            modFlag = false;
-                            break;
-                        }
-                    }
-                } catch (BusinessException e) {
-                    System.out.println(e.getMessage());
-                }
-                clientService.updateClient(currentClientID, mockClient);
-            }
-        } else
-            System.out.println("Client not found");
+
     }
 
     private void modifyProduct() {
@@ -263,8 +273,10 @@ public class AdminMenu implements IMenu {
             System.out.println("Input phone:");
             String phoneNumber = getInput();
             validator.validatePhoneNumber(phoneNumber);//validator
-            clientService.createClient(name, surname, age, email, phoneNumber);
-            System.out.println("New Client created!");
+            if (!clientService.isPresent(phoneNumber)) {
+                clientService.createClient(name, surname, age, email, phoneNumber);
+                System.out.println("New Client created!");
+            } else System.out.println("Client with the same number already exist!");
         } catch (BusinessException e) {
             System.out.println(e.getMessage());
             System.out.println("Client not created!");
@@ -295,7 +307,7 @@ public class AdminMenu implements IMenu {
         while (true) {
             int j = 0;
             if (productService.getProducts().size() < 1) {
-                System.out.println("No products left");
+                System.out.println("No products");
                 return;
             }
             for (Product product : productService.getProducts()) {

@@ -12,7 +12,7 @@ public interface ProductServise {
 
     void deleteById(long id);//
 
-    boolean isInDB(long id);
+    boolean isPresent(long id);
 
     void updateProduct(long id, Product product);
 

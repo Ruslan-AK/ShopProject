@@ -52,8 +52,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean isInDBById(long id) {
-        return orderDao.isInDBById(id);
+    public boolean isPresent(long id) {
+        return orderDao.isPresent(id);
     }
 
     @Override

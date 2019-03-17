@@ -30,8 +30,8 @@ public class ProductServiceImpl implements ProductServise {
     }
 
     @Override
-    public boolean isInDB(long id) {
-        return productDao.isInDB(id);
+    public boolean isPresent(long id) {
+        return productDao.isPresent(id);
     }
 
     @Override

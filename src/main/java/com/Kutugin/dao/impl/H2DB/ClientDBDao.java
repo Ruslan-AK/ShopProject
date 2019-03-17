@@ -83,7 +83,7 @@ public class ClientDBDao implements ClientDao {
                 return resultSet.getLong("ID");
             } else throw new BusinessException("No such ID");
         } catch (SQLException | BusinessException e) {
-            System.out.println("Error isInDB");
+            System.out.println("Error isPresent");
             System.out.println(e.getMessage());
         }
         return -1;
@@ -124,14 +124,14 @@ public class ClientDBDao implements ClientDao {
     }
 
     @Override
-    public boolean isInDB(String phone) {
+    public boolean isPresent(String phone) {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT WHERE PHONE =?;")) {
             statement.setString(1, phone);
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
         } catch (SQLException e) {
-            System.out.println("Error isInDB");
+            System.out.println("Error isPresent");
             System.out.println(e.getSQLState());
         }
         return false;

@@ -16,10 +16,8 @@ public interface OrderDao {
     Order getByID(long id);
 
     List<Order> getOrdersByClient(long clientId);
-
-    //void addProduct(long id, Product product);
-
-    boolean isInDBById(long id);
+    
+    boolean isPresent(long id);
 
     long getNextByMaxID();
 }

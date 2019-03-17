@@ -180,59 +180,60 @@ public class ClientMenu implements IMenu {
 
     private void modify() {
         boolean isRunning = true;
-        while (isRunning)
+        while (isRunning) {
             System.out.println("What you want to modify?:\n1 - Name\n2 - Surname\n3 - Age\n4 - Email\n5 - Phone Number\nr - Return");
-        String input = null;
-        input = getInput();
-        Client mockClient = new Client();
-        try {
-            switch (input) {
-                case "r":
-                    isRunning = false;
-                    break;
-                case "1": {
-                    System.out.println("Enter new Name:");
-                    input = getInput();
-                    validator.validateName(input);
-                    mockClient.setName(input);
-                    break;
+            String input = null;
+            input = getInput();
+            Client mockClient = new Client();
+            try {
+                switch (input) {
+                    case "r":
+                        isRunning = false;
+                        break;
+                    case "1": {
+                        System.out.println("Enter new Name:");
+                        input = getInput();
+                        validator.validateName(input);
+                        mockClient.setName(input);
+                        break;
+                    }
+                    case "2": {
+                        System.out.println("Enter new Surname:");
+                        input = getInput();
+                        validator.validateName(input);
+                        mockClient.setSurname(input);
+                        break;
+                    }
+                    case "3": {
+                        System.out.println("Enter new Age:");
+                        input = getInput();
+                        validator.validateAge(input);
+                        mockClient.setAge(Integer.valueOf(input));
+                        break;
+                    }
+                    case "4": {
+                        System.out.println("Enter new Email:");
+                        input = getInput();
+                        validator.validateEmail(input);
+                        mockClient.setEmail(input);
+                        break;
+                    }
+                    case "5": {
+                        System.out.println("Enter new Phone Number:");
+                        input = getInput();
+                        mockClient.setPhoneNumber(input);
+                        break;
+                    }
+                    default:
+                        System.out.println("Wrong input");
+                        break;
                 }
-                case "2": {
-                    System.out.println("Enter new Surname:");
-                    input = getInput();
-                    validator.validateName(input);
-                    mockClient.setSurname(input);
-                    break;
-                }
-                case "3": {
-                    System.out.println("Enter new Age:");
-                    input = getInput();
-                    validator.validateAge(input);
-                    mockClient.setAge(Integer.valueOf(input));
-                    break;
-                }
-                case "4": {
-                    System.out.println("Enter new Email:");
-                    input = getInput();
-                    validator.validateEmail(input);
-                    mockClient.setEmail(input);
-                    break;
-                }
-                case "5": {
-                    System.out.println("Enter new Phone Number:");
-                    input = getInput();
-                    mockClient.setPhoneNumber(input);
-                    break;
-                }
-                default:
-                    System.out.println("Wrong input");
-                    break;
+            } catch (BusinessException e) {
+                System.out.println(e.getMessage() + "\n");
             }
-        } catch (BusinessException e) {
-            System.out.println(e.getMessage() + "\n");
+            clientService.updateClient(currentClient.getId(), mockClient);
+            System.out.println("Client modified!");
         }
-        clientService.updateClient(currentClient.getId(), mockClient);
-        System.out.println("Client modified!");
     }
 
     private void createClient() {
@@ -252,7 +253,7 @@ public class ClientMenu implements IMenu {
             System.out.println("Input phone:");
             String phoneNumber = getInput();
             validator.validatePhoneNumber(phoneNumber);//validator
-            if (clientService.isInDB(phoneNumber)) {
+            if (clientService.isPresent(phoneNumber)) {
                 System.out.println("Client with this phone number already exist");
                 System.out.println("Client not created!");
                 return;

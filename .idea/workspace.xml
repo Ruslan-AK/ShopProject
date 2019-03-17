@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d5a1b2b-481d-485a-99b9-1987da214966" name="Default" comment="fix Total price">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ShopProject_war.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ShopProject_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_h2database_h2_1_4_197.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_all_1_9_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/ClientServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/clientMenu.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/menu.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/OrderServiceImplTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ProductServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="1d5a1b2b-481d-485a-99b9-1987da214966" name="Default" comment="add service and validation tests">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/Filters/ClientFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/WebApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ShopProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ClientDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/OrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ProductDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ClientDBDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ClientDBDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/OrderDBDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/OrderDBDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ProductDBDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ProductDBDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ProductServise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ProductServise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/Service.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ClientServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/ClientServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/ClientServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/view/AdminMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/view/AdminMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Kutugin/view/ClientMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Kutugin/view/ClientMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/clientMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/clientMenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/createClient.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/createClient.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ClientServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ClientServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/OrderServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/OrderServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ProductServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ProductServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Kutugin/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Kutugin/App.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Kutugin/dao/ClientDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Kutugin/dao/ClientDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Kutugin/domain/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Kutugin/domain/Client.class" afterDir="false" />
@@ -70,21 +70,109 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ClientServiceImplTest.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/view/ClientMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="39" column="30" selection-start-column="2" selection-end-line="67" selection-end-column="3" />
+            <state relative-caret-position="227">
+              <caret line="260" column="8" selection-start-line="260" selection-start-column="8" selection-end-line="260" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ProductDBDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="169">
+              <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ProductDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="214">
+              <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="40" selection-start-column="40" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/clientMenu.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/WebApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="15" column="55" lean-forward="true" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/validators/impl/ValidationServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/ClientServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6">
-              <caret line="24" column="55" lean-forward="true" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+            <state relative-caret-position="316">
+              <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/createClient.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="341">
+              <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/menu.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ProductServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="326">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#740#741#0" expanded="true" />
+                <element signature="e#787#788#0" expanded="true" />
+                <element signature="e#854#855#0" expanded="true" />
+                <element signature="e#907#908#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,18 +185,13 @@
       <list>
         <option value="Interface" />
         <option value="JUnit4 Test Class" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>save</find>
-      <find>toS</find>
-      <find>to</find>
-      <find>show</find>
-      <find>login</find>
       <find>signO</find>
       <find>isSignIn</find>
       <find>signIn</find>
@@ -123,7 +206,6 @@
       <find>validateSurname</find>
       <find>Init</find>
       <find>modify</find>
-      <find>delete</find>
       <find>order ar</find>
       <find>updTI</find>
       <find>getOrd</find>
@@ -134,6 +216,12 @@
       <find>cartList</find>
       <find>productCartList</find>
       <find>log out</find>
+      <find>Modify client</find>
+      <find>Modify</find>
+      <find>delete</find>
+      <find>isInDBById</find>
+      <find>Add client</find>
+      <find>isInDB</find>
     </findStrings>
     <replaceStrings>
       <replace>signIn</replace>
@@ -143,6 +231,7 @@
       <replace>getNextByMaxID</replace>
       <replace>validateInteger</replace>
       <replace>InitDB</replace>
+      <replace>isPresent</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -162,10 +251,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ClientServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/view/ClientAutentification.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ProductServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/db/productDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/db/ProductDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/ProductDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/ClientDaoImpl.java" />
@@ -175,44 +260,48 @@
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/view/AbstractMenue.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/view/IMenu.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/view/ClientAuthentication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/Service.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/Temp.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/noDB/ProductDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/view/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/noDB/ProductDB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ProductServise.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ProductServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/domain/Client.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/Init.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/validators/ValidationService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ProductDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ProductDBDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/domain/Product.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/InitDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/domain/Order.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/OrderDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/OrderService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/OrderServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/OrderDBDao.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/OrderServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ProductServiceImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/AdminServlet.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/client.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/createClient.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/menu.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/clientMenu.html" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/ClientServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ClientDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ClientService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/view/ClientMenu.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ClientServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/view/AdminMenu.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ClientDBDao.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ClientServiceImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/validators/impl/ValidationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/Kutugin/validators/impl/ValidationServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/menu.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/createClient.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/WebApp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/Filters/ClientFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ClientDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ClientDBDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ClientServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ClientService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/OrderServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/OrderService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/OrderDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/OrderDBDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ProductDBDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ProductDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ProductServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/ProductServise.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/services/Service.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/view/ClientMenu.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ClientServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ProductServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/OrderServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/view/AdminMenu.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/clientMenu.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/ClientServlet.java" />
       </list>
     </option>
   </component>
@@ -230,14 +319,26 @@
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="Kutugin.project" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Kutugin.project" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Kutugin.project" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+          <item name="tomcat7" type="36feed69:MavenProjectsStructure$PluginNode" />
+        </path>
       </expand>
       <select />
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="1382" />
-    <option name="height" value="784" />
+    <option name="x" value="-6" />
+    <option name="y" value="1" />
+    <option name="width" value="1378" />
+    <option name="height" value="773" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -247,7 +348,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -281,6 +381,36 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="Kutugin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ShopProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ShopProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Kutugin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ShopProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ShopProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Kutugin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ShopProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ShopProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Kutugin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+              <item name="H2DB" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ShopProject" type="b2602c69:ProjectViewProjectNode" />
@@ -334,6 +464,15 @@
               <item name="ShopProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Kutugin" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ShopProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ShopProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -344,56 +483,27 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ShopProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShopProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ShopProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShopProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ShopProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShopProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Kutugin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ShopProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShopProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Kutugin" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552505412090" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552833701482" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SmartTomcat" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="com.poratu.idea.plugins.tomcat.setting.TomcatSettingConfigurable" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -535,36 +645,87 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Kutugin.view.MainMenu" />
-      <module name="ShopProject" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.Kutugin.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Temp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Kutugin.dao.impl.H2DB.Temp" />
-      <module name="ShopProject" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.Kutugin.dao.impl.H2DB.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.Kutugin.services.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.Kutugin.services.impl" />
+      <option name="MAIN_CLASS_NAME" value="com.Kutugin.services.impl.ClientServiceImplTest" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.Kutugin.services.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.Kutugin.services.impl" />
+      <option name="MAIN_CLASS_NAME" value="com.Kutugin.services.impl.OrderServiceImplTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.Kutugin.services.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.Kutugin.services.impl" />
+      <option name="MAIN_CLASS_NAME" value="com.Kutugin.services.impl.ProductServiceImplTest" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ValidationServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.Kutugin.validators.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.Kutugin.validators.impl" />
+      <option name="MAIN_CLASS_NAME" value="com.Kutugin.validators.impl.ValidationServiceImplTest" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ValidationServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ShopProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.Kutugin.validators.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.Kutugin.validators.impl" />
+      <option name="MAIN_CLASS_NAME" value="com.Kutugin.validators.impl.ValidationServiceImplTest" />
+      <option name="METHOD_NAME" value="validatePhoneNumberFail" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -652,16 +813,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.MainMenu" />
       <item itemvalue="Application.App" />
-      <item itemvalue="Application.Temp" />
+      <item itemvalue="JUnit.ClientServiceImplTest" />
+      <item itemvalue="JUnit.OrderServiceImplTest" />
+      <item itemvalue="JUnit.ValidationServiceImplTest" />
       <item itemvalue="Maven.Kutugin.project [tomcat7:run]" />
+      <item itemvalue="JUnit.ProductServiceImplTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
-        <item itemvalue="Application.Temp" />
-        <item itemvalue="Application.MainMenu" />
+        <item itemvalue="JUnit.ProductServiceImplTest" />
+        <item itemvalue="JUnit.ValidationServiceImplTest" />
+        <item itemvalue="JUnit.ClientServiceImplTest" />
+        <item itemvalue="JUnit.ValidationServiceImplTest" />
       </list>
     </recent_temporary>
   </component>
@@ -688,7 +853,12 @@
       <workItem from="1552480082290" duration="23000" />
       <workItem from="1552480277000" duration="8120000" />
       <workItem from="1552492234860" duration="4573000" />
-      <workItem from="1552497743622" duration="6272000" />
+      <workItem from="1552497743622" duration="14055000" />
+      <workItem from="1552582502620" duration="4134000" />
+      <workItem from="1552594882022" duration="3215000" />
+      <workItem from="1552631629272" duration="1329000" />
+      <workItem from="1552643149685" duration="4158000" />
+      <workItem from="1552663311371" duration="13709000" />
     </task>
     <task id="LOCAL-00001" summary="Initial">
       <created>1549910682560</created>
@@ -753,17 +923,64 @@
       <option name="project" value="LOCAL" />
       <updated>1552494696659</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add Servlet">
+      <created>1552546007605</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1552546007605</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add service and validation tests">
+      <created>1552648645233</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1552648645233</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="ValidationServiceImplTest - 2019.03.15 at 12h 27m 10s.xml">
+      <configuration name="ValidationServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ValidationServiceImplTest - 2019.03.15 at 12h 33m 08s.xml">
+      <configuration name="ValidationServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ValidationServiceImplTest - 2019.03.15 at 13h 01m 42s.xml">
+      <configuration name="ValidationServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ValidationServiceImplTest - 2019.03.15 at 13h 03m 05s.xml">
+      <configuration name="ValidationServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ValidationServiceImplTest - 2019.03.15 at 13h 08m 59s.xml">
+      <configuration name="ValidationServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ValidationServiceImplTest - 2019.03.15 at 13h 10m 27s.xml">
+      <configuration name="ValidationServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ProductServiceImplTest - 2019.03.15 at 18h 23m 37s.xml">
+      <configuration name="ProductServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ProductServiceImplTest - 2019.03.15 at 18h 30m 17s.xml">
+      <configuration name="ProductServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ProductServiceImplTest - 2019.03.15 at 18h 38m 20s.xml">
+      <configuration name="ProductServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ProductServiceImplTest - 2019.03.15 at 18h 39m 33s.xml">
+      <configuration name="ProductServiceImplTest" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84449000" />
+    <option name="totallyTimeSpent" value="118777000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="top" id="Ant Build" order="0" side_tool="true" weight="0.24960254" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21558245" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22334754" />
       <window_info id="Structure" order="1" weight="0.24962178" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -777,12 +994,12 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.95230526" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.05632306" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32718894" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32872504" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3036566" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.30206677" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.3290938" />
@@ -793,12 +1010,13 @@
       <window_info anchor="right" id="Designer" order="4" />
       <window_info anchor="right" id="Maven Projects" order="5" weight="0.32975295" />
       <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Maven" order="7" weight="0.022692889" />
+      <window_info anchor="right" id="Maven" order="7" weight="0.38956127" />
       <window_info anchor="right" id="Database" order="8" weight="0.32980332" />
+      <window_info anchor="right" x="0" y="0" width="434" height="896" id="Documentation" order="9" side_tool="true" weight="0.32928678" />
     </layout>
     <layout-to-restore>
       <window_info anchor="top" id="Ant Build" order="0" side_tool="true" weight="0.24960254" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21558245" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31694403" />
       <window_info id="Structure" order="1" weight="0.24962178" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -812,12 +1030,12 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.95230526" />
+      <window_info anchor="bottom" id="Run" order="5" visible="true" weight="0.32114467" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32718894" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32872504" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.3036566" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.30206677" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.3290938" />
@@ -828,8 +1046,9 @@
       <window_info anchor="right" id="Designer" order="4" />
       <window_info anchor="right" id="Maven Projects" order="5" weight="0.32975295" />
       <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Maven" order="7" weight="0.022692889" />
+      <window_info anchor="right" id="Maven" order="7" weight="0.38956127" />
       <window_info anchor="right" id="Database" order="8" weight="0.32980332" />
+      <window_info anchor="right" x="0" y="0" width="434" height="896" id="Documentation" order="9" side_tool="true" weight="0.32980332" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -865,17 +1084,15 @@
     <MESSAGE value="add Log out to client menu, move methods from ClientAuthentication to ClientMenu" />
     <MESSAGE value="add start of H2Console, fix all DB by PreparedStatements, change method update to pass few parameters, add amount to products in order" />
     <MESSAGE value="fix Total price" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix Total price" />
+    <MESSAGE value="add Servlet" />
+    <MESSAGE value="add service and validation tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="add service and validation tests" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DI09.247/MainMenu.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/domain/Products.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/ClientDaoImpl2.java" />
-    <entry file="jar://$USER_HOME$/Downloads/jdk1.8.0_201/src.zip!/java/lang/NumberFormatException.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/noDB/ClientDB.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/exceptions/BusinessException.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -907,13 +1124,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/Service.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/noDB/ClientDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -929,13 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
           <caret line="237" selection-start-line="237" selection-end-line="237" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/domain/ProductType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -967,66 +1170,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/view/MainMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="27" column="34" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/ProductServise.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ProductDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/validators/ValidationService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ProductDBDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="109" column="25" lean-forward="true" selection-start-line="109" selection-start-column="25" selection-end-line="109" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/domain/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2370">
-          <caret line="99" column="37" selection-start-line="99" selection-start-column="37" selection-end-line="99" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2659#2660#0" expanded="true" />
-            <element signature="e#2720#2721#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1037,77 +1184,257 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/OrderDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/InitDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+        <state relative-caret-position="727">
+          <caret line="61" column="118" selection-start-line="61" selection-start-column="118" selection-end-line="61" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/Assert.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/domain/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2659#2660#0" expanded="true" />
+            <element signature="e#2720#2721#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/domain/ProductType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/Kutugin/validators/impl/ValidationServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="20" column="61" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/view/MainMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/validators/impl/ValidationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1410">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1500">
+          <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2">
+          <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1.jar!/javax/servlet/ServletContextListener.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/Filters/ClientFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ClientDBDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="133" column="47" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ClientDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ClientServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1459#1460#0" expanded="true" />
+            <element signature="e#1508#1509#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/ClientService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/OrderServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+          <folding>
+            <element signature="e#1319#1320#0" expanded="true" />
+            <element signature="e#1364#1365#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/OrderService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        <state relative-caret-position="214">
+          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/OrderDBDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/OrderDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="190" column="9" selection-start-line="190" selection-start-column="9" selection-end-line="190" selection-end-column="9" />
+        <state relative-caret-position="214">
+          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/OrderServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/OrderDBDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/OrderServiceImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ProductServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="267">
+          <caret line="203" column="48" selection-start-line="203" selection-start-column="48" selection-end-line="203" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#854#855#0" expanded="true" />
-            <element signature="e#907#908#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/ProductServise.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/Service.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ClientServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="127" column="45" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ProductServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        <state relative-caret-position="137">
+          <caret line="63" column="46" selection-start-line="63" selection-start-column="46" selection-end-line="63" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/menu.html">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/OrderServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="269">
+          <caret line="116" column="35" selection-start-line="116" selection-start-column="35" selection-end-line="116" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/createClient.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/view/AdminMenu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ProductDBDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/view/ClientMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="260" column="8" selection-start-line="260" selection-start-column="8" selection-end-line="260" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ProductServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#740#741#0" expanded="true" />
+            <element signature="e#787#788#0" expanded="true" />
+            <element signature="e#854#855#0" expanded="true" />
+            <element signature="e#907#908#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ProductDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1118,101 +1445,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/createClient.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/clientMenu.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="360">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/WebApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1273">
-          <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/view/ClientMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="260" column="58" selection-start-line="260" selection-start-column="58" selection-end-line="260" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/impl/ClientServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="39" column="37" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1259#1260#0" expanded="true" />
-            <element signature="e#1302#1303#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/services/ClientService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/view/AdminMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="115" column="94" selection-start-line="115" selection-start-column="94" selection-end-line="115" selection-end-column="94" />
+        <state relative-caret-position="173">
+          <caret line="15" column="55" lean-forward="true" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/ClientDBDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="127" column="40" selection-start-line="127" selection-start-column="40" selection-end-line="127" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/impl/H2DB/InitDB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="727">
-          <caret line="61" column="118" selection-start-line="61" selection-start-column="118" selection-end-line="61" selection-end-column="118" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/servlets/ClientServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/dao/ClientDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="9" selection-start-line="9" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/Kutugin/services/impl/ClientServiceImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="39" column="30" selection-start-column="2" selection-end-line="67" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/Kutugin/validators/impl/ValidationServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="24" column="55" lean-forward="true" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+        <state relative-caret-position="316">
+          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

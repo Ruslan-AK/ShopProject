@@ -22,7 +22,7 @@ public interface OrderService {
 
     //void addProduct(long id, Product product);
 
-    boolean isInDBById(long id);
+    boolean isPresent(long id);
 
     long getNextByMaxID();
 }

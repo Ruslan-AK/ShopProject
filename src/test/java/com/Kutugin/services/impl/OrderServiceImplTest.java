@@ -108,12 +108,12 @@ public class OrderServiceImplTest {
     }
 
     @Test
-    public void isInDBById() {
+    public void isPresent() {
         //Given
         long id = 1L;
         //When
-        orderService.isInDBById(id);
+        orderService.isPresent(id);
         //Then
-        verify(orderDao).isInDBById(id);
+        verify(orderDao).isPresent(id);
     }
 }

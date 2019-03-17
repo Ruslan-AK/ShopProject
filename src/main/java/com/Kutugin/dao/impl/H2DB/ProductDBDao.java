@@ -84,7 +84,7 @@ public class ProductDBDao implements ProductDao {
     }
 
     @Override
-    public boolean isInDB(long id) {
+    public boolean isPresent(long id) {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCT WHERE ID = ?;")) {
             statement.setLong(1, id);
@@ -93,7 +93,7 @@ public class ProductDBDao implements ProductDao {
                 return true;
             }
         } catch (SQLException e) {
-            System.out.println("Error isInDB");
+            System.out.println("Error isPresent");
             System.out.println(e.getErrorCode());
         }
         return false;

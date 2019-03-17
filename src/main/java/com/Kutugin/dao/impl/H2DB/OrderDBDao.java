@@ -193,7 +193,7 @@ public class OrderDBDao implements OrderDao {
     }
 
     @Override
-    public boolean isInDBById(long id) {
+    public boolean isPresent(long id) {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"ORDER\" WHERE ID =?;")) {
             statement.setLong(1, id);
@@ -201,7 +201,7 @@ public class OrderDBDao implements OrderDao {
             if (resultSet.next())
                 return true;
         } catch (SQLException e) {
-            System.out.println("Error isInDBById");
+            System.out.println("Error isPresent");
             System.out.println(e.getSQLState());
         }
         return false;

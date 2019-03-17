@@ -40,8 +40,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean isInDB(String phone) {
-        return clientDao.isInDB(phone);
+    public boolean isPresent(String phone) {
+        return clientDao.isPresent(phone);
     }
 
     @Override
