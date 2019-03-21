@@ -44,7 +44,7 @@ public class WebApp implements ServletContextListener {
                 .addServlet("ProductServlet", new ProductServlet(productService))
                 .addMapping("/products/*");
         servletContext
-                .addServlet("MainServlet", new MainServlet(orderService,productService))
+                .addServlet("MainServlet", new MainServlet(orderService,productService,clientService,validationService))
                 .addMapping("/main/*");
     }
 }

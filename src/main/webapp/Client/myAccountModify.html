@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Account Modify</title>
+</head>
+<body>
+        <form action="/main" method="post">
+            <input type="hidden" name="_method" value="myAccount"/>
+            <input type="hidden" name="_method1" value="myAccountModify"/>
+            <fieldset>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            <input type="text" name="name"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Surname
+                        </td>
+                        <td>
+                            <input type="text" name="surname"> <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Age
+                        </td>
+                        <td>
+                            <input type="text" name="age"> <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Email
+                        </td>
+                        <td>
+                            <input type="text" name="email"> <br>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            <input type="submit" value="Create client">
+        </form>
+</body>
+</html>

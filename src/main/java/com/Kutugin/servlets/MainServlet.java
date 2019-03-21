@@ -89,7 +89,7 @@ public class MainServlet extends HttpServlet {
         for (Order o : orderService.getOrdersByClient(currentClient.getId())) {
             writer.println(o);
         }
-        writer.println("<a href = /Client/clientMenu.html>Back to client menu</h2>");
+        writer.println("<br><a href = /Client/clientMenu.html>Back to client menu</h2>");
     }
 
     private void clientEnter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -115,7 +115,7 @@ public class MainServlet extends HttpServlet {
                 String phone = null;
                 clientService.updateClient(currentClient.getId(), new Client(currentClient.getId(), name, surname, age, email, phone));
                 writer.println("<h2>Client updated:</h2>");
-                writer.println(currentClient);
+                writer.println(currentClient = clientService.getClientByID(currentClient.getId()));
                 writer.println("<a href=\"/Client/clientMenu.html\">Back to menu</a>");
                 break;
             }
@@ -221,14 +221,14 @@ public class MainServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         if (signIn) {
             writer.println("<h2>You already sign in</h2>");
-//            System.out.println("You already sign in\n1 - sign out\nr - Return to previous menu");
         } else {
             currentClient = clientService.getClientByID(clientService.getIDByPhoneNumber(phone));
             if (currentClient == null) {
                 writer.println("<h2>Client not found</h2>");
+                resp.sendRedirect("mainMenu.html");
             } else {
                 writer.println("<h2>You sing in as:" + currentClient.getName() + "</h2>");
-                writer.println("<a href=\"Client/clientMenu.html\">Client Menu>");
+                resp.sendRedirect("/Client/clientMenu.html");
                 signIn = true;
             }
         }
