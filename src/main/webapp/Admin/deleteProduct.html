@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Product</title>
+</head>
+<body>
+<form action="/products" method="post">
+    <fieldset>
+        <input type="hidden" name="_method" value="delete"/>
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    Id <input type="text" name="id"> <br>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <br>
+    <input type="submit" value="Delete product">
+</form>
+</body>
+</html>

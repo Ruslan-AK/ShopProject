@@ -6,7 +6,7 @@ import com.Kutugin.domain.Product;
 import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.services.OrderService;
-import com.Kutugin.services.ProductServise;
+import com.Kutugin.services.ProductService;
 import com.Kutugin.validators.ValidationService;
 
 import java.io.BufferedReader;
@@ -20,12 +20,12 @@ public class ClientMenu implements IMenu {
     private Client currentClient;
     private Order currentOrder;
     private List<Order> clientOrders;
-    private ProductServise productService;
+    private ProductService productService;
     private boolean signIn = false;
     private ValidationService validator;
     private OrderService orderService;
 
-    public ClientMenu(ProductServise productService, BufferedReader br, ClientService clientService, ValidationService validator, OrderService orderService) {
+    public ClientMenu(ProductService productService, BufferedReader br, ClientService clientService, ValidationService validator, OrderService orderService) {
         this.br = br;
         this.clientService = clientService;
         this.validator = validator;

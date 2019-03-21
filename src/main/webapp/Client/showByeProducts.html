@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Product</title>
+</head>
+<body>
+Products
+    <iframe src="/products"></iframe>
+    Enter id to bye product
+    <form action="/main" method="post">
+        <input type="hidden" name="_method" value="byeProduct"/>
+        <fieldset>
+            <table>
+                <tbody>
+                <tr>
+                    <td>
+                        Id <input type="text" name="id"> <br>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+        <br>
+        <input type="submit" value="Bye Product">
+    </form>
+    <a href="clientMenu.html">Back to menu</a>
+</body>
+</html>

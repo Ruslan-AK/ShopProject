@@ -26,14 +26,12 @@ public class Client {
     @Override
     public String toString() {
 
-        return ">======================<\n"+
-                "Name='" + name + '\'' + ", \n" +
+        return "Name='" + name + '\'' + ", \n" +
                 "surmame='" + surmame + '\'' + ", \n" +
                 "email='" + email + '\'' + ", \n" +
                 "age=" + age + ", \n" +
                 "phoneNumber='" + phoneNumber + '\'' + ", \n" +
-                "id=" + id +
-                "\n>======================<";
+                "id=" + id;
     }
 
     public String getName() {

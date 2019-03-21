@@ -4,7 +4,7 @@ import com.Kutugin.domain.Product;
 
 import java.util.List;
 
-public interface ProductServise {
+public interface ProductService {
 
     boolean saveProduct(Product product);
 

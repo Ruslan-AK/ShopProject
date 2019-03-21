@@ -102,6 +102,10 @@ public class ProductDBDao implements ProductDao {
     @Override
     public void updateProduct(long id, Product product) {
         Product p = getByID(id);
+        if (p == null){
+            saveProduct(product);
+            return;
+        }
         if (product.getFirm() != null) {
             p.setFirm(product.getFirm());
         }

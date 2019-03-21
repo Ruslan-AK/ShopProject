@@ -36,7 +36,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order №=" + id + "\nCreated: " + date +
+        return "Order ID=" + id + "\nCreated: " + date +
                 "\nProductList:\n" + (showProducts().equals("") ? "No products yet" : showProducts());
     }
 

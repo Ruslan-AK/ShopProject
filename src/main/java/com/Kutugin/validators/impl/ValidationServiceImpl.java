@@ -22,7 +22,7 @@ public class ValidationServiceImpl implements ValidationService {
 
     @Override
     public void validatePhoneNumber(String phoneNumber) throws BusinessException {
-        Pattern p = Pattern.compile("(063|095|067)\\d{7}");
+        Pattern p = Pattern.compile("(063|095|067|098)\\d{7}");
         Matcher m = p.matcher(phoneNumber);
         if (!m.matches()) throw new BusinessException("Wrong phone number format!");
     }

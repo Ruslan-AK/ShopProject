@@ -6,7 +6,7 @@ import com.Kutugin.domain.Product;
 import com.Kutugin.domain.ProductType;
 import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
-import com.Kutugin.services.ProductServise;
+import com.Kutugin.services.ProductService;
 import com.Kutugin.validators.ValidationService;
 
 import java.io.BufferedReader;
@@ -16,10 +16,10 @@ public class AdminMenu implements IMenu {
     private ClientService clientService;
     private ValidationService validator;
     private BufferedReader br;
-    private ProductServise productService;
+    private ProductService productService;
     private InitDB init;
 
-    public AdminMenu(BufferedReader br, ClientService clientService, ValidationService validator, ProductServise productService, InitDB init) {
+    public AdminMenu(BufferedReader br, ClientService clientService, ValidationService validator, ProductService productService, InitDB init) {
         this.br = br;
         this.clientService = clientService;
         this.validator = validator;

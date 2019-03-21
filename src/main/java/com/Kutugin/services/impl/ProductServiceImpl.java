@@ -2,11 +2,11 @@ package com.Kutugin.services.impl;
 
 import com.Kutugin.dao.ProductDao;
 import com.Kutugin.domain.Product;
-import com.Kutugin.services.ProductServise;
+import com.Kutugin.services.ProductService;
 
 import java.util.List;
 
-public class ProductServiceImpl implements ProductServise {
+public class ProductServiceImpl implements ProductService {
 
     private ProductDao productDao;
 

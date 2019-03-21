@@ -213,8 +213,10 @@ public class OrderDBDao implements OrderDao {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              Statement statement2 = connection.createStatement()) {
             ResultSet resultSet = statement2.executeQuery("SELECT MAX(ID) FROM \"ORDER\";");
-            resultSet.next();
-            maxId = resultSet.getLong(1);
+            if (resultSet.next()){
+                maxId = resultSet.getLong(1);
+            }
+            else maxId = 0;
         } catch (SQLException e) {
             System.out.println("Error getNextByMaxID");
             System.out.println(e.getSQLState());
