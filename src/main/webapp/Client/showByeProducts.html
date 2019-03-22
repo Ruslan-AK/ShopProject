@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Product</title>
+    <title>Bye</title>
 </head>
 <body>
+<em>You can bye product here</em>
+<br>
 <em>Products:</em>
+<br>
     <iframe src="/products"></iframe>
-<em>Enter id to bye product:</em>
-    <form action="/main" method="post">
-        <input type="hidden" name="_method" value="byeProduct"/>
-        <fieldset>
-            <table>
+<form action="/main" method="post">
+    <input type="hidden" name="_method" value="byeProduct"/>
+    <fieldset>
+        <em>Enter id to bye product:</em>
+        <table>
                 <tbody>
                 <tr>
                     <td>
@@ -20,9 +23,9 @@
                 </tr>
                 </tbody>
             </table>
-        </fieldset>
         <br>
         <input type="submit" value="Bye Product">
+        </fieldset>
     </form>
 <form action="/Client/clientMenu.html">
     <input type="submit" value="Back to menu"/>

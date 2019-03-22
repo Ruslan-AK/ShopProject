@@ -122,7 +122,7 @@ public class ClientServlet extends HttpServlet {
                 "                    </tr>\n" +
                 "                    <tr>\n" +
                 "                        <td>\n" +
-                "                            Email\n" +
+                "                            Phone\n" +
                 "                        </td>\n" +
                 "                        <td>\n" +
                 "                            <input type=\"text\" name=\"phone\" value=\"" + currentClient.getPhoneNumber() + "\">\n" +

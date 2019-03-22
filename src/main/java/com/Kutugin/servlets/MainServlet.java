@@ -191,21 +191,97 @@ public class MainServlet extends HttpServlet {
         currentOrder.addProduct(goods);
         orderService.update(currentOrder.getId(), currentOrder);
         PrintWriter writer = resp.getWriter();
-        writer.println("<h2>You bye " + goods.getFirm() + " " + goods.getModel() + "</h2>");
-        writer.println("<a href=\"/Client/showByeProducts.html\">Back to menu</a>");
+        writer.println("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Purchase</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "    <fieldset>\n" +
+                "        <table>\n" +
+                "            <tbody>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                <h2>You bye " + goods.getFirm() + " " + goods.getModel() + "</h2>\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            </tbody>\n" +
+                "        </table>\n" +
+                "    </fieldset>\n" +
+                "<form action=\"/Client/showByeProducts.html\">\n" +
+                "    <input type=\"submit\" value=\"Back to menu\"/>\n" +
+                "</form>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     private void myOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter writer = resp.getWriter();
         if (currentOrder == null) {
-            writer.println("<h2>Order empty</h2>");
-            writer.println("<a href=\"/Client/clientMenu.html\">Back to menu</a>");
+            writer.println("<!DOCTYPE html>\n" +
+                    "<html lang=\"en\">\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "    <title>Purchase</title>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "    <fieldset>\n" +
+                    "        <table>\n" +
+                    "            <tbody>\n" +
+                    "            <tr>\n" +
+                    "                <td>\n" +
+                    "                <h2>Order empty</h2>\n" +
+                    "                </td>\n" +
+                    "            </tr>\n" +
+                    "            </tbody>\n" +
+                    "        </table>\n" +
+                    "    </fieldset>\n" +
+                    "<form action=\"/Client/clientMenu.html\">\n" +
+                    "    <input type=\"submit\" value=\"Back to menu\"/>\n" +
+                    "</form>\n" +
+                    "</body>\n" +
+                    "</html>");
             return;
         }
-        writer.println("<h2>Current Order</h2>");
-        writer.println(currentOrder + "<br>");
-        writer.println("Total price: " + orderService.summaryPrice(currentOrder) + "<br>");
-        writer.println("<a href=\"/Client/clientMenu.html\">Back to menu</a>");
+        writer.println("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Purchase</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "    <fieldset>\n" +
+                "        <table>\n" +
+                "            <tbody>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                <h2>Current Order:</h2>\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                                currentOrder +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                <h2>Total price:</h2>\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                                    orderService.summaryPrice(currentOrder) +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            </tbody>\n" +
+                "        </table>\n" +
+                "    </fieldset>\n" +
+                "<form action=\"/Client/clientMenu.html\">\n" +
+                "    <input type=\"submit\" value=\"Back to menu\"/>\n" +
+                "</form>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     private void logOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {

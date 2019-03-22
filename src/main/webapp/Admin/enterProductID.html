@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Enter Product ID</title>
 </head>
 <body>
-<form action="/main" method="post">
-    <input type="hidden" name="_method" value="login"/>
+<form action="/products" method="post">
+    <iframe src="/products"></iframe>
+    <input type="hidden" name="_method" value="enterProductID"/>
     <fieldset>
         <table>
             <tbody>
@@ -17,17 +18,17 @@
             </tr>
             <tr>
                 <td>
-                    Phone <input type="text" name="phone">
+                    Product ID <input type="text" name="productID">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="submit" value="Login">
+                    <input type="submit" value="Enter Product ID">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <form action="../mainMenu.html">
+                    <form action="/Admin/adminProductMenu.html">
                         <input type="submit" value="Back to menu"/>
                     </form>
                 </td>
