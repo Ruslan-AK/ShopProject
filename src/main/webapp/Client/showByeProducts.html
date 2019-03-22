@@ -5,9 +5,9 @@
     <title>Create Product</title>
 </head>
 <body>
-Products
+<em>Products:</em>
     <iframe src="/products"></iframe>
-    Enter id to bye product
+<em>Enter id to bye product:</em>
     <form action="/main" method="post">
         <input type="hidden" name="_method" value="byeProduct"/>
         <fieldset>
@@ -24,6 +24,8 @@ Products
         <br>
         <input type="submit" value="Bye Product">
     </form>
-    <a href="clientMenu.html">Back to menu</a>
+<form action="/Client/clientMenu.html">
+    <input type="submit" value="Back to menu"/>
+</form>
 </body>
 </html>

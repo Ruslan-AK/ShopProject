@@ -6,7 +6,7 @@
 </head>
 <body>
 <form action="/clients" method="post">
-    <input type="hidden" name="_method" value="put" />
+    <input type="hidden" name="_method" value="updateClient"/>
     <fieldset>
         <table>
             <tbody>
@@ -49,6 +49,13 @@
                 </td>
                 <td>
                     <input type="text" name="email"> <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form action="/Admin/adminClientMenu.html">
+                        <input type="submit" value="Back to menu"/>
+                    </form>
                 </td>
             </tr>
             </tbody>

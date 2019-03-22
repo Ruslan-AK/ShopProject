@@ -31,19 +31,6 @@ public class MainServlet extends HttpServlet {
         this.validationService = validationService;
         this.clientService = clientService;
     }
-//    @Override
-//    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String firm = req.getParameter("firm");
-//        String model = req.getParameter("model");
-//        double price = Double.valueOf(req.getParameter("price"));
-//        String type = req.getParameter("type");
-//        long id = Long.valueOf(req.getParameter("id"));
-//        Product product = new Product(firm, model, price, type);
-//        productService.updateProduct(id, product);
-//        doGet(req, resp);
-//    }
-
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,6 +50,10 @@ public class MainServlet extends HttpServlet {
             myAccount(req, resp);
             return;
         }
+        if ("modifyCurrentClient".equals(req.getParameter("_method"))) {
+            modifyCurrentClient(req, resp);
+            return;
+        }
         if ("logOut".equals(req.getParameter("_method"))) {
             logOut(req, resp);
             return;
@@ -75,12 +66,72 @@ public class MainServlet extends HttpServlet {
             showOrderArchive(req, resp);
             return;
         }
-//        String firm = req.getParameter("firm");
-//        String model = req.getParameter("model");
-//        double price = Double.valueOf(req.getParameter("price"));
-//        String type = req.getParameter("type");
-//        productService.saveProduct(new Product(firm, model, price, type));
-//        doGet(req, resp);
+    }
+
+    private void modifyCurrentClient(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        PrintWriter writer = resp.getWriter();
+        writer.println("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Update Client</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "        <form action=\"/main\" method=\"post\">\n" +
+                "            <input type=\"hidden\" name=\"_method\" value=\"myAccount\"/>\n" +
+                "            <input type=\"hidden\" name=\"_method1\" value=\"myAccountModify\"/>\n" +
+                "            <fieldset>\n" +
+                "                <table>\n" +
+                "                    <tbody>\n" +
+                "                    <tr>\n" +
+                "                        <td>\n" +
+                "                            Name\n" +
+                "                        </td>\n" +
+                "                        <td>\n" +
+                "                            <input type=\"text\" name=\"name\" value=\"" + currentClient.getName() + "\"/>\n" +
+                "                        </td>\n" +
+                "                    </tr>\n" +
+                "\n" +
+                "                    <tr>\n" +
+                "                        <td>\n" +
+                "                            Surname\n" +
+                "                        </td>\n" +
+                "                        <td>\n" +
+                "                            <input type=\"text\" name=\"surname\" value=\"" + currentClient.getSurmame() + "\">\n" +
+                "                        </td>\n" +
+                "                    </tr>\n" +
+                "                    <tr>\n" +
+                "                        <td>\n" +
+                "                            Age\n" +
+                "                        </td>\n" +
+                "                        <td>\n" +
+                "                            <input type=\"text\" name=\"age\" value=\"" + currentClient.getAge() + "\">\n" +
+                "                        </td>\n" +
+                "                    </tr>\n" +
+                "                    <tr>\n" +
+                "                        <td>\n" +
+                "                            Email\n" +
+                "                        </td>\n" +
+                "                        <td>\n" +
+                "                            <input type=\"text\" name=\"email\" value=\"" + currentClient.getEmail() + "\">\n" +
+                "                        </td>\n" +
+                "                    </tr>\n" +
+                "                    </tbody>\n" +
+                "                </table>\n" +
+                "            </fieldset>\n" +
+                "            <input type=\"submit\" value=\"Update client\">\n" +
+                "        </form>\n" +
+                "        <table>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                    <form action=\"/Client/myAccount.html\">\n" +
+                "                        <input type=\"submit\" value=\"Back to menu\"/>\n" +
+                "                    </form>\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "        </table>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     private void showOrderArchive(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -120,49 +171,14 @@ public class MainServlet extends HttpServlet {
                 break;
             }
             case "myAccountDelete": {
-
+                String phone = req.getParameter("phone");
+                clientService.deleteClient(currentClient.getId());
+                currentClient = null;
+                currentOrder = null;
+                resp.sendRedirect("mainMenu.html");
                 break;
             }
         }
-//        boolean run = true;
-//        while (run) {
-//            System.out.println("0 - Show Account Info\n1 - Modify\n2 - Delete\nr - Return");
-//            switch (getInput()) {
-//                case "r":
-//                    run = false;
-//                    break;
-//                case "0":
-//                    System.out.println(currentClient);
-//                    break;
-//                case "1":
-//                    modify();
-//                    break;
-//                case "2": {
-//                    boolean run1 = true;
-//                    while (run1) {
-//                        System.out.println("Are you sure?\n y - yes\n n - no");
-//                        String inputPhoneNumber = getInput();
-//                        switch (inputPhoneNumber) {
-//                            case "y":
-//                                clientService.deleteClient(currentClient.getId());
-//                                System.out.println("Client removed");
-//                                currentClient = null;
-//                                signOut();
-//                                return false;
-//                            case "n":
-//                                run1 = false;
-//                                break;
-//                            default:
-//                                System.out.println("Wrong input!");
-//                                break;
-//                        }
-//                    }
-//                }
-//                default:
-//                    System.out.println("Wrong input!");
-//                    break;
-//            }
-        writer.println("<br><a href=\"/Client/myAccount.html\">Back to menu</a>");
     }
 
     private void byeProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -191,23 +207,6 @@ public class MainServlet extends HttpServlet {
         writer.println("Total price: " + orderService.summaryPrice(currentOrder) + "<br>");
         writer.println("<a href=\"/Client/clientMenu.html\">Back to menu</a>");
     }
-
-//    @Override
-//    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        long id = Long.valueOf(req.getParameter("id"));
-//        productService.deleteById(id);
-//        doGet(req, resp);
-//    }
-
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setContentType("text/html");
-//        PrintWriter writer = resp.getWriter();
-//        for (Order order : orderService.getOrdersByClient()) {
-//            writer.println("<h3>" + product + "</h3>");
-//            writer.println("<br>");
-//        }
-//    }
 
     private void logOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         signIn = false;

@@ -11,31 +11,42 @@
         <tbody>
         <tr>
             <td>
-                <a href="/clients">Show all clients</a>
+                <form action="/clients">
+                    <input type="hidden" name="_method" value="Admin"/>
+                    <input type="submit" value="Show all clients">
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/Admin/createClient.html">Create client</a>
+                <form action="/Admin/createClient.html">
+                    <input type="submit" value="Create client">
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/Admin/updateClient.html">Modify client</a>
+                <form action="/Admin/adminClientLoginMenu.html">
+                    <input type="submit" value="Modify client">
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/Admin/deleteClient.html">Delete client</a>
+                <form action="/Admin/deleteClient.html">
+                    <input type="submit" value="Delete client">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/Admin/adminMenu.html">
+                    <input type="submit" value="Back to menu"/>
+                </form>
             </td>
         </tr>
         </tbody>
     </table>
 </fieldset>
-
-<!--<a href="createClient.html">1. Create Client</a>-->
-<!--<form action="/clients" href="">2. List of all clients</form>-->
-
-
 </body>
 </html>

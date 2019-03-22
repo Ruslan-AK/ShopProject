@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Client Menu</title>
+    <title>Product Menu</title>
 </head>
 <body>
 <br>
@@ -11,30 +11,41 @@
         <tbody>
         <tr>
             <td>
-                <a href="/Admin/showProducts.html">Show all products</a>
+                <form action="/products">
+                    <input type="submit" value="Show all products">
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/Admin/createProduct.html">Create product</a>
+                <form action="/Admin/createProduct.html">
+                    <input type="submit" value="Create product">
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/Admin/updateProduct.html">Modify product</a>
+                <form action="/Admin/updateProduct.html">
+                    <input type="submit" value="Modify product">
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/Admin/deleteProduct.html">Delete product</a>
+                <form action="/Admin/deleteProduct.html">
+                    <input type="submit" value="Delete product"/>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/Admin/adminMenu.html">
+                    <input type="submit" value="Back to menu"/>
+                </form>
             </td>
         </tr>
         </tbody>
     </table>
 </fieldset>
-<!--<a href="createClient.html">1. Create Client</a>-->
-<!--<form action="/clients" href="">2. List of all clients</form>-->
-
-
 </body>
 </html>

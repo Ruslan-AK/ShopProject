@@ -6,6 +6,7 @@
 </head>
 <body>
 <form action="/clients" method="post">
+    <input type="hidden" name="_method" value="createClient" />
     <fieldset>
         <table>
             <tbody>
@@ -50,10 +51,17 @@
                     <input type="text" name="email"> <br>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Create client">
+                </td>
+            </tr>
             </tbody>
         </table>
     </fieldset>
-<input type="submit" value="Create client">
+</form>
+<form action="/Admin/adminClientMenu.html">
+    <input type="submit" value="Back to menu"/>
 </form>
 </body>
 </html>

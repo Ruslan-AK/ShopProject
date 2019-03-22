@@ -5,8 +5,8 @@
     <title>Login</title>
 </head>
 <body>
-<form action="/main" method="post">
-    <input type="hidden" name="_method" value="login"/>
+<form action="/clients" method="post">
+    <input type="hidden" name="_method" value="adminClientLogin"/>
     <fieldset>
         <table>
             <tbody>
@@ -20,16 +20,12 @@
                     <input type="submit" value="Login">
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <form action="../mainMenu.html">
-                        <input type="submit" value="Back to menu"/>
-                    </form>
-                </td>
-            </tr>
             </tbody>
         </table>
     </fieldset>
+</form>
+<form action="/Admin/adminClientMenu.html">
+    <input type="submit" value="Back to menu"/>
 </form>
 </body>
 </html>

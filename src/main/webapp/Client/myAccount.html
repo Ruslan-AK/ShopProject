@@ -5,8 +5,8 @@
     <title>My Account</title>
 </head>
 <body>
-    <fieldset>
-        <table>
+<fieldset>
+    <table>
         <tbody>
         <tr>
             <td>
@@ -19,7 +19,8 @@
         </tr>
         <tr>
             <td>
-                <form action="/Client/myAccountModify.html" method="post">
+                <form action="/main" method="post">
+                    <input type="hidden" name="_method" value="modifyCurrentClient"/>
                     <input type="submit" value="Modify">
                 </form>
             </td>
@@ -35,7 +36,7 @@
         </tr>
         <tr>
             <td>
-                <form action="clientMenu.html" method="post">
+                <form action="clientMenu.html">
                     <input type="submit" value="Back to menu">
                 </form>
             </td>

@@ -18,8 +18,7 @@ public class ProductServlet extends HttpServlet {
         this.productService = productService;
     }
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void updateProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String firm = req.getParameter("firm");
         String model = req.getParameter("model");
         double price = Double.valueOf(req.getParameter("price"));
@@ -33,11 +32,11 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if ("put".equals(req.getParameter("_method"))) {
-            doPut(req, resp);
+            updateProduct(req, resp);
             return;
         }
         if ("delete".equals(req.getParameter("_method"))) {
-            doDelete(req, resp);
+            deleteProduct(req, resp);
             return;
         }
         String firm = req.getParameter("firm");
@@ -48,8 +47,7 @@ public class ProductServlet extends HttpServlet {
         doGet(req, resp);
     }
 
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void deleteProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long id = Long.valueOf(req.getParameter("id"));
         productService.deleteById(id);
         doGet(req, resp);
@@ -63,5 +61,9 @@ public class ProductServlet extends HttpServlet {
             writer.println("<h3>" + product + "</h3>");
             writer.println("<br>");
         }
+
+        writer.println("<form action=\"/Admin/adminProductMenu.html\">\n" +
+                "                 <input type=\"submit\" value=\"Back to menu\"/>\n" +
+                "       </form>");
     }
 }
