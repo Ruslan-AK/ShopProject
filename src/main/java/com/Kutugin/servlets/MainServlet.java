@@ -38,8 +38,8 @@ public class MainServlet extends HttpServlet {
             login(req, resp);
             return;
         }
-        if ("byeProduct".equals(req.getParameter("_method"))) {
-            byeProduct(req, resp);
+        if ("buyProduct".equals(req.getParameter("_method"))) {
+            buyProduct(req, resp);
             return;
         }
         if ("myOrder".equals(req.getParameter("_method"))) {
@@ -136,11 +136,22 @@ public class MainServlet extends HttpServlet {
 
     private void showOrderArchive(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter writer = resp.getWriter();
-        writer.println("<h2>Order Archive:</h2>");
+        writer.println("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Order Archive</title>\n" +
+                "</head>\n" +
+                "<body>");
+        writer.println("<h3>Order Archive:</h3>");
         for (Order o : orderService.getOrdersByClient(currentClient.getId())) {
             writer.println(o);
         }
-        writer.println("<br><a href = /Client/clientMenu.html>Back to client menu</h2>");
+        writer.println("<form action=\"/Client/clientMenu.html\">\n" +
+                "    <input type=\"submit\" value=\"Back to menu\"/>\n" +
+                "</form>");
+        writer.println("</body>\n" +
+                "</html>");
     }
 
     private void clientEnter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -155,7 +166,19 @@ public class MainServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         switch (req.getParameter("_method1")) {
             case "myAccountInfo": {
-                writer.println("<h2>Client Info:</h2><br>" + currentClient);
+                writer.println("<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>Delete Client</title>\n" +
+                        "</head>\n" +
+                        "<body>");
+                writer.println("<h3>Client Info:</h3><br>" +"<em>"+ currentClient+"</em>");
+                writer.println("<form action=\"/Client/clientMenu.html\">\n" +
+                        "    <input type=\"submit\" value=\"Back to menu\"/>\n" +
+                        "</form>");
+                writer.println("</body>\n" +
+                        "</html>");
                 break;
             }
             case "myAccountModify": {
@@ -165,23 +188,34 @@ public class MainServlet extends HttpServlet {
                 String email = req.getParameter("email");
                 String phone = null;
                 clientService.updateClient(currentClient.getId(), new Client(currentClient.getId(), name, surname, age, email, phone));
-                writer.println("<h2>Client updated:</h2>");
+                writer.println("<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>Update Client</title>\n" +
+                        "</head>\n" +
+                        "<body>");
+                writer.println("<h3>Client updated:</h3>");
                 writer.println(currentClient = clientService.getClientByID(currentClient.getId()));
-                writer.println("<a href=\"/Client/clientMenu.html\">Back to menu</a>");
+                writer.println("<form action=\"/Client/clientMenu.html\">\n" +
+                        "    <input type=\"submit\" value=\"Back to menu\"/>\n" +
+                        "</form>");
+                writer.println("</body>\n" +
+                        "</html>");
                 break;
             }
             case "myAccountDelete": {
-                String phone = req.getParameter("phone");
                 clientService.deleteClient(currentClient.getId());
                 currentClient = null;
                 currentOrder = null;
+                signIn = false;
                 resp.sendRedirect("mainMenu.html");
                 break;
             }
         }
     }
 
-    private void byeProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void buyProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long id = Long.valueOf(req.getParameter("id"));
         if (currentOrder == null) {
             currentOrder = new Order(orderService.getNextByMaxID());
@@ -203,13 +237,13 @@ public class MainServlet extends HttpServlet {
                 "            <tbody>\n" +
                 "            <tr>\n" +
                 "                <td>\n" +
-                "                <h2>You bye " + goods.getFirm() + " " + goods.getModel() + "</h2>\n" +
+                "                <h2>You buy " + goods.getFirm() + " " + goods.getModel() + "</h2>\n" +
                 "                </td>\n" +
                 "            </tr>\n" +
                 "            </tbody>\n" +
                 "        </table>\n" +
                 "    </fieldset>\n" +
-                "<form action=\"/Client/showByeProducts.html\">\n" +
+                "<form action=\"/Client/showBuyProducts.html\">\n" +
                 "    <input type=\"submit\" value=\"Back to menu\"/>\n" +
                 "</form>\n" +
                 "</body>\n" +

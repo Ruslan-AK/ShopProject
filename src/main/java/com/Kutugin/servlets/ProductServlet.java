@@ -22,12 +22,16 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if ("put".equals(req.getParameter("_method"))) {
+        if ("update".equals(req.getParameter("_method"))) {
             updateProduct(req, resp);
             return;
         }
         if ("delete".equals(req.getParameter("_method"))) {
             deleteProduct(req, resp);
+            return;
+        }
+        if ("create".equals(req.getParameter("_method"))) {
+            createProduct(req, resp);
             return;
         }
         if ("updateProductBlank".equals(req.getParameter("_method"))) {
@@ -46,6 +50,71 @@ public class ProductServlet extends HttpServlet {
         doGet(req, resp);
     }
 
+    private void createProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        PrintWriter writer = resp.getWriter();
+        writer.println("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Create Product</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<form action=\"/products\" method=\"post\">\n" +
+                "    <input type=\"hidden\" name=\"_method\" value=\"create\" />\n" +
+                "    <fieldset>\n" +
+                "        <table>\n" +
+                "            <tbody>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                    Firm\n" +
+                "                </td>\n" +
+                "                <td>\n" +
+                "                    <input type=\"text\" name=\"firm\"/> \n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                    Model\n" +
+                "                </td>\n" +
+                "                <td>\n" +
+                "                    <input type=\"text\" name=\"model\"/>\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                    Price\n" +
+                "                </td>\n" +
+                "                <td>\n" +
+                "                    <input type=\"text\" name=\"price\"/>\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                    Select Type from following:\n" +
+                "                </td>\n" +
+                "                <td>\n" +
+                "                    <select name=\"type\">\n" +
+                productsTypeString() +
+                "                    </select>\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                    <input type=\"submit\" value=\"Create product\">\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            </tbody>\n" +
+                "        </table>\n" +
+                "    </fieldset>\n" +
+                "</form>\n" +
+                "<form action=\"/Admin/adminProductMenu.html\">\n" +
+                "    <input type=\"submit\" value=\"Back to menu\"/>\n" +
+                "</form>\n" +
+                "</body>\n" +
+                "</html>"
+        );
+    }
+
     private void enterProductID(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long productID = Long.valueOf(req.getParameter("productID"));
         currentProduct = productService.getByID(productID);
@@ -58,7 +127,7 @@ public class ProductServlet extends HttpServlet {
                         "</head>\n" +
                         "<body>\n" +
                         "<form action=\"/products\" method=\"post\">\n" +
-                        "    <input type=\"hidden\" name=\"_method\" value=\"put\" />\n" +
+                        "    <input type=\"hidden\" name=\"_method\" value=\"update\" />\n" +
                         "    <fieldset>\n" +
                         "        <table>\n" +
                         "            <tbody>\n" +
@@ -123,7 +192,7 @@ public class ProductServlet extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<form action=\"/products\" method=\"post\">\n" +
-                "    <input type=\"hidden\" name=\"_method\" value=\"put\" />\n" +
+                "    <input type=\"hidden\" name=\"_method\" value=\"updateProductBlank\" />\n" +
                 "    <fieldset>\n" +
                 "        <table>\n" +
                 "            <tbody>\n" +
@@ -183,26 +252,39 @@ public class ProductServlet extends HttpServlet {
                 "</form>\n" +
                 "</body>\n" +
                 "</html>");
+        currentProduct = null;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        for (Product product : productService.getProducts()) {
-            writer.println("<h3>" + product + "</h3>");
-            writer.println("<br>");
+        writer.println("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Show clients</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<fieldset\n>");
+        if (productService.getProducts().size() > 0) {
+            for (Product product : productService.getProducts()) {
+                writer.println("<h4>" + product + "</h4>");
+            }
+        } else {
+            writer.println("<h4>Product list empty<h4>");
         }
-
         writer.println("<form action=\"/Admin/adminProductMenu.html\">\n" +
                 "                 <input type=\"submit\" value=\"Back to menu\"/>\n" +
-                "       </form>");
+                "       </form>" +
+                " </fieldset>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     private String productsTypeString() {
         StringBuilder sb = new StringBuilder();
         for (ProductType p : ProductType.values()) {
-            if (currentProduct.getType().equals(p.toString())){
+            if (p.toString().equals(currentProduct.getType()) && currentProduct != null) {
                 sb.append("<option value=\"" + p.toString() + "\"selected>" + p.toString() + "</option>");
             } else {
                 sb.append("<option value=\"" + p.toString() + "\">" + p.toString() + "</option>");

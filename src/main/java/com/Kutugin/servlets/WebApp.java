@@ -14,6 +14,7 @@ import com.Kutugin.services.impl.OrderServiceImpl;
 import com.Kutugin.services.impl.ProductServiceImpl;
 import com.Kutugin.validators.ValidationService;
 import com.Kutugin.validators.impl.ValidationServiceImpl;
+import org.h2.tools.Server;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -46,5 +47,10 @@ public class WebApp implements ServletContextListener {
         servletContext
                 .addServlet("MainServlet", new MainServlet(orderService,productService,clientService,validationService))
                 .addMapping("/main/*");
+        try {
+            Server.openBrowser("http://localhost:8080/mainMenu.html");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

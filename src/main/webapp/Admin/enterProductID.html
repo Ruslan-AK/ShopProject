@@ -6,7 +6,6 @@
 </head>
 <body>
 <form action="/products" method="post">
-    <iframe src="/products"></iframe>
     <input type="hidden" name="_method" value="enterProductID"/>
     <fieldset>
         <table>
@@ -26,16 +25,12 @@
                     <input type="submit" value="Enter Product ID">
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <form action="/Admin/adminProductMenu.html">
-                        <input type="submit" value="Back to menu"/>
-                    </form>
-                </td>
-            </tr>
             </tbody>
         </table>
     </fieldset>
+</form>
+<form action="/Admin/adminProductMenu.html">
+    <input type="submit" value="Back to menu"/>
 </form>
 </body>
 </html>

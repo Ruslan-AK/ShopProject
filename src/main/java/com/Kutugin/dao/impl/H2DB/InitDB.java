@@ -17,7 +17,7 @@ public class InitDB {
         tablesInDB = new ArrayList<>();
     }
 
-    public void initDBs() {
+    public void fillExistTables() {
         loadDBNameToList();
         createAndFillDBifInList();
     }

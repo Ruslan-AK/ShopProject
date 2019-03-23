@@ -14,9 +14,19 @@ import static com.Kutugin.dao.impl.H2DB.InitDB.*;
 public class ClientDBDao implements ClientDao {
 
     public ClientDBDao() {
-        try {
-            Server server = Server.createTcpServer().start();
-        } catch (SQLException e) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);) {
+            Server.createTcpServer().start();
+            DatabaseMetaData metaData = connection.getMetaData();
+            ResultSet tables = metaData.getTables(null,null,"clients",null);
+            if (!tables.next()){
+                PreparedStatement statement = connection.prepareStatement("CREATE TABLE CLIENT(ID BIGINT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(20), SURNAME VARCHAR(20),AGE INT, PHONE VARCHAR(20),EMAIL VARCHAR(50));");
+                statement.execute();
+                InitDB initDB = new InitDB();
+                initDB.fillExistTables();
+            }
+        } catch (SQLException ignored) {
+            System.out.println("Error init DB");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         getAllClients();

@@ -22,15 +22,28 @@ public class ClientServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
-        for (Client client : clientService.getAllClients()) {
-            writer.println("<h1>" + client + "</h1>");
-            writer.println("<br>");
+        writer.println("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Show clients</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<fieldset\n>");
+        if (clientService.getAllClients().size() > 0) {
+            for (Client client : clientService.getAllClients()) {
+                writer.println("<h4>" + client + "</h4>");
+            }
+            writer.println("<form action = \"/Admin/adminClientMenu.html\" >\n" +
+                    "                    <input type = \"submit\" value = \"Back to menu\" / >\n" +
+                    "       </form >");
+        } else {
+            writer.println("<h4>Client list empty<h4>");
         }
-        writer.println("<form action = \"/Admin/adminClientMenu.html\" >\n" +
-                "                    <input type = \"submit\" value = \"Back to menu\" / >\n" +
-                "       </form >");
+        writer.println(" </fieldset>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     @Override

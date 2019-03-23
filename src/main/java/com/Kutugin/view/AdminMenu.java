@@ -57,7 +57,7 @@ public class AdminMenu implements IMenu {
                     deleteProduct();
                     break;
                 case "9":
-                    init.initDBs();
+                    init.fillExistTables();
                     System.out.println("DB created, reload program, please");
                     System.exit(0);
                     break;
