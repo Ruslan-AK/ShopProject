@@ -2,6 +2,7 @@ package com.Kutugin.dao.impl.H2DB;
 
 import com.Kutugin.dao.ProductDao;
 import com.Kutugin.domain.Product;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import static com.Kutugin.dao.impl.H2DB.InitDB.*;
 
+@Service
 public class ProductDBDao implements ProductDao {
 
     @Override

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Menu</title>
+</head>
+<body>
+<fieldset>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <h4>Select action:</h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="showBuyProducts.html">
+                    <input type="submit" value="Show products">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/main" method="post">
+                    <input type="hidden" name="_method" value="myOrder"/>
+                    <input type="submit" value="My order">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="myAccount.html">
+                    <input type="submit" value="My account">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/main" method="post">
+                    <input type="hidden" name="_method" value="logOut"/>
+                    <input type="submit" value="Log out">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/main" method="post">
+                    <input type="hidden" name="_method" value="showOrderArchive"/>
+                    <input type="submit" value="Show order archive">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="../mainMenu.html">
+                    <input type="submit" value="Back to menu">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</body>
+</html>

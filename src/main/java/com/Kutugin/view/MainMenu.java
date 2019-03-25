@@ -1,9 +1,12 @@
 package com.Kutugin.view;
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class MainMenu implements IMenu {
+@Component
+public class MainMenu {
     private final BufferedReader br;
     private final AdminMenu adminMenu;
     private final ClientMenu clientMenu;
@@ -44,7 +47,6 @@ public class MainMenu implements IMenu {
         }
     }
 
-    @Override
     public String getInput() {
         String input = null;
         try {

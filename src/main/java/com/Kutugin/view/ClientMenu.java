@@ -8,12 +8,13 @@ import com.Kutugin.services.ClientService;
 import com.Kutugin.services.OrderService;
 import com.Kutugin.services.ProductService;
 import com.Kutugin.validators.ValidationService;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
-
-public class ClientMenu implements IMenu {
+@Component
+public class ClientMenu {
 
     private BufferedReader br;
     private ClientService clientService;
@@ -308,7 +309,6 @@ public class ClientMenu implements IMenu {
         return false;
     }
 
-    @Override
     public String getInput() {
         String input = null;
         try {

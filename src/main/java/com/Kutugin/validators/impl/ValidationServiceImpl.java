@@ -2,11 +2,14 @@ package com.Kutugin.validators.impl;
 
 import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.validators.ValidationService;
+import org.springframework.stereotype.Service;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Service
 public class ValidationServiceImpl implements ValidationService {
+
     @Override
     public void validateAge(String age) throws BusinessException {
         int ageInt;

@@ -1,6 +1,17 @@
 package com.Kutugin.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "CLIENTS")
 public class Client {
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment",strategy = "increment")
+    private long id;
+    @Column(name = "NAME")
     private String name;
     private String surmame;
 
@@ -8,7 +19,6 @@ public class Client {
 
     private int age;
     private String phoneNumber;
-    private long id;
     private static long currentId = 0;
 
     public Client() {

@@ -1,29 +1,17 @@
 package com.Kutugin;
 
 import com.Kutugin.view.MainMenu;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
+@Controller
 public class App {
     public static void main(String[] args) throws IOException {
-//        InitDB init = new InitDB();
-//        ClientDao clientDao = new ClientDBDao();
-//        ValidationService validationService = new ValidationServiceImpl();
-//        ClientService clientService = new ClientServiceImpl(clientDao, validationService);
-////        ProductDao productDao = ProductDaoImpl.getInstance();
-//        ProductDao productDao = new ProductDBDao();
-//
-//        ProductService productService = new ProductServiceImpl(productDao);
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        AdminMenu adminMenu = new AdminMenu(br, clientService, validationService, productService,init);
-//        OrderDao orderDao = new OrderDBDao();
-//        OrderService orderService = new OrderServiceImpl(orderDao);
-//        ClientMenu clientMenu = new ClientMenu(productService, br, clientService, validationService, orderService);
-//        MainMenu menu = new MainMenu(br, adminMenu, clientMenu);
-//        menu.showMenu();
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("app.xml");
-        MainMenu menu = (MainMenu) context.getBean("mainMenu");
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        MainMenu menu = context.getBean(MainMenu.class);
         menu.showMenu();
     }
 }

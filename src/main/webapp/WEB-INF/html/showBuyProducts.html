@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy</title>
+</head>
+<body>
+<em>You can buy product here</em>
+<br>
+<em>Products:</em>
+<br>
+    <iframe src="/products"></iframe>
+<form action="/main" method="post">
+    <input type="hidden" name="_method" value="buyProduct"/>
+    <fieldset>
+        <em>Enter id to buy product:</em>
+        <table>
+                <tbody>
+                <tr>
+                    <td>
+                        Id <input type="text" name="id"> <br>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        <br>
+        <input type="submit" value="Buy Product">
+        </fieldset>
+    </form>
+<form action="/Client/clientMenu.html">
+    <input type="submit" value="Back to menu"/>
+</form>
+</body>
+</html>

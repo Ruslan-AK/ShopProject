@@ -8,11 +8,13 @@ import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.services.ProductService;
 import com.Kutugin.validators.ValidationService;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class AdminMenu implements IMenu {
+@Component
+public class AdminMenu {
     private ClientService clientService;
     private ValidationService validator;
     private BufferedReader br;
@@ -332,7 +334,6 @@ public class AdminMenu implements IMenu {
         }
     }
 
-    @Override
     public String getInput() {
         String input = null;
         try {

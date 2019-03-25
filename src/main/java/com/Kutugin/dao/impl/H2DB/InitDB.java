@@ -1,10 +1,13 @@
 package com.Kutugin.dao.impl.H2DB;
 
+import org.springframework.stereotype.Service;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class InitDB {
     public static final String DB_URL = "jdbc:h2:tcp://localhost/~/LuxoftShop";
     public static final String LOGIN = "admin";

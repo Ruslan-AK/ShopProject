@@ -5,14 +5,18 @@ import com.Kutugin.domain.Client;
 import com.Kutugin.domain.Order;
 import com.Kutugin.domain.Product;
 import com.Kutugin.services.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Service
 public class OrderServiceImpl implements OrderService {
 
+    @Autowired
     private OrderDao orderDao;
 
+    @Autowired
     public OrderServiceImpl(OrderDao orderDao) {
         this.orderDao = orderDao;
     }

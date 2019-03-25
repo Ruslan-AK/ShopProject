@@ -3,13 +3,18 @@ package com.Kutugin.services.impl;
 import com.Kutugin.dao.ProductDao;
 import com.Kutugin.domain.Product;
 import com.Kutugin.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 
+    @Autowired
     private ProductDao productDao;
 
+    @Autowired
     public ProductServiceImpl(ProductDao productDao) {
         this.productDao = productDao;
     }
