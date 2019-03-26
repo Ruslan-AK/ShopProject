@@ -4,6 +4,7 @@ import com.Kutugin.dao.ClientDao;
 import com.Kutugin.domain.Client;
 import com.Kutugin.exceptions.BusinessException;
 import org.h2.tools.Server;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -33,7 +34,7 @@ public class ClientDBDao implements ClientDao {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME,AGE, PHONE,EMAIL,ID) VALUES(?,?,?,?,?,?);")) {
             statement.setString(1, client.getName());
-            statement.setString(2, client.getSurmame());
+            statement.setString(2, client.getSurname());
             statement.setInt(3, client.getAge());
             statement.setString(4, client.getPhoneNumber());
             statement.setString(5, client.getEmail());
@@ -52,8 +53,8 @@ public class ClientDBDao implements ClientDao {
         if (clientFrom.getName() != null) {
             c.setName(clientFrom.getName());
         }
-        if (clientFrom.getSurmame() != null) {
-            c.setSurname(clientFrom.getSurmame());
+        if (clientFrom.getSurname() != null) {
+            c.setSurname(clientFrom.getSurname());
         }
         if (clientFrom.getAge() != 0) {
             c.setAge(clientFrom.getAge());
@@ -67,7 +68,7 @@ public class ClientDBDao implements ClientDao {
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement("UPDATE CLIENT SET NAME = ?, SURNAME = ?,AGE = ?, PHONE = ?,EMAIL = ? WHERE ID = ?;")) {
             statement.setString(1, c.getName());
-            statement.setString(2, c.getSurmame());
+            statement.setString(2, c.getSurname());
             statement.setInt(3, c.getAge());
             statement.setString(4, c.getPhoneNumber());
             statement.setString(5, c.getEmail());

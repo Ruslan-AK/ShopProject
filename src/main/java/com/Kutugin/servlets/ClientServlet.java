@@ -122,7 +122,7 @@ public class ClientServlet extends HttpServlet {
                 "                            Surname\n" +
                 "                        </td>\n" +
                 "                        <td>\n" +
-                "                            <input type=\"text\" name=\"surname\" value=\"" + currentClient.getSurmame() + "\">\n" +
+                "                            <input type=\"text\" name=\"surname\" value=\"" + currentClient.getSurname() + "\">\n" +
                 "                        </td>\n" +
                 "                    </tr>\n" +
                 "                    <tr>\n" +

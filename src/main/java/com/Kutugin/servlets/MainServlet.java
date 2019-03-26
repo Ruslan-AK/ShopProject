@@ -17,13 +17,13 @@ import java.io.PrintWriter;
 
 public class MainServlet extends HttpServlet {
 
-    boolean signIn = false;
-    ValidationService validationService;
-    ClientService clientService;
-    ProductService productService;
-    OrderService orderService;
-    Client currentClient;
-    Order currentOrder;
+    private boolean signIn = false;
+    private ValidationService validationService;
+    private ClientService clientService;
+    private ProductService productService;
+    private OrderService orderService;
+    private Client currentClient;
+    private Order currentOrder;
 
     public MainServlet(OrderService orderService, ProductService productService,ClientService clientService,ValidationService validationService) {
         this.orderService = orderService;
@@ -97,7 +97,7 @@ public class MainServlet extends HttpServlet {
                 "                            Surname\n" +
                 "                        </td>\n" +
                 "                        <td>\n" +
-                "                            <input type=\"text\" name=\"surname\" value=\"" + currentClient.getSurmame() + "\">\n" +
+                "                            <input type=\"text\" name=\"surname\" value=\"" + currentClient.getSurname() + "\">\n" +
                 "                        </td>\n" +
                 "                    </tr>\n" +
                 "                    <tr>\n" +

@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CLIENTS")
+@Table(name = "CLIENT")
 public class Client {
     @Id
     @GeneratedValue(generator = "increment")
@@ -13,20 +13,22 @@ public class Client {
     private long id;
     @Column(name = "NAME")
     private String name;
-    private String surmame;
-
+    @Column(name = "SURNAME")
+    private String surname;
+    @Column(name = "EMAIL")
     private String email;
-
+    @Column(name = "AGE")
     private int age;
+    @Column(name = "PHONE")
     private String phoneNumber;
     private static long currentId = 0;
 
     public Client() {
     }
 
-    public Client(long id, String name, String surmame, String age, String email, String phoneNumber) {
+    public Client(long id, String name, String surname, String age, String email, String phoneNumber) {
         this.name = name;
-        this.surmame = surmame;
+        this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.age = Integer.valueOf(age);
         this.email = email;
@@ -37,7 +39,7 @@ public class Client {
     public String toString() {
 
         return "Name='" + name + '\'' + ", \n" +
-                "surmame='" + surmame + '\'' + ", \n" +
+                "surname='" + surname + '\'' + ", \n" +
                 "email='" + email + '\'' + ", \n" +
                 "age=" + age + ", \n" +
                 "phoneNumber='" + phoneNumber + '\'' + ", \n" +
@@ -52,12 +54,12 @@ public class Client {
         this.name = name;
     }
 
-    public String getSurmame() {
-        return surmame;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurname(String surmame) {
-        this.surmame = surmame;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public int getAge() {
@@ -95,7 +97,7 @@ public class Client {
         Client client = (Client) o;
         if (age != client.age) return false;
         if (name != null ? !name.equals(client.name) : client.name != null) return false;
-        if (surmame != null ? !surmame.equals(client.surmame) : client.surmame != null) return false;
+        if (surname != null ? !surname.equals(client.surname) : client.surname != null) return false;
         return phoneNumber != null ? phoneNumber.equals(client.phoneNumber) : client.phoneNumber == null;
 
     }
@@ -103,7 +105,7 @@ public class Client {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (surmame != null ? surmame.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + age;
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         return result;
