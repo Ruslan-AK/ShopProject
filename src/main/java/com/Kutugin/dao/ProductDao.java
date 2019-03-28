@@ -5,7 +5,7 @@ import com.Kutugin.domain.Product;
 import java.util.List;
 
 public interface ProductDao {
-    boolean saveProduct(Product product);
+    long saveProduct(Product product);
 
     List<Product> getProducts();
 

@@ -14,7 +14,7 @@ import static com.Kutugin.dao.impl.H2DB.InitDB.*;
 public class ProductDBDao implements ProductDao {
 
     @Override
-    public boolean saveProduct(Product product) {
+    public long saveProduct(Product product) {
         long id = getNextByMaxID();
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement("INSERT INTO PRODUCT(ID,FIRM,MODEL,TYPE,PRICE) VALUES(?,?,?,?,?)")) {
@@ -25,11 +25,11 @@ public class ProductDBDao implements ProductDao {
             statement.setString(4, product.getType());
             statement.setDouble(5, product.getPrice());
             statement.execute();
-            return true;
+            return id;
         } catch (SQLException e) {
             System.out.println("Error saving product");
             System.out.println(e.getErrorCode());
-            return false;
+            return -1;
         }
     }
 

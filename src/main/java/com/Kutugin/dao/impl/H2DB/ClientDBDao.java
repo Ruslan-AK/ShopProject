@@ -4,7 +4,6 @@ import com.Kutugin.dao.ClientDao;
 import com.Kutugin.domain.Client;
 import com.Kutugin.exceptions.BusinessException;
 import org.h2.tools.Server;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -48,7 +47,7 @@ public class ClientDBDao implements ClientDao {
     }
 
     @Override
-    public void updateClient(long currentClientID, Client clientFrom) {
+    public void  updateClient(long currentClientID, Client clientFrom) {
         Client c = getClientByID(currentClientID);
         if (clientFrom.getName() != null) {
             c.setName(clientFrom.getName());

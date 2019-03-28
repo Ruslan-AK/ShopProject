@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Client</title>
+    <title>Login</title>
 </head>
 <body>
-<form action="/clients" method="post">
-    <input type="hidden" name="_method" value="delete"/>
+<form action="/clientLogin" method="post">
     <fieldset>
         <table>
             <tbody>
             <tr>
                 <td>
+                    <h4>Format phone 0671234567</h4>
                     <h4>Fill form, please:</h4>
                 </td>
             </tr>
@@ -22,15 +22,19 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" value="Delete client">
+                    <input type="submit" value="Login">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form action="../mainMenu.html">
+                        <input type="submit" value="Back to menu"/>
+                    </form>
                 </td>
             </tr>
             </tbody>
         </table>
     </fieldset>
-</form>
-<form action="/Admin/adminClientMenu.html">
-    <input type="submit" value="Back to menu"/>
 </form>
 </body>
 </html>

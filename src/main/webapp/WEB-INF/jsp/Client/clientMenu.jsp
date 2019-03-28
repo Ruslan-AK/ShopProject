@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,45 +15,42 @@
         </tr>
         <tr>
             <td>
-                <form action="showBuyProducts.html">
+                <form action="/Client/showBuyProducts.jsp">
                     <input type="submit" value="Show products">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/main" method="post">
-                    <input type="hidden" name="_method" value="myOrder"/>
+                <form action="/myOrder" method="post">
                     <input type="submit" value="My order">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="myAccount.html">
+                <form action="myAccount.jsp">
                     <input type="submit" value="My account">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/main" method="post">
-                    <input type="hidden" name="_method" value="logOut"/>
+                <form action="/logOut" method="post">
                     <input type="submit" value="Log out">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/main" method="post">
-                    <input type="hidden" name="_method" value="showOrderArchive"/>
+                <form action="/showOrdersByClient" method="post">
                     <input type="submit" value="Show order archive">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="../mainMenu.html">
+                <form action="../mainMenu.jsp">
                     <input type="submit" value="Back to menu">
                 </form>
             </td>

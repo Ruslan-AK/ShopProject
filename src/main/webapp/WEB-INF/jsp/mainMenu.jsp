@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin menu</title>
+    <title>Main Menu</title>
 </head>
 <body>
 <fieldset>
@@ -10,27 +10,25 @@
         <tbody>
         <tr>
             <td>
-                <h4>Select menu:</h4>
+                <h3><em>Welcome</em></h3>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="adminClientMenu.html">
-                    <input type="submit" value="Clients">
+                <h4>Select your role:</h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/Admin/adminMenu.jsp">
+                    <input type="submit" value="Admin">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="adminProductMenu.html">
-                    <input type="submit" value="Products">
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form action="../mainMenu.html">
-                    <input type="submit" value="Back to menu"/>
+                <form action="/enterAsClient" method="post">
+                    <input type="submit" value="Client">
                 </form>
             </td>
         </tr>

@@ -1,14 +1,39 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+ <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>Main Menu</title>
 </head>
 <body>
-<h1>Welcome to shop</h1>
-<br>
-<p>Please choose user</p>
-<form action="/clientss" method="get">
-    <input type="submit" value="client"/><br><br>
-    <input type="submit" name="user" value="admin"/><br><br>
-</form>
+<fieldset>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <h3><em>Welcome</em></h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Select your role:</h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/enterAsAdmin" method="post">
+                    <input type="submit" value="Admin">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/enterAsClient" method="post">
+                    <input type="submit" value="Client">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
 </body>
+</html>

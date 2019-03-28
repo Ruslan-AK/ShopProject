@@ -35,10 +35,10 @@ public class ProductServiceImplTest {
         long id = 1L;
         Product product = new Product(firm, model, price, type, id);
         //When
-        Mockito.when(productDBDao.saveProduct(product)).thenReturn(true);
+        Mockito.when(productDBDao.saveProduct(product)).thenReturn(id);
         //Then
-        boolean res = productServise.saveProduct(product);
-        Assert.assertTrue(res);
+        long resId = productServise.saveProduct(product);
+        Assert.assertEquals(id,resId);
     }
 
     @Test

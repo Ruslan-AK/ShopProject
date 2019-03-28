@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Order Menu</title>
+    <title>My Account</title>
 </head>
 <body>
-<br>
 <fieldset>
     <table>
         <tbody>
@@ -16,29 +15,28 @@
         </tr>
         <tr>
             <td>
-                <form action="/byeProduct.html">
-                    <input type="submit" value="Bye product">
+                <form action="/myAccountInfo" method="post">
+                    <input type="submit" value="Show Account Info">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/showCurrentOrder.html">
-                    <input type="submit" value="Show current order">
+                <form action="/updateCurrentClientBlank" method="post">
+                    <input type="submit" value="Modify">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/showOrderArchive.html">
-                    <input type="submit" value="Show order archive">
+                <form action="/deleteCurrentClient" method="post">
+                    <input type="submit" value="Delete">
                 </form>
             </td>
         </tr>
-
         <tr>
             <td>
-                <form action="clientMenu.html">
+                <form action="/Client/clientMenu.jsp">
                     <input type="submit" value="Back to menu">
                 </form>
             </td>
