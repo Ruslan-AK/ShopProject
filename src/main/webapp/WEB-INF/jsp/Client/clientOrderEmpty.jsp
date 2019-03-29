@@ -23,8 +23,5 @@
         </tbody>
     </table>
 </fieldset>
-<form action="/Client/clientMenu.jsp">
-    <input type="submit" value="Back to menu"/>
-</form>
 </body>
 </html>

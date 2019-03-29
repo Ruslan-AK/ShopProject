@@ -34,13 +34,6 @@
                 </form>
             </td>
         </tr>
-        <tr>
-            <td>
-                <form action="/Client/clientMenu.jsp">
-                    <input type="submit" value="Back to menu">
-                </form>
-            </td>
-        </tr>
         </tbody>
     </table>
 </fieldset>

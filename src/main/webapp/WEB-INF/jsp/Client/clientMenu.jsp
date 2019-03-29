@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <td>
-                <form action="myAccount.jsp">
+                <form action="/Client/myAccount.jsp">
                     <input type="submit" value="My account">
                 </form>
             </td>
@@ -45,13 +45,6 @@
             <td>
                 <form action="/showOrdersByClient" method="post">
                     <input type="submit" value="Show order archive">
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form action="../mainMenu.jsp">
-                    <input type="submit" value="Back to menu">
                 </form>
             </td>
         </tr>

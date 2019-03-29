@@ -25,13 +25,6 @@
                     <input type="submit" value="Login">
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <form action="../mainMenu.html">
-                        <input type="submit" value="Back to menu"/>
-                    </form>
-                </td>
-            </tr>
             </tbody>
         </table>
     </fieldset>

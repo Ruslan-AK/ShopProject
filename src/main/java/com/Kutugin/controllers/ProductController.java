@@ -16,7 +16,7 @@ public class ProductController {
     private ProductService productService;
     private Product currentProduct;
 
-    @RequestMapping(value = "showProducts", method = RequestMethod.POST)
+    @RequestMapping(value = "/showProducts", method = RequestMethod.POST)
     public String showProducts(ModelMap modelMap) {
         String productsString = "";
         if (productService.getProducts().size() > 0) {
@@ -30,7 +30,7 @@ public class ProductController {
         return "/Admin/showProducts";
     }
 
-    @RequestMapping(value = "createProductBlank", method = RequestMethod.POST)
+    @RequestMapping(value = "/createProductBlank", method = RequestMethod.POST)
     public String createProduct(ModelMap modelMap) {
         String productsTypesString = "";
         for (ProductType pt : ProductType.values()) {

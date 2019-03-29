@@ -9,9 +9,18 @@
 <br>
 <em>Products:</em>
 <br>
-    <iframe src="/products"></iframe>
-<form action="/main" method="post">
-    <input type="hidden" name="_method" value="buyProduct"/>
+<fieldset>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                ${products}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<form action="/buyProduct" method="post">
     <fieldset>
         <em>Enter id to buy product:</em>
         <table>
@@ -27,8 +36,5 @@
         <input type="submit" value="Buy Product">
         </fieldset>
     </form>
-<form action="/Client/clientMenu.html">
-    <input type="submit" value="Back to menu"/>
-</form>
 </body>
 </html>

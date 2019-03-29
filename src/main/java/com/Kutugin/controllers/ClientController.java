@@ -24,8 +24,8 @@ public class ClientController {
 
     @RequestMapping(value = "/enterAsAdmin", method = RequestMethod.POST)
     public String start() {
-        System.out.println("EEEEEEEEEE");
-        return "index1";
+        System.out.println("WORK!");
+        return "/Admin/adminMenu";
     }
 
     @RequestMapping(value = "/enterAsClient", method = RequestMethod.POST)
