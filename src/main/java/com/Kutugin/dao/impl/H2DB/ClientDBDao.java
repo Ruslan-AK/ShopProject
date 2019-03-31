@@ -4,7 +4,7 @@ import com.Kutugin.dao.ClientDao;
 import com.Kutugin.domain.Client;
 import com.Kutugin.exceptions.BusinessException;
 import org.h2.tools.Server;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,13 +12,12 @@ import java.util.List;
 
 import static com.Kutugin.dao.impl.H2DB.InitDB.*;
 
-@Repository
+@Service
 public class ClientDBDao implements ClientDao {
 
     public ClientDBDao() {
         try {
             Server.createTcpServer().start();
-            Server.openBrowser("youtube.com");
         } catch (SQLException ignored) {
             System.out.println("Error init DBbb");
         } catch (Exception e) {

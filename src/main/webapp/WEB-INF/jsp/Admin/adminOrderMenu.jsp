@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Account</title>
+    <title>Order Menu</title>
 </head>
 <body>
+<br>
 <fieldset>
     <table>
         <tbody>
@@ -15,15 +16,15 @@
         </tr>
         <tr>
             <td>
-                <form action="/myAccountInfo" method="post">
-                    <input type="submit" value="Show Account Info">
+                <form action="/showOrders" method="post">
+                    <input type="submit" value="Show all orders">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/updateCurrentClientBlank" method="post">
-                    <input type="submit" value="Modify">
+                <form action="/adminDeleteOrder" method="post">
+                    <input type="submit" value="Delete order">
                 </form>
             </td>
         </tr>

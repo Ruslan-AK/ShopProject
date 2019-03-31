@@ -10,31 +10,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import static com.Kutugin.controllers.States.getCurrentProduct;
+import static com.Kutugin.controllers.States.setCurrentProduct;
+
 @Controller
 public class ProductController {
     @Autowired
     private ProductService productService;
-    private Product currentProduct;
 
     @RequestMapping(value = "/showProducts", method = RequestMethod.POST)
     public String showProducts(ModelMap modelMap) {
         String productsString = "";
         if (productService.getProducts().size() > 0) {
             for (Product product : productService.getProducts()) {
-                productsString += "<p>" + product.toString() + "</p>";
+                productsString += "<fieldset>" + product.toString() + "</fieldset>";
             }
         } else {
             productsString = "No products";
         }
+        modelMap.put("title", "Show products");
         modelMap.put("message", productsString);
-        return "/Admin/showProducts";
+        return "/showItem";
     }
 
     @RequestMapping(value = "/createProductBlank", method = RequestMethod.POST)
     public String createProduct(ModelMap modelMap) {
         String productsTypesString = "";
         for (ProductType pt : ProductType.values()) {
-            if (pt.toString().equals(currentProduct.getType())) {
+            if (getCurrentProduct() != null && pt.toString().equals(getCurrentProduct().getType())) {
                 productsTypesString += "<option value=\"" + pt.toString() + "\" selected>" + pt.toString() + "</option>\n";
             } else {
                 productsTypesString += "<option value=\"" + pt.toString() + "\">" + pt.toString() + "</option>\n";
@@ -45,7 +48,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
-    public String createClient(
+    public String createProduct(
             @RequestParam String firm,
             @RequestParam String model,
             @RequestParam String price,
@@ -54,28 +57,28 @@ public class ProductController {
         Product product = new Product(firm, model, Double.valueOf(price), type);
         long id = productService.saveProduct(product);
         String s = productService.getByID(id).toString() + " - created";
-        modelMap.put("productString", s);
-        modelMap.put("back", "/Admin/adminProductMenu.jsp");
-        return "/Admin/showProduct";
+        modelMap.put("message", s);
+        modelMap.put("title", "Product created");
+        return "/showItem";
     }
 
     @RequestMapping(value = "/updateProductBlank", method = RequestMethod.POST)
     public String updateProductBlank(
             @RequestParam String id,
             ModelMap modelMap) {
-        currentProduct = productService.getByID(Long.parseLong(id));
+        setCurrentProduct(productService.getByID(Long.parseLong(id)));
         String productsTypesString = "";
         for (ProductType pt : ProductType.values()) {
-            if (pt.toString().equals(currentProduct.getType())) {
+            if (pt.toString().equals(getCurrentProduct().getType())) {
                 productsTypesString += "<option value=\"" + pt.toString() + "\" selected>" + pt.toString() + "</option>\n";
             } else {
                 productsTypesString += "<option value=\"" + pt.toString() + "\">" + pt.toString() + "</option>\n";
             }
         }
         modelMap.put("options", productsTypesString);
-        modelMap.put("price", currentProduct.getPrice());
-        modelMap.put("model", currentProduct.getModel());
-        modelMap.put("firm", currentProduct.getFirm());
+        modelMap.put("price", getCurrentProduct().getPrice());
+        modelMap.put("model", getCurrentProduct().getModel());
+        modelMap.put("firm", getCurrentProduct().getFirm());
         return "/Admin/updateProductForm";
     }
 
@@ -87,12 +90,12 @@ public class ProductController {
             @RequestParam String type,
             ModelMap modelMap) {
         Product product = new Product(firm, model, Double.valueOf(price), type);
-        productService.updateProduct(currentProduct.getId(), product);
+        productService.updateProduct(getCurrentProduct().getId(), product);
         String s = product.toString() + " - updated";
+        setCurrentProduct(null);
         modelMap.put("message", s);
-        modelMap.put("back", "/Admin/adminProductMenu.jsp");
-        currentProduct = null;
-        return "/Admin/showProduct";
+        modelMap.put("title", "Product updated");
+        return "/showItem";
     }
 
     @RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
@@ -103,7 +106,21 @@ public class ProductController {
         String s = productService.getByID(idL).toString() + " - deleted";
         productService.deleteById(idL);
         modelMap.put("message", s);
-        modelMap.put("back", "/Admin/adminProductMenu.jsp");
-        return "/Admin/showProduct";
+        modelMap.put("title", "Product deleted");
+        return "/showItem";
+    }
+
+    @RequestMapping(value = "/showBuyProducts", method = RequestMethod.POST)
+    public String showBuyProducts(ModelMap modelMap) {
+        String productsString = "";
+        if (productService.getProducts().size() > 0) {
+            for (Product product : productService.getProducts()) {
+                productsString += "<p>" + product.toString() + "</p>";
+            }
+        } else {
+            productsString = "No products";
+        }
+        modelMap.put("message", productsString);
+        return "/Client/showBuyProducts";
     }
 }

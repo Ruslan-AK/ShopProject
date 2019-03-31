@@ -9,44 +9,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update Client</title>
+    <title>Update Product</title>
 </head>
 <body>
 <fieldset>
-    <form action="/updateCurrentClient" method="post" >
+    <form action="/updateProduct" method="post" >
     <table>
         <tbody>
         <tr>
             <td>
-                <h3>Name:</h3>
+                <h3>Firm:</h3>
             </td>
             <td>
-                <input type="text" name="name" value="${name}">
+                <input type="text" name="firm" value="${firm}">
             </td>
         </tr>
         <tr>
             <td>
-                <h3>Surname:</h3>
+                <h3>Model:</h3>
             </td>
             <td>
-                <input type="text" name="surname" value="${surname}">
+                <input type="text" name="model" value="${model}">
             </td>
         </tr>
         <tr>
             <td>
-                <h3>Age:</h3>
+                <h3>Price:</h3>
             </td>
             <td>
-                <input type="text" name="age" value="${age}">
+                <input type="text" name="price" value="${price}">
             </td>
         </tr>
-        <tr>
-            <td>
-                <h3>Email:</h3>
-            </td>
-            <td>
-                <input type="text" name="email" value="${email}">
-            </td>
+        </tr>
+        <td>
+            Type
+        </td>
+        <td>
+            Select Type from following:
+            <select name="type">
+                ${options}
+            </select>
+        </td>
         </tr>
         <tr>
             <td>

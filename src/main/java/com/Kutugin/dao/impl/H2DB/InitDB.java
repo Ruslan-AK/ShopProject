@@ -20,7 +20,7 @@ public class InitDB {
         tablesInDB = new ArrayList<>();
     }
 
-    public void fillExistTables() {
+    public void createAndFill() {
         loadDBNameToList();
         createAndFillDBifInList();
     }

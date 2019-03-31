@@ -13,7 +13,7 @@
 </head>
 <body>
 <fieldset>
-    <form action="/updateCurrentClient" method="post" >
+    <form action="/updateAdminCurrentClient" method="post" >
     <table>
         <tbody>
         <tr>
@@ -46,6 +46,14 @@
             </td>
             <td>
                 <input type="text" name="email" value="${email}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Phone:</h3>
+            </td>
+            <td>
+                <input type="text" name="phone" value="${phone}">
             </td>
         </tr>
         <tr>

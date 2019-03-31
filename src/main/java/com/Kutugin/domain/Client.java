@@ -1,27 +1,22 @@
 package com.Kutugin.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "CLIENT")
+//@Entity
+//@Table(name = "CLIENT")
 public class Client {
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment",strategy = "increment")
+//    @Id
+//    @GeneratedValue(generator = "increment")
+//    @GenericGenerator(name = "increment",strategy = "increment")
     private long id;
-    @Column(name = "NAME")
+//    @Column(name = "NAME")
     private String name;
-    @Column(name = "SURNAME")
+//    @Column(name = "SURNAME")
     private String surname;
-    @Column(name = "EMAIL")
+//    @Column(name = "EMAIL")
     private String email;
-    @Column(name = "AGE")
+//    @Column(name = "AGE")
     private int age;
-    @Column(name = "PHONE")
+//    @Column(name = "PHONE")
     private String phoneNumber;
-    private static long currentId = 0;
 
     public Client() {
     }

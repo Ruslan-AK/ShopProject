@@ -59,7 +59,7 @@ public class AdminMenu {
                     deleteProduct();
                     break;
                 case "9":
-                    init.fillExistTables();
+                    init.createAndFill();
                     System.out.println("DB created, reload program, please");
                     System.exit(0);
                     break;

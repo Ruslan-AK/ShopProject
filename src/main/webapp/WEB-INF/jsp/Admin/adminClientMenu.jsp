@@ -5,6 +5,7 @@
     <title>Client Menu</title>
 </head>
 <body>
+<br>
 <fieldset>
     <table>
         <tbody>
@@ -15,36 +16,29 @@
         </tr>
         <tr>
             <td>
-                <form action="showBuyProducts" method="post">
-                    <input type="submit" value="Show products">
+                <form action="/showClients" method="post">
+                    <input type="submit" value="Show all clients">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/myOrder" method="post">
-                    <input type="submit" value="My order">
+                <form action="/adminCreateClient" method="post">
+                    <input type="submit" value="Create client">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/myAccount" method="post">
-                    <input type="submit" value="My account">
+                <form action="/adminClientLoginMenu" method="post">
+                    <input type="submit" value="Modify client">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/logOut" method="post">
-                    <input type="submit" value="Log out">
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form action="/showOrdersByClient" method="post">
-                    <input type="submit" value="Show order archive">
+                <form action="/adminDeleteClientEnterPhone" method="post">
+                    <input type="submit" value="Delete client">
                 </form>
             </td>
         </tr>

@@ -6,7 +6,6 @@ import com.Kutugin.exceptions.BusinessException;
 import com.Kutugin.services.ClientService;
 import com.Kutugin.validators.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 @Service
 public class ClientServiceImpl implements ClientService {
     @Autowired
-    @Qualifier(value = "clientDao")
+//    @Qualifier(value = "clientDao")
     private ClientDao clientDao;
     private ValidationService validationService;
 

@@ -18,12 +18,13 @@ public class OrderDBDao implements OrderDao {
 
     @Override
     public void addClientOrder(Client client, Order order) {
-        String queryCart = "INSERT INTO \"ORDER\"(CLIENT_ID,DATE) VALUES(?,?);";
+        String queryCart = "INSERT INTO \"ORDER\"(CLIENT_ID,DATE,ID) VALUES(?,?,?);";
         try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASS);
              PreparedStatement statement = connection.prepareStatement(queryCart)) {
             statement.setLong(1, client.getId());
             statement.setString(2, order.getDate());
-            statement.execute();
+            statement.setLong(3, order.getId());
+            statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error adding order");
             System.out.println(e.getErrorCode());
@@ -39,7 +40,7 @@ public class OrderDBDao implements OrderDao {
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, order.getDate());
             statement.setLong(2, id);
-            statement.execute();
+            statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error updating order");
             System.out.println(e.getErrorCode());
@@ -62,7 +63,7 @@ public class OrderDBDao implements OrderDao {
                 statement.setLong(1, id);
                 statement.setLong(2, p.getId());
                 statement.setLong(3, order.getProductMap().get(p));
-                statement.execute();
+                statement.executeUpdate();
             } catch (SQLException e) {
                 System.out.println("Error updating order");
                 System.out.println(e.getErrorCode());
@@ -219,6 +220,7 @@ public class OrderDBDao implements OrderDao {
                 maxId = resultSet.getLong(1);
             }
             else maxId = 0;
+            System.out.println("AAAA"+maxId);
         } catch (SQLException e) {
             System.out.println("Error getNextByMaxID");
             System.out.println(e.getSQLState());

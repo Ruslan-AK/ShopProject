@@ -14,7 +14,7 @@
         <tbody>
         <tr>
             <td>
-                ${products}
+                <iframe srcdoc="${message}"></iframe>
             </td>
         </tr>
         </tbody>
