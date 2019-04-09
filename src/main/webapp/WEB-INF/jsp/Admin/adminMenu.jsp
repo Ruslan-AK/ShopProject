@@ -34,13 +34,6 @@
                 </form>
             </td>
         </tr>
-        <tr>
-            <td>
-                <form action="/initDB" method="post">
-                    <input type="submit" value="Init DB">
-                </form>
-            </td>
-        </tr>
         </tbody>
     </table>
 </fieldset>
