@@ -20,9 +20,5 @@ public interface OrderService {
 
     Order getByID(long id);
 
-    //void addProduct(long id, Product product);
-
     boolean isPresent(long id);
-
-    long getNextByMaxID();
 }

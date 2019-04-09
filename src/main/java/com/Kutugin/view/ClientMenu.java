@@ -167,7 +167,7 @@ public class ClientMenu {
                     Product product = productService.getProducts().get(index);
                     System.out.println("You bye " + product);
                     if (currentOrder == null) {
-                        currentOrder = new Order(orderService.getNextByMaxID());
+                        currentOrder = new Order();
                         orderService.addClientOrder(currentClient, currentOrder);
                     }
                     currentOrder.addProduct(product);
@@ -305,7 +305,7 @@ public class ClientMenu {
     public boolean signOut() {
         signIn = false;
         currentClient = null;
-        currentOrder = null;
+//        currentOrder = null;
         return false;
     }
 

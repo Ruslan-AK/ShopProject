@@ -1,6 +1,6 @@
 package com.Kutugin.services.impl;
 
-import com.Kutugin.dao.impl.H2DB.ProductDBDao;
+import com.Kutugin.dao.impl.hibernate.ProductEMDao;
 import com.Kutugin.domain.Product;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 public class ProductServiceImplTest {
 
     @Mock
-    private ProductDBDao productDBDao;
+    private ProductEMDao productDBDao;
     @InjectMocks
     private ProductServiceImpl productServise;
 

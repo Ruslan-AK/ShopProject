@@ -90,7 +90,7 @@ public class OrderController {
     public String buyProduct(@RequestParam String id, ModelMap modelMap) {
         long idL = Long.parseLong(id);
         if (getCurrentOrder() == null) {
-            setCurrentOrder(new Order(orderService.getNextByMaxID()));
+            setCurrentOrder(new Order());
             System.out.println("currentOrder.getId INIT " + getCurrentOrder().getId());
             orderService.addClientOrder(getCurrentClient(), getCurrentOrder());
         }

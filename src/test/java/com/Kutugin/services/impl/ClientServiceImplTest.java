@@ -44,9 +44,9 @@ public class ClientServiceImplTest {
         String age = "30";
         String phone = "0677676767";
         String email = "client@client.com";
-        long id = clientDao.getNextByMaxID();
+//        long id = clientDao.getNextByMaxID();
         //When
-        Mockito.when(clientDao.saveClient(new Client(id, name, surname, age, email, phone))).thenReturn(true);
+        Mockito.when(clientDao.saveClient(new Client(name, surname, Integer.valueOf(age), email, phone))).thenReturn(true);
         //Then
         boolean res = clientService.createClient(name, surname, age, email, phone);
         Assert.assertTrue(res);
@@ -60,9 +60,9 @@ public class ClientServiceImplTest {
         String age = "30";
         String phone = "06776767678";
         String email = "client@client.com";
-        long id = clientDao.getNextByMaxID();
+//        long id = clientDao.getNextByMaxID();
         //When
-        Mockito.when(clientDao.saveClient(new Client(id, name, surname, age, email, phone))).thenReturn(true);
+        Mockito.when(clientDao.saveClient(new Client(name, surname, Integer.valueOf(age), email, phone))).thenReturn(true);
         //Then
         boolean res = clientService.createClient(name, surname, age, email, phone);
         Assert.assertFalse(res);
@@ -83,8 +83,8 @@ public class ClientServiceImplTest {
         String age = "30";
         String phone = "06776767678";
         String email = "client@client.com";
-        long id = clientDao.getNextByMaxID();
-        Client client = new Client(id, name, surname, age, email, phone);
+//        long id = clientDao.getNextByMaxID();
+        Client client = new Client(name, surname, Integer.valueOf(age), email, phone);
         clientService.updateClient(idC, client);
         verify(clientDao).updateClient(idC, client);
     }
@@ -120,8 +120,8 @@ public class ClientServiceImplTest {
         String age = "30";
         String phone = "06776767678";
         String email = "client@client.com";
-        long id = clientDao.getNextByMaxID();
-        Client client = new Client(id, name, surname, age, email, phone);
+//        long id = clientDao.getNextByMaxID();
+        Client client = new Client(name, surname, Integer.valueOf(age), email, phone);
         //When
         Mockito.when(clientDao.isPresent(client.getPhoneNumber())).thenReturn(true);
         //Then

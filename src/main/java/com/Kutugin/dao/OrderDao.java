@@ -16,8 +16,6 @@ public interface OrderDao {
     Order getByID(long id);
 
     List<Order> getOrdersByClient(long clientId);
-    
-    boolean isPresent(long id);
 
-    long getNextByMaxID();
+    boolean isPresent(long id);
 }

@@ -1,23 +1,53 @@
 package com.Kutugin.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "PRODUCT")
 public class Product {
-    private String model;
-    private String firm;
-    private BigDecimal price;
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
-    private static long currentId = 0;
+    @Column(name = "FIRM")
+    private String firm;
+    @Column(name = "PRICE")
+    private BigDecimal price;
+    @Column(name = "MODEL")
+    private String model;
+    @Column(name = "TYPE")
     private ProductType type;
-    private static List<Long> listId = new ArrayList<>();
+
+    public Product() {
+    }
+
+    public Product(String firm, String model, double price, String type) {
+        this.firm = firm;
+        this.model = model;
+        this.price = BigDecimal.valueOf(Double.valueOf(price));
+        this.type = ProductType.valueOf(type);
+    }
+
+    public Product(String firm, String model, double price, String type, long id) {
+        this.firm = firm;
+        this.model = model;
+        this.price = BigDecimal.valueOf(Double.valueOf(price));
+        this.type = ProductType.valueOf(type);
+        this.id = id;
+    }
 
     public Double getPrice() {
         if (price != null)
             return price.doubleValue();
         return null;
+    }
+
+    public void setPrice(Double price) {
+        this.price = BigDecimal.valueOf(price);
     }
 
     public String getModel() {
@@ -36,20 +66,12 @@ public class Product {
         this.firm = firm;
     }
 
-    public void setPrice(Double price) {
-        this.price = BigDecimal.valueOf(price);
-    }
-
     public void setId(long id) {
         this.id = id;
     }
 
-    public static List<Long> getListId() {
-        return listId;
-    }
-
-    public static void setListId(List<Long> listId) {
-        Product.listId = listId;
+    public long getId() {
+        return id;
     }
 
     public String getType() {
@@ -62,38 +84,15 @@ public class Product {
         this.type = ProductType.valueOf(type);
     }
 
-    public Product() {
-    }
-
-    public Product(String firm, String model, double price, String type) {
-        this.firm = firm;
-        this.model = model;
-        this.price = BigDecimal.valueOf(Double.valueOf(price));
-        this.type = ProductType.valueOf(type);
-        id = currentId++;
-    }
-
-    public Product(String firm, String model, double price, String type, long id) {
-        this.firm = firm;
-        this.model = model;
-        this.price = BigDecimal.valueOf(Double.valueOf(price));
-        this.type = ProductType.valueOf(type);
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "Product{" +
-                "firm='" + firm + '\'' +
-                ", model='" + model + '\'' +
+                "id=" + id +
+                ", firm='" + firm + '\'' +
                 ", price=" + price +
-                ", id=" + id +
+                ", model='" + model + '\'' +
                 ", type=" + type +
                 '}';
-    }
-
-    public long getId() {
-        return id;
     }
 
     @Override

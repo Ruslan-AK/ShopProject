@@ -17,7 +17,5 @@ public interface ClientDao {
 
     boolean isPresent(String phone);
 
-    long getNextByMaxID();
-
     Client getClientByID(long id);
 }

@@ -24,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public BigDecimal summaryPrice(Order order) {
         BigDecimal sum = new BigDecimal(0);
-        for (Product product : order.getProductList()) {
+        for (Product product : order.getProductsList()) {
             sum = sum.add(BigDecimal.valueOf(product.getPrice()));
         }
         return sum;
@@ -58,10 +58,5 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean isPresent(long id) {
         return orderDao.isPresent(id);
-    }
-
-    @Override
-    public long getNextByMaxID() {
-        return orderDao.getNextByMaxID();
     }
 }

@@ -16,6 +16,4 @@ public interface ProductDao {
     boolean isPresent(long id);
 
     void updateProduct(long id, Product product);
-
-    long getNextByMaxID();
 }

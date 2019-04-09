@@ -1,20 +1,53 @@
 package com.Kutugin.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
+@Table(name = "ORDERS")
 public class Order {
+
+    @Id
+    @GeneratedValue
+    @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
+
+    @Column(name = "DATE")
     private String date;
 
-    public Map<Product, Long> getProductMap() {
-        return productMap;
+    @Column(name = "CLIENT_ID")
+    long clientId;
+
+    @JoinTable(
+            name = "ORDER_PRODUCT",
+            joinColumns = @JoinColumn(
+                    name = "order_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = {@JoinColumn(
+                    name = "product_id",
+                    referencedColumnName = "id"
+            )}
+    )
+    @ManyToMany(targetEntity = Product.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    private List<Product> products;
+
+    public Order() {
+        date = new Date().toString();
     }
 
-    private Map<Product, Long> productMap = new HashMap<>();
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
-    public Order(long id) {
-        this.id = id;
-        date = new Date().toString();
+    public long getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(long clientId) {
+        this.clientId = clientId;
     }
 
     public void setDate(String date) {
@@ -25,15 +58,6 @@ public class Order {
         return date;
     }
 
-    public Order(long id, List<Product> productCartList, String date) {
-        this.id = id;
-        for (Product p:productCartList) {
-            Long pos = productMap.get(p);
-            productMap.put(p, pos == null ? 1 : pos + 1);
-        }
-        this.date = date;
-    }
-
     @Override
     public String toString() {
         return "Order ID=" + id + "\nCreated: " + date +
@@ -42,10 +66,17 @@ public class Order {
 
     private String showProducts() {
         String t = "";
-        for (Product p : productMap.keySet()) {
+        Map<Product, Integer> productIntegerMap = new HashMap<>();
+        for (Product p : products) {
+            if (productIntegerMap.get(p) == null) {
+                productIntegerMap.put(p, 1);
+            } else {
+                productIntegerMap.put(p, productIntegerMap.get(p) + 1);
+            }
+        }
+        for (Product p : productIntegerMap.keySet()) {
             t += p.toString();
-            t += "\nAmount: ";
-            t += productMap.get(p);
+            t += " Amount: " + productIntegerMap.get(p);
             t += "\n";
         }
         return t;
@@ -55,25 +86,15 @@ public class Order {
         return id;
     }
 
-    public List<Product> getProductList() {
-        List<Product> productList = new ArrayList<>();
-        for(Product p:productMap.keySet()){
-            for (int i=0;i<productMap.get(p);i++){
-                productList.add(p);
-            }
-        }
-        return productList;
+    public List<Product> getProductsList() {
+        return products;
     }
 
     public void addProduct(Product product) {
-        Long pos = productMap.get(product);
-        productMap.put(product, pos == null ? 1 : pos + 1);
-    }
-
-    public void update(Order order) {
-        for (Product p:order.getProductList()){
-            addProduct(p);
+        if (products == null) {
+            products = new ArrayList<>();
         }
-        date = new Date().toString();
+        products.add(product);
+        setDate(new Date().toString());
     }
 }

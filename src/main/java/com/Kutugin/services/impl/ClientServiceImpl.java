@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 public class ClientServiceImpl implements ClientService {
     @Autowired
-//    @Qualifier(value = "clientDao")
     private ClientDao clientDao;
     private ValidationService validationService;
 
@@ -31,8 +30,8 @@ public class ClientServiceImpl implements ClientService {
             validationService.validateName(name);
             validationService.validateAge(age);
             validationService.validatePhoneNumber(phoneNumber);
-            long id = getNextByMaxID();
-            Client client = new Client(id, name, surname, age, email, phoneNumber);
+//            long id = getNextByMaxID();
+            Client client = new Client(name, surname, Integer.valueOf(age), email, phoneNumber);
             return clientDao.saveClient(client);
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
@@ -76,7 +75,7 @@ public class ClientServiceImpl implements ClientService {
         return clientDao.getAllClients();
     }
 
-    private long getNextByMaxID() {
-        return clientDao.getNextByMaxID();
-    }
+//    private long getNextByMaxID() {
+//        return clientDao.getNextByMaxID();
+//    }
 }
