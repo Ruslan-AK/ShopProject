@@ -66,20 +66,27 @@ public class ProductController {
     public String updateProductBlank(
             @RequestParam String id,
             ModelMap modelMap) {
-        setCurrentProduct(productService.getByID(Long.parseLong(id)));
-        String productsTypesString = "";
-        for (ProductType pt : ProductType.values()) {
-            if (pt.toString().equals(getCurrentProduct().getType())) {
-                productsTypesString += "<option value=\"" + pt.toString() + "\" selected>" + pt.toString() + "</option>\n";
-            } else {
-                productsTypesString += "<option value=\"" + pt.toString() + "\">" + pt.toString() + "</option>\n";
+        if (productService.getByID(Long.parseLong(id)) != null) {
+            setCurrentProduct(productService.getByID(Long.parseLong(id)));
+            String productsTypesString = "";
+            for (ProductType pt : ProductType.values()) {
+                if (pt.toString().equals(getCurrentProduct().getType())) {
+                    productsTypesString += "<option value=\"" + pt.toString() + "\" selected>" + pt.toString() + "</option>\n";
+                } else {
+                    productsTypesString += "<option value=\"" + pt.toString() + "\">" + pt.toString() + "</option>\n";
+                }
             }
+            modelMap.put("options", productsTypesString);
+            modelMap.put("price", getCurrentProduct().getPrice());
+            modelMap.put("model", getCurrentProduct().getModel());
+            modelMap.put("firm", getCurrentProduct().getFirm());
+            return "/Admin/updateProductForm";
+        } else {
+            modelMap.put("message", "Product not found");
+            modelMap.put("title", "Product not found");
+            return "/showItem";
         }
-        modelMap.put("options", productsTypesString);
-        modelMap.put("price", getCurrentProduct().getPrice());
-        modelMap.put("model", getCurrentProduct().getModel());
-        modelMap.put("firm", getCurrentProduct().getFirm());
-        return "/Admin/updateProductForm";
+
     }
 
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)

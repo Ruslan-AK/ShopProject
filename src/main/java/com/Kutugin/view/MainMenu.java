@@ -17,7 +17,7 @@ public class MainMenu {
         this.clientMenu = clientMenu;
     }
 
-    public void showMenu() throws IOException {
+    public void showMenu() {
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("$$$$$$$$$$$ WELCOME TO SHOP $$$$$$$$$$$");

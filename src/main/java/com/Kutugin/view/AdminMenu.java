@@ -1,6 +1,5 @@
 package com.Kutugin.view;
 
-import com.Kutugin.dao.impl.H2DB.InitDB;
 import com.Kutugin.domain.Client;
 import com.Kutugin.domain.Product;
 import com.Kutugin.domain.ProductType;
@@ -19,20 +18,18 @@ public class AdminMenu {
     private ValidationService validator;
     private BufferedReader br;
     private ProductService productService;
-    private InitDB init;
 
-    public AdminMenu(BufferedReader br, ClientService clientService, ValidationService validator, ProductService productService, InitDB init) {
+    public AdminMenu(BufferedReader br, ClientService clientService, ValidationService validator, ProductService productService) {
         this.br = br;
         this.clientService = clientService;
         this.validator = validator;
         this.productService = productService;
-        this.init = init;
     }
 
     public void show() {
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("1 - Show clients\n2 - Add client\n3 - Modify client\n4 - Remove client\n5 - Show products\n6 - Add product\n7 - Modify product\n8 - Delete product\n9 - Initialize DB\n0 - Exit to main menu");
+            System.out.println("1 - Show clients\n2 - Add client\n3 - Modify client\n4 - Remove client\n5 - Show products\n6 - Add product\n7 - Modify product\n8 - Delete product\n0 - Exit to main menu");
             switch (getInput()) {
                 case "1":
                     showAllClients();
@@ -57,11 +54,6 @@ public class AdminMenu {
                     break;
                 case "8":
                     deleteProduct();
-                    break;
-                case "9":
-                    init.createAndFill();
-                    System.out.println("DB created, reload program, please");
-                    System.exit(0);
                     break;
                 case "0":
                     System.out.println("Exit to main menu");

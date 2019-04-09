@@ -305,7 +305,7 @@ public class ClientMenu {
     public boolean signOut() {
         signIn = false;
         currentClient = null;
-//        currentOrder = null;
+        currentOrder = null;
         return false;
     }
 

@@ -30,7 +30,6 @@ public class ClientServiceImpl implements ClientService {
             validationService.validateName(name);
             validationService.validateAge(age);
             validationService.validatePhoneNumber(phoneNumber);
-//            long id = getNextByMaxID();
             Client client = new Client(name, surname, Integer.valueOf(age), email, phoneNumber);
             return clientDao.saveClient(client);
         } catch (BusinessException ex) {
@@ -75,7 +74,4 @@ public class ClientServiceImpl implements ClientService {
         return clientDao.getAllClients();
     }
 
-//    private long getNextByMaxID() {
-//        return clientDao.getNextByMaxID();
-//    }
 }

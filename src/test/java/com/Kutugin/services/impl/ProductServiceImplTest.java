@@ -20,11 +20,6 @@ public class ProductServiceImplTest {
     @InjectMocks
     private ProductServiceImpl productServise;
 
-//    @Before
-//    public void init() {
-//        productServise = new ProductServiceImpl(productDao);
-//    }
-
     @Test
     public void saveProductTest() {
         //Given

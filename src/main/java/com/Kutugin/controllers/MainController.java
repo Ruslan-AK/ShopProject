@@ -1,8 +1,6 @@
 package com.Kutugin.controllers;
 
-import com.Kutugin.dao.impl.H2DB.InitDB;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -86,14 +84,5 @@ public class MainController {
         setCurrentClient(null);
         setCurrentOrder(null);
         return "index";
-    }
-
-    @RequestMapping(value = "/initDB", method = RequestMethod.POST)
-    public String initDB(ModelMap modelMap) {
-        InitDB initDB = new InitDB();
-        initDB.createAndFill();
-        modelMap.put("message", "DB initialized");
-        modelMap.put("title", "DB initialized");
-        return "/showItem";
     }
 }
