@@ -2,51 +2,35 @@ package com.Kutugin.dao.impl.hibernate;
 
 import com.Kutugin.dao.ProductDao;
 import com.Kutugin.domain.Product;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
+@Repository
+@Transactional
 public class ProductEMDao implements ProductDao {
-
+    @PersistenceContext(unitName = "factory")
     private EntityManager entityManager;
-
-    @Autowired
-    public ProductEMDao(EntityManagerFactory factory) {
-        this.entityManager = factory.createEntityManager();
-    }
 
     @Override
     public long saveProduct(Product product) {
-        if (!entityManager.getTransaction().isActive()) {
-            entityManager.getTransaction().begin();
-        }
         entityManager.persist(product);
-        entityManager.flush();
-        entityManager.getTransaction().commit();
         return product.getId();
     }
 
     @Override
     public List<Product> getProducts() {
-        if (!entityManager.getTransaction().isActive()) {
-            entityManager.getTransaction().begin();
-        }
         List<Product> resultList = entityManager.createQuery("Select p from Product p").getResultList();//hql
         return resultList;
     }
 
     @Override
     public void deleteById(long id) {
-        if (!entityManager.getTransaction().isActive()) {
-            entityManager.getTransaction().begin();
-        }
         entityManager.remove(getByID(id));
-        entityManager.getTransaction().commit();
     }
 
     @Override
@@ -63,14 +47,10 @@ public class ProductEMDao implements ProductDao {
 
     @Override
     public void updateProduct(long id, Product product) {
-        if (!entityManager.getTransaction().isActive()) {
-            entityManager.getTransaction().begin();
-        }
         Product product1 = entityManager.find(Product.class, id);
         if (product.getType() != null) product1.setType(product.getType());
         if (product.getModel() != null) product1.setModel(product.getModel());
         if (product.getPrice() != null) product1.setPrice(product.getPrice());
         if (product.getFirm() != null) product1.setFirm(product.getFirm());
-        entityManager.getTransaction().commit();
     }
 }

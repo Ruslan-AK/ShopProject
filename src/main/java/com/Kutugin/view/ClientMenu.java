@@ -233,6 +233,7 @@ public class ClientMenu {
                 System.out.println(e.getMessage() + "\n");
             }
             clientService.updateClient(currentClient.getId(), mockClient);
+            currentClient = clientService.getClientByID(currentClient.getId());
             System.out.println("Client modified!");
         }
     }
@@ -259,7 +260,8 @@ public class ClientMenu {
                 System.out.println("Client not created!");
                 return;
             }
-            if (clientService.createClient(name, surname, age, email, phoneNumber)) {
+            clientService.createClient(name, surname, age, email, phoneNumber);
+            if (clientService.isPresent(phoneNumber)) {
                 System.out.println("New Client created!\nYou can login now");
             } else System.out.println("New Client not created!");
         } catch (BusinessException ex) {

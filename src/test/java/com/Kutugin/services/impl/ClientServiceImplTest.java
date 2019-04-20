@@ -44,28 +44,36 @@ public class ClientServiceImplTest {
         String age = "30";
         String phone = "0677676767";
         String email = "client@client.com";
-//        long id = clientDao.getNextByMaxID();
+        Client client = new Client(name, surname, Integer.valueOf(age), email, phone);
         //When
-        Mockito.when(clientDao.saveClient(new Client(name, surname, Integer.valueOf(age), email, phone))).thenReturn(true);
+        try {
+            clientDao.saveClient(client);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //Then
-        boolean res = clientService.createClient(name, surname, age, email, phone);
-        Assert.assertTrue(res);
+        Client res = clientService.getClientByID(clientService.getIDByPhoneNumber(phone));
+        Assert.assertEquals(client,res);
     }
 
     @Test
-    public void createClientWrongParameters() {
+    public void createClientWrongParameters() throws Exception {
         //Given
         String name = "client";
         String surname = "client";
         String age = "30";
         String phone = "06776767678";
         String email = "client@client.com";
-//        long id = clientDao.getNextByMaxID();
+      Client client = new Client(name, surname, Integer.valueOf(age), email, phone);
         //When
-        Mockito.when(clientDao.saveClient(new Client(name, surname, Integer.valueOf(age), email, phone))).thenReturn(true);
+        try {
+            clientDao.saveClient(client);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //Then
-        boolean res = clientService.createClient(name, surname, age, email, phone);
-        Assert.assertFalse(res);
+        Client res = clientService.getClientByID(clientService.getIDByPhoneNumber(phone));
+        Assert.assertEquals(client,res);
     }
 
     @Test

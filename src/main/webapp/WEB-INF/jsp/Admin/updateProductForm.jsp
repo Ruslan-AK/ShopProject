@@ -13,7 +13,7 @@
 </head>
 <body>
 <fieldset>
-    <form action="/updateProduct" method="post" >
+    <form action="/updateProduct" method="put" >
     <table>
         <tbody>
         <tr>

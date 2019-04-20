@@ -16,28 +16,28 @@
         </tr>
         <tr>
             <td>
-                <form action="/showProducts" method="post">
+                <form action="/showProducts" method="get">
                     <input type="submit" value="Show all products">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/createProductBlank" method="post">
+                <form action="/createProductBlank" method="get">
                     <input type="submit" value="Create product">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/enterProductIDtoUpdate" method="post">
+                <form action="/enterProductIDtoUpdate" method="get">
                     <input type="submit" value="Modify product">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/enterProductIDtoDelete" method="post">
+                <form action="/enterProductIDtoDelete" method="get">
                     <input type="submit" value="Delete product"/>
                 </form>
             </td>

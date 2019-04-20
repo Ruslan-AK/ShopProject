@@ -5,7 +5,7 @@ import com.Kutugin.domain.Client;
 import java.util.List;
 
 public interface ClientService {
-    boolean createClient(String name, String surname, String age, String email, String phoneNumber);//for Admin
+    void createClient(String name, String surname, String age, String email, String phoneNumber);//for Admin
 
     void deleteClient(long id);
 

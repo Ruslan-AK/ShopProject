@@ -15,35 +15,35 @@
         </tr>
         <tr>
             <td>
-                <form action="showBuyProducts" method="post">
+                <form action="showBuyProducts" method="get">
                     <input type="submit" value="Show products">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/myOrder" method="post">
+                <form action="/myOrder" method="get">
                     <input type="submit" value="My order">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/myAccount" method="post">
+                <form action="/myAccount" method="get">
                     <input type="submit" value="My account">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/logOut" method="post">
+                <form action="/logOut" method="get">
                     <input type="submit" value="Log out">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/showOrdersByClient" method="post">
+                <form action="/showOrdersByClient" method="get">
                     <input type="submit" value="Show order archive">
                 </form>
             </td>

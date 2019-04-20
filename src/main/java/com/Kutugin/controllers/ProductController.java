@@ -15,10 +15,14 @@ import static com.Kutugin.controllers.States.setCurrentProduct;
 
 @Controller
 public class ProductController {
-    @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/showProducts", method = RequestMethod.POST)
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @RequestMapping(value = "/showProducts", method = RequestMethod.GET)
     public String showProducts(ModelMap modelMap) {
         String productsString = "";
         if (productService.getProducts().size() > 0) {
@@ -33,7 +37,7 @@ public class ProductController {
         return "/showItem";
     }
 
-    @RequestMapping(value = "/createProductBlank", method = RequestMethod.POST)
+    @RequestMapping(value = "/createProductBlank", method = RequestMethod.GET)
     public String createProduct(ModelMap modelMap) {
         String productsTypesString = "";
         for (ProductType pt : ProductType.values()) {
@@ -62,7 +66,7 @@ public class ProductController {
         return "/showItem";
     }
 
-    @RequestMapping(value = "/updateProductBlank", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateProductBlank", method = RequestMethod.GET)
     public String updateProductBlank(
             @RequestParam String id,
             ModelMap modelMap) {
@@ -89,7 +93,7 @@ public class ProductController {
 
     }
 
-    @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateProduct", method = RequestMethod.PUT)
     public String updateProduct(
             @RequestParam String firm,
             @RequestParam String model,
@@ -105,7 +109,7 @@ public class ProductController {
         return "/showItem";
     }
 
-    @RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteProduct", method = RequestMethod.DELETE)
     public String deleteProduct(
             @RequestParam String id,
             ModelMap modelMap) {
@@ -117,7 +121,7 @@ public class ProductController {
         return "/showItem";
     }
 
-    @RequestMapping(value = "/showBuyProducts", method = RequestMethod.POST)
+    @RequestMapping(value = "/showBuyProducts", method = RequestMethod.GET)
     public String showBuyProducts(ModelMap modelMap) {
         String productsString = "";
         if (productService.getProducts().size() > 0) {

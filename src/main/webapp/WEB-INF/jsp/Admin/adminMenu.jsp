@@ -15,21 +15,21 @@
         </tr>
         <tr>
             <td>
-                <form action="/adminClientMenu" method="post">
+                <form action="/adminClientMenu" method="get">
                     <input type="submit" value="Clients">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/adminProductMenu" method="post">
+                <form action="/adminProductMenu" method="get">
                     <input type="submit" value="Products">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/adminOrderMenu" method="post">
+                <form action="/adminOrderMenu" method="get">
                     <input type="submit" value="Orders">
                 </form>
             </td>

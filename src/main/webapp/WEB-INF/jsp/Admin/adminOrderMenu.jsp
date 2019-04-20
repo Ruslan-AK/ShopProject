@@ -16,14 +16,14 @@
         </tr>
         <tr>
             <td>
-                <form action="/showOrders" method="post">
+                <form action="/showOrders" method="get">
                     <input type="submit" value="Show all orders">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/adminDeleteOrder" method="post">
+                <form action="/adminDeleteOrder" method="get">
                     <input type="submit" value="Delete order">
                 </form>
             </td>

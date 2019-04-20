@@ -5,7 +5,7 @@
     <title>Enter ID</title>
 </head>
 <body>
-<form action="/deleteProduct" method="post">
+<form action="/deleteProduct" method="delete">
     <fieldset>
         <table>
             <tbody>

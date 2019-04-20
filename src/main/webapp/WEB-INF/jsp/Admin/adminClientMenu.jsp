@@ -16,28 +16,28 @@
         </tr>
         <tr>
             <td>
-                <form action="/showClients" method="post">
+                <form action="/clients" method="get">
                     <input type="submit" value="Show all clients">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/adminCreateClient" method="post">
+                <form action="/adminCreateClient" method="get">
                     <input type="submit" value="Create client">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/adminClientLoginMenu" method="post">
+                <form action="/adminClientLoginMenu" method="get">
                     <input type="submit" value="Modify client">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/adminDeleteClientEnterPhone" method="post">
+                <form action="/adminDeleteClientEnterPhone" method="get">
                     <input type="submit" value="Delete client">
                 </form>
             </td>

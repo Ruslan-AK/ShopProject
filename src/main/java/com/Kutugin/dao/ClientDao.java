@@ -5,7 +5,7 @@ import com.Kutugin.domain.Client;
 import java.util.List;
 
 public interface ClientDao {
-    boolean saveClient(Client client);
+    void saveClient(Client client) throws Exception;
 
     void updateClient(long id, Client client);
 

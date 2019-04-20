@@ -15,14 +15,14 @@
         </tr>
         <tr>
             <td>
-                <form action="/myAccountInfo" method="post">
+                <form action="/myAccountInfo" method="get">
                     <input type="submit" value="Show Account Info">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/updateCurrentClientBlank" method="post">
+                <form action="/getCurrentClientBlank" method="get">
                     <input type="submit" value="Modify">
                 </form>
             </td>

@@ -13,11 +13,15 @@ import static com.Kutugin.controllers.States.*;
 
 @Controller
 public class ClientController {
-    @Autowired
     private ClientService clientService;
 
-    @RequestMapping(value = "/showClients", method = RequestMethod.POST)
-    public String showClients(ModelMap modelMap) {
+    @Autowired
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
+
+    @RequestMapping(value = "/clients", method = RequestMethod.GET)
+    public String clients(ModelMap modelMap) {
         String clientsString = "";
         if (clientService.getAllClients().size() > 0) {
             for (Client client : clientService.getAllClients()) {
@@ -31,8 +35,8 @@ public class ClientController {
         return "/showItem";
     }
 
-    @RequestMapping(value = "/updateCurrentClientBlank", method = RequestMethod.POST)
-    public String updateCurrentClientBlank(ModelMap modelMap) {
+    @RequestMapping(value = "/getCurrentClientBlank", method = RequestMethod.GET)
+    public String getCurrentClientBlank(ModelMap modelMap) {
         modelMap.put("name", getCurrentClient().getName());
         modelMap.put("surname", getCurrentClient().getSurname());
         modelMap.put("age", getCurrentClient().getAge());
@@ -40,7 +44,7 @@ public class ClientController {
         return "/Client/updateCurrentClientForm";
     }
 
-    @RequestMapping(value = "/updateCurrentClient", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateCurrentClient", method = RequestMethod.PUT)
     public String updateCurrentClient(
             @RequestParam String name,
             @RequestParam String surname,
@@ -54,23 +58,23 @@ public class ClientController {
         modelMap.put("title", "Client updated");
         return "/showItem";
     }
-
-    @RequestMapping(value = "/adminUpdateCurrentClient", method = RequestMethod.POST)
-    public String adminUpdateCurrentClient(
-            @RequestParam String name,
-            @RequestParam String surname,
-            @RequestParam String age,
-            @RequestParam String email,
-            @RequestParam String phone,
-            ModelMap modelMap) {
-        clientService.updateClient(getAdminCurrentClient().getId(), new Client(getAdminCurrentClient().getId(), name, surname, age, email, phone));
-        setAdminCurrentClient(clientService.getClientByID(getAdminCurrentClient().getId()));
-        String s = getAdminCurrentClient().toString() + " - updated";
-        setAdminCurrentClient(null);
-        modelMap.put("message", s);
-        modelMap.put("title", "Client updated");
-        return "/showItem";
-    }
+//
+//    @RequestMapping(value = "/adminUpdateCurrentClient", method = RequestMethod.PUT)
+//    public String adminUpdateCurrentClient(
+//            @RequestParam String name,
+//            @RequestParam String surname,
+//            @RequestParam String age,
+//            @RequestParam String email,
+//            @RequestParam String phone,
+//            ModelMap modelMap) {
+//        clientService.updateClient(getAdminCurrentClient().getId(), new Client(getAdminCurrentClient().getId(), name, surname, age, email, phone));
+//        setAdminCurrentClient(clientService.getClientByID(getAdminCurrentClient().getId()));
+//        String s = getAdminCurrentClient().toString() + " - updated";
+//        setAdminCurrentClient(null);
+//        modelMap.put("message", s);
+//        modelMap.put("title", "Client updated");
+//        return "/showItem";
+//    }
 
     @RequestMapping(value = "/createClient", method = RequestMethod.POST)
     public String createClient(
@@ -87,7 +91,7 @@ public class ClientController {
         return "/showItem";
     }
 
-    @RequestMapping(value = "/adminClientLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/adminClientLogin", method = RequestMethod.GET)
     public String adminClientLogin(
             @RequestParam String phone,
             ModelMap modelMap) {
@@ -106,7 +110,7 @@ public class ClientController {
         }
     }
 
-    @RequestMapping(value = "/updateAdminCurrentClient", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateAdminCurrentClient", method = RequestMethod.PUT)
     public String updateAdminCurrentClient(
             @RequestParam String name,
             @RequestParam String surname,
@@ -123,7 +127,7 @@ public class ClientController {
         return "/showItem";
     }
 
-    @RequestMapping(value = "/adminClientDelete", method = RequestMethod.POST)
+    @RequestMapping(value = "/adminClientDelete", method = RequestMethod.DELETE)
     public String adminClientDelete(
             @RequestParam String phone,
             ModelMap modelMap) {
@@ -134,14 +138,14 @@ public class ClientController {
         return "/showItem";
     }
 
-    @RequestMapping(value = "/myAccountInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/myAccountInfo", method = RequestMethod.GET)
     public String myAccountInfo(ModelMap modelMap) {
         modelMap.put("message", getCurrentClient().toString());
         modelMap.put("title", "Account info");
         return "/showItem";
     }
 
-    @RequestMapping(value = "/clientLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/clientLogin", method = RequestMethod.GET)
     public String clientLogin(@RequestParam String phone, ModelMap modelMap) {
         if (isSignIn()) {
             return "/Client/clientMenu";

@@ -5,7 +5,7 @@
     <title>Login</title>
 </head>
 <body>
-<form action="/adminClientDelete" method="post">
+<form action="/adminClientDelete" method="delete">
     <fieldset>
         <table>
             <tbody>

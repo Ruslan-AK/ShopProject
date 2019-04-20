@@ -17,14 +17,19 @@ import static com.Kutugin.controllers.States.*;
 
 @Controller
 public class OrderController {
-    @Autowired
+
     private ClientService clientService;
-    @Autowired
     private OrderService orderService;
-    @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/deleteOrder", method = RequestMethod.POST)
+    @Autowired
+    public OrderController(ClientService clientService, OrderService orderService, ProductService productService) {
+        this.clientService = clientService;
+        this.orderService = orderService;
+        this.productService = productService;
+    }
+
+    @RequestMapping(value = "/deleteOrder", method = RequestMethod.DELETE)
     public String deleteOrder(
             @RequestParam String id,
             ModelMap modelMap) {
@@ -37,7 +42,7 @@ public class OrderController {
     }
 
 
-    @RequestMapping(value = "/myOrder", method = RequestMethod.POST)
+    @RequestMapping(value = "/myOrder", method = RequestMethod.GET)
     public String myOrder(ModelMap modelMap) {
         if (getCurrentOrder() == null) {
             modelMap.put("currentOrder", "Order empty");
@@ -49,7 +54,7 @@ public class OrderController {
         return "/Client/clientOrder";
     }
 
-    @RequestMapping(value = "/showOrdersByClient", method = RequestMethod.POST)
+    @RequestMapping(value = "/showOrdersByClient", method = RequestMethod.GET)
     public String showOrdersByClient(ModelMap modelMap) {
         StringBuilder sb = new StringBuilder();
         for (Order o : orderService.getOrdersByClient(getCurrentClient().getId())) {
@@ -63,7 +68,7 @@ public class OrderController {
         return "/showItem";
     }
 
-    @RequestMapping(value = "/showOrders", method = RequestMethod.POST)
+    @RequestMapping(value = "/showOrders", method = RequestMethod.GET)
     public String showOrders(ModelMap modelMap) {
         StringBuilder sb = new StringBuilder();
         for (Client c : clientService.getAllClients()) {
@@ -96,7 +101,6 @@ public class OrderController {
         }
         Product goods = productService.getByID(idL);
         getCurrentOrder().addProduct(goods);
-        System.out.println("currentOrder.getId " + getCurrentOrder().getId());
         orderService.update(getCurrentOrder().getId(), getCurrentOrder());
         modelMap.put("message", "<h2>You buy " + goods.getFirm() + " " + goods.getModel() + "</h2>\n");
         modelMap.put("title", "Buy product");

@@ -106,13 +106,11 @@ public class AdminMenu {
     }
 
     private void modifyClient() {
-        String inputPhoneNumber;
         System.out.println("Input Client phone number:");
-        inputPhoneNumber = getInput();
+        String inputPhoneNumber = getInput();
         try {
             validator.validatePhoneNumber(inputPhoneNumber);
-            long currentClientID = clientService.getIDByPhoneNumber(inputPhoneNumber);
-            if (clientService.isPresent(clientService.getClientByID(currentClientID).getPhoneNumber())) {
+            if (clientService.isPresent(inputPhoneNumber)) {
                 Client mockClient = new Client();
                 boolean modFlag = true;
                 while (modFlag) {
@@ -164,13 +162,13 @@ public class AdminMenu {
                     } catch (BusinessException e) {
                         System.out.println(e.getMessage());
                     }
-                    clientService.updateClient(currentClientID, mockClient);
+                    clientService.updateClient(clientService.getIDByPhoneNumber(inputPhoneNumber), mockClient);
                 }
             } else
                 System.out.println("Client not found");
         } catch (BusinessException e) {
             System.out.println(e.getMessage());
-            System.out.println("Abort");
+            System.out.println("Abort updating client");
         }
 
     }
@@ -192,6 +190,9 @@ public class AdminMenu {
                     try {
                         validator.validateInteger(input);
                         int index = Integer.valueOf(input) - 1;
+                        if(index>productService.getProducts().size()-1||index<0){
+                            throw new BusinessException("Id is out of index");
+                        }
                         long currentProductID = productService.getProducts().get(index).getId();
                         Product mockProduct = new Product();
                         System.out.println(productService.getByID(currentProductID));
@@ -269,7 +270,11 @@ public class AdminMenu {
             validator.validatePhoneNumber(phoneNumber);//validator
             if (!clientService.isPresent(phoneNumber)) {
                 clientService.createClient(name, surname, age, email, phoneNumber);
-                System.out.println("New Client created!");
+                if (clientService.isPresent(phoneNumber)){
+                    System.out.println("New Client created!");
+                } else {
+                    System.out.println("New Client not created!");
+                }
             } else System.out.println("Client with the same number already exist!");
         } catch (BusinessException e) {
             System.out.println(e.getMessage());
@@ -315,9 +320,11 @@ public class AdminMenu {
                 default:
                     try {
                         int index = Integer.valueOf(input) - 1;
+                        if(index>productService.getProducts().size()-1||index<0){
+                            throw new NumberFormatException("Id is out of index");
+                        }
                         productService.deleteById(productService.getProducts().get(index).getId());
                         System.out.println("Product deleted");
-                        j--;
                     } catch (NumberFormatException ex) {
                         System.out.println("Wrong input!");
                     }

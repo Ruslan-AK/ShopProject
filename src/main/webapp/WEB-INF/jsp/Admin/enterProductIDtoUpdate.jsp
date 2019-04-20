@@ -5,7 +5,7 @@
     <title>Enter ID</title>
 </head>
 <body>
-<form action="/updateProductBlank" method="post">
+<form action="/updateProductBlank" method="get">
     <fieldset>
         <table>
             <tbody>

@@ -5,7 +5,7 @@
     <title>Login</title>
 </head>
 <body>
-<form action="/clientLogin" method="post">
+<form action="/clientLogin" method="get">
     <fieldset>
         <table>
             <tbody>

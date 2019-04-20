@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 public class ClientServiceImpl implements ClientService {
-    @Autowired
     private ClientDao clientDao;
     private ValidationService validationService;
 
@@ -23,7 +22,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean createClient(String name, String surname, String age, String email, String phoneNumber) {
+    public void createClient(String name, String surname, String age, String email, String phoneNumber) {
         try {
             validationService.validateEmail(email);
             validationService.validateName(surname);
@@ -31,10 +30,11 @@ public class ClientServiceImpl implements ClientService {
             validationService.validateAge(age);
             validationService.validatePhoneNumber(phoneNumber);
             Client client = new Client(name, surname, Integer.valueOf(age), email, phoneNumber);
-            return clientDao.saveClient(client);
+            clientDao.saveClient(client);
         } catch (BusinessException ex) {
             System.out.println(ex.getMessage());
-            return false;
+        } catch (Exception e) {
+            System.out.println("Exception catches: "+e.getMessage());
         }
     }
 

@@ -20,14 +20,14 @@
         </tr>
         <tr>
             <td>
-                <form action="/enterAsAdmin" method="post">
+                <form action="/enterAsAdmin" method="get">
                     <input type="submit" value="Admin">
                 </form>
             </td>
         </tr>
         <tr>
             <td>
-                <form action="/enterAsClient" method="post">
+                <form action="/enterAsClient" method="get">
                     <input type="submit" value="Client">
                 </form>
             </td>
