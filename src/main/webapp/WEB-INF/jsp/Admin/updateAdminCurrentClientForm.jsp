@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Reneuby
@@ -10,6 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Client</title>
+    <spring:url value="/resources/js/ajax-js.js" var="mainJs" />
+    <script src="${mainJs}"></script>
 </head>
 <body>
 <fieldset>
